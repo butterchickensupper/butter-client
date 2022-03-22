@@ -10,15 +10,14 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    PageNotFoundComponent,
-    SidenavComponent
-  ],
+  declarations: [AppComponent, HomeComponent, LoginComponent, PageNotFoundComponent, SidenavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,9 +27,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
