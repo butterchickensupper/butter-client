@@ -16,9 +16,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { UpdateMenuComponent } from './admin/update-menu/update-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, UpdateMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
