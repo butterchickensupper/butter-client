@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -19,7 +18,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { UpdateMenuComponent } from './admin/update-menu/update-menu.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, UpdateMenuComponent],
+  declarations: [AppComponent, LoginComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, UpdateMenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
