@@ -1,8 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/home'" (click)="close()"> Menu </a>
-      <a mat-list-item [routerLink]="'/order-history'" (click)="close()"> Order History </a>
+      <a mat-list-item [routerLink]="'/home'" (click)="sidenav.toggle()"> Menu </a>
+      <a mat-list-item [routerLink]="'/order-history'" (click)="sidenav.toggle()"> Order History </a>
     </mat-nav-list>
   </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

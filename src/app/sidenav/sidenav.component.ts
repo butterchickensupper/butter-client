@@ -12,8 +12,4 @@ export class SidenavComponent implements OnInit {
 
   @Input()
   public opened: boolean = false;
-
-  public close(): void {
-    this.opened = false;
-  }
 }
