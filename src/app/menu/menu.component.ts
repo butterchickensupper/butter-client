@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Menu } from './menu';
 
 @Component({
   selector: 'app-menu',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   public adminMode = false;
+  public menu: Menu = { description: '' };
 
   constructor() {}
 

@@ -18,6 +18,9 @@ import { MenuComponent } from './menu/menu.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent],
@@ -37,7 +40,10 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     MatSidenavModule,
     MatListModule,
     MatSlideToggleModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

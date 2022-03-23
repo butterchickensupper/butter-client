@@ -2,7 +2,28 @@
   <mat-card-title>Menu</mat-card-title>
   <mat-card-content>
     <section>
-      <mat-slide-toggle class="example-margin" [checked]="adminMode">Admin Mode</mat-slide-toggle>
+      <img class="images" src="./assets/chicken.jpg" width="128" height="128" />
+      <p>Butter Chicken</p>
+      <!-- <mat-slide-toggle class="example-margin" [checked]="adminMode">Admin Mode</mat-slide-toggle> -->
+
+      <!-- <form #myForm="ngForm">
+        <div class="form-group">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput [hidden]="adminMode" placeholder="Description" [(ngModel)]="menu.description" name="description" />
+            <span [hidden]="!adminMode">{{ menu.description }}</span>
+          </mat-form-field>
+        </div>
+        <div class="button-panel" [hidden]="adminMode">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="cancel" class="btn btn-success">Cancel</button>
+        </div>
+      </form> -->
     </section>
   </mat-card-content>
+  <mat-card-actions>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Order</button>
+    </div>
+  </mat-card-actions>
 </mat-card>
