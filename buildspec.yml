@@ -16,6 +16,6 @@ phases:
   post_build:
     commands:
       - echo build process finished, uploading to s3
-      - cd dist/$APP_NAME
+      - cd dist/butter-client
       - ls -la
       - aws s3 sync . s3://butter-client --delete
