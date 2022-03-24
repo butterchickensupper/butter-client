@@ -10,6 +10,8 @@ import { MenuOrder } from '../models/order';
 export class MenuViewerComponent implements OnInit {
   @Input()
   item!: MenuItem;
+  @Input()
+  readOnly: boolean = false;
 
   public quantity?: number = undefined;
   public selected = false;

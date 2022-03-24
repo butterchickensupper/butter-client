@@ -23,9 +23,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { OrderViewerComponent } from './menu/order-viewer/order-viewer.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

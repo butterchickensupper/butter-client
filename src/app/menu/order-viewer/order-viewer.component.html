@@ -1,0 +1,25 @@
+<mat-card class="result">
+  <mat-card-title>Order</mat-card-title>
+  <mat-card-content>
+    <section class="order">
+      <div class="menu-item" *ngFor="let item of order?.orders">
+        <app-menu-viewer #viewer [item]="item.item" [readOnly]="true"></app-menu-viewer>
+      </div>
+    </section>
+    <section>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" (ngModel)="(order?.name)" name="name" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" (ngModel)="(order?.address)" name="address" />
+      </mat-form-field>
+    </section>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="submitOrder()">Order</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
