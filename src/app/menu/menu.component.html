@@ -1,29 +1,25 @@
 <mat-card class="result">
   <mat-card-title>Menu</mat-card-title>
   <mat-card-content>
+    <section class="menu">
+      <div class="menu-item" *ngFor="let item of menu.items">
+        <app-menu-viewer #viewer [item]="item"></app-menu-viewer>
+      </div>
+    </section>
     <section>
-      <img class="images" src="./assets/chicken.jpg" width="128" height="128" />
-      <p>Butter Chicken</p>
-      <!-- <mat-slide-toggle class="example-margin" [checked]="adminMode">Admin Mode</mat-slide-toggle> -->
-
-      <!-- <form #myForm="ngForm">
-        <div class="form-group">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Description</mat-label>
-            <input matInput [hidden]="adminMode" placeholder="Description" [(ngModel)]="menu.description" name="description" />
-            <span [hidden]="!adminMode">{{ menu.description }}</span>
-          </mat-form-field>
-        </div>
-        <div class="button-panel" [hidden]="adminMode">
-          <button type="submit" class="btn btn-success">Save</button>
-          <button type="cancel" class="btn btn-success">Cancel</button>
-        </div>
-      </form> -->
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" [(ngModel)]="order.name" name="name" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" [(ngModel)]="order.address" name="address" />
+      </mat-form-field>
     </section>
   </mat-card-content>
   <mat-card-actions>
     <div class="example-button-row">
-      <button mat-raised-button color="primary">Order</button>
+      <button mat-raised-button color="primary" (click)="submitOrder()">Order</button>
     </div>
   </mat-card-actions>
 </mat-card>

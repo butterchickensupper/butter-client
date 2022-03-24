@@ -21,9 +21,11 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,7 +45,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,20 @@
+<mat-card class="result">
+  <mat-card-title>{{ item.name }}</mat-card-title>
+  <mat-card-content>
+    <img class="image" [src]="item.imageUrl" width="128" height="128" />
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <span>{{ item.description }}</span>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-checkbox class="example-margin" [checked]="selected"> Order </mat-checkbox>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input matInput type="numeric" />
+    </mat-form-field>
+  </mat-card-footer>
+</mat-card>
