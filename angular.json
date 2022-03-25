@@ -125,6 +125,6 @@
   },
   "defaultProject": "butter-client",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@ngrx/schematics"
   }
 }
