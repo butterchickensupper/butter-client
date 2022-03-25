@@ -12,7 +12,9 @@ export class OrderViewerComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init');
+  }
 
   public submitOrder(): void {}
 }

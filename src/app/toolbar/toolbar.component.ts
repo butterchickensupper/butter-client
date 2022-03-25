@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   constructor(public router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init');
+  }
 
   @Output()
   public menuOpen = false;

@@ -8,7 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SidenavComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init');
+  }
 
   @Input()
   public opened: boolean = false;

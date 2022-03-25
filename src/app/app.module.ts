@@ -24,11 +24,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OrderViewerComponent } from './menu/order-viewer/order-viewer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

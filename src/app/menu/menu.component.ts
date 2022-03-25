@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Menu } from './models/menu';
+import { Menu, MenuItem } from './models/menu';
 import { MenuViewerComponent } from './menu-viewer/menu-viewer.component';
 import { Order } from './models/order';
 
@@ -11,12 +11,14 @@ import { Order } from './models/order';
 export class MenuComponent implements OnInit {
   @ViewChildren('viewer') items?: QueryList<MenuViewerComponent>;
   public adminMode = false;
-  public menu: Menu = new Menu();
+  public menu: Menu = new Menu({ items: [new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken' })] });
   public order: Order = new Order();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('init');
+  }
 
   public submitOrder(): void {
     if (!this.items) {

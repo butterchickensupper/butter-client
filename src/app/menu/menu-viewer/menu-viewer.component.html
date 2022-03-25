@@ -1,10 +1,10 @@
 <mat-card class="result">
-  <mat-card-title>{{ item.name }}</mat-card-title>
+  <mat-card-title>{{ item?.name }}</mat-card-title>
   <mat-card-content>
-    <img class="image" [src]="item.imageUrl" width="128" height="128" />
+    <img class="image" [src]="item?.imageUrl" width="128" height="128" />
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Description</mat-label>
-      <span>{{ item.description }}</span>
+      <span>{{ item?.description }}</span>
     </mat-form-field>
   </mat-card-content>
 
