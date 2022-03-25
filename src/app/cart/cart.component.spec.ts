@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MenuAgent } from '../menu/menu.agent';
 
 import { CartComponent } from './cart.component';
 
@@ -8,9 +9,17 @@ describe('CartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CartComponent ]
-    })
-    .compileComponents();
+      declarations: [CartComponent],
+      providers: [
+        {
+          provider: MenuAgent,
+          useValue: {
+            getMenu: jasmine.createSpy('getMenu'),
+            submitOrder: jasmine.createSpy('submitOrder')
+          }
+        }
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { OrderState } from '../store/reducer/order.reducer';
+import { MenuAgent } from './menu.agent';
 
 import { MenuComponent } from './menu.component';
 
@@ -8,9 +12,18 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
-    })
-    .compileComponents();
+      declarations: [MenuComponent],
+      providers: [
+        {
+          provider: MenuAgent,
+          useValue: {
+            getMenu: jasmine.createSpy('getMenu'),
+            submitOrder: jasmine.createSpy('submitOrder')
+          }
+        },
+        Router
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
