@@ -12,8 +12,9 @@ export class MenuViewerComponent implements OnInit {
   item!: MenuItem;
   @Input()
   readOnly: boolean = false;
+  @Input()
+  public quantity?: number = undefined; // this must be sent on readOnly mode
 
-  public quantity?: number = undefined;
   public selected = false;
 
   public get order(): MenuOrder | undefined {
@@ -25,6 +26,8 @@ export class MenuViewerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('init');
+    if (this.readOnly && this.quantity === undefined) {
+      console.log('quantity should be defined');
+    }
   }
 }

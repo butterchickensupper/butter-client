@@ -25,9 +25,11 @@ import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OrderViewerComponent } from './menu/order-viewer/order-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './cart/cart.component';
+import { MenuAgent } from './menu/menu.agent';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -51,7 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [MenuAgent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

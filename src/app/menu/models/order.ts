@@ -11,7 +11,7 @@ export class MenuOrder {
 }
 
 export class Order {
-  public orders: MenuOrder[] = [];
+  public items: MenuOrder[] = [];
   public name!: string;
   public address!: string;
 }
