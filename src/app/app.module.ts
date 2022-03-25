@@ -18,7 +18,7 @@ import { MenuComponent } from './menu/menu.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { OrderHistoryComponent } from './order-history/order-history.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
@@ -27,6 +27,9 @@ import { OrderViewerComponent } from './menu/order-viewer/order-viewer.component
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { MenuAgent } from './menu/menu.agent';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent],
@@ -49,9 +52,12 @@ import { MenuAgent } from './menu/menu.agent';
     MatSlideToggleModule,
     MatCardModule,
     FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [MenuAgent],
   bootstrap: [AppComponent]

@@ -27,7 +27,7 @@ export class MenuViewerComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.readOnly && this.quantity === undefined) {
-      console.log('quantity should be defined');
+      throw new Error('quantity should be defined');
     }
   }
 }
