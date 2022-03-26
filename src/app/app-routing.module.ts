@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'edit-menu', component: EditorComponent }, //TODO: add guard
-  { path: 'edit-item', component: EditItemComponent },
+  { path: 'edit-item/:id', component: EditItemComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'order-history', component: OrderHistoryComponent },
   { path: '', redirectTo: '/menu', pathMatch: 'full' },

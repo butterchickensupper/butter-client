@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { AppState } from 'src/app.state';
+import { AppState } from 'src/app/app.state';
 import { Menu, MenuItem } from '../models/menu';
 import { Order } from '../models/order';
-import { AddOrder } from '../store/action/order.actions';
+import { AddOrder, RemoveOrder } from '../store/action/order.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,8 @@ export class MenuService {
   }
 
   public submitOrder(order: Order): Observable<any> {
+    // TODO: remove item from the store?
+    // this.store.dispatch(new RemoveOrder(1));
     return of();
     // return this.http.post(this.orderUrl, order).pipe(share());
   }
