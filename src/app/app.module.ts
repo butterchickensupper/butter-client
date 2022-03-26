@@ -22,7 +22,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
-import { MenuAgent } from './menu/menu.agent';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -63,7 +62,6 @@ import { CartModule } from './cart/cart.module';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     CartModule
   ],
-  providers: [MenuAgent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

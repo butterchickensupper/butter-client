@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { MenuAgent } from '../menu/menu.agent';
+import { CartAgent } from './cart.agent';
 import { Order } from '../models/order';
 import { OrderState } from '../store/reducer/order.reducer';
 import { selectOrder } from '../store/selector/order.selectors';
@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
     address: ['', [Validators.required]]
   });
 
-  constructor(public fb: FormBuilder, public menuAgent: MenuAgent, private store: Store<OrderState>) {
+  constructor(public fb: FormBuilder, public cartAgent: CartAgent, private store: Store<OrderState>) {
     this.order$ = this.store.pipe(select(selectOrder));
   }
 
@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
       return;
     }
 
-    this.menuAgent.submitOrder(this.order).subscribe((res) => {
+    this.cartAgent.submitOrder(this.order).subscribe((res) => {
       console.log(res);
     });
 

@@ -10,10 +10,12 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
 import { MenuViewerComponent } from '../menu/menu-viewer/menu-viewer.component';
+import { CartAgent } from './cart.agent';
 
 @NgModule({
   declarations: [CartComponent, MenuComponent, MenuViewerComponent],
   imports: [CommonModule, StoreModule.forFeature(orderFeatureKey, reducer), MatButtonModule, MatInputModule, MatCheckboxModule, MatCardModule, ReactiveFormsModule],
-  exports: [CartComponent, MenuComponent, MenuViewerComponent]
+  exports: [CartComponent, MenuComponent, MenuViewerComponent],
+  providers: [CartAgent]
 })
 export class CartModule {}

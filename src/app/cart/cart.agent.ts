@@ -5,7 +5,7 @@ import { Observable, of, share } from 'rxjs';
 import { Order } from '../models/order';
 
 @Injectable()
-export class MenuAgent {
+export class CartAgent {
   private menuUrl = '/menu';
   private orderUrl = '/menu';
 

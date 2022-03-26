@@ -2,7 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Menu } from '../models/menu';
 import { MenuViewerComponent } from './menu-viewer/menu-viewer.component';
 import { Order } from '../models/order';
-import { MenuAgent } from './menu.agent';
+import { CartAgent } from '../cart/cart.agent';
 import { Router } from '@angular/router';
 import { OrderState } from '../store/reducer/order.reducer';
 import { Store } from '@ngrx/store';
@@ -19,10 +19,10 @@ export class MenuComponent implements OnInit {
   public menu!: Menu;
   public order: Order = new Order();
 
-  constructor(public menuAgent: MenuAgent, public router: Router, private store: Store<OrderState>) {}
+  constructor(public cartAgent: CartAgent, public router: Router, private store: Store<OrderState>) {}
 
   ngOnInit(): void {
-    this.menuAgent.getMenu().subscribe((res) => {
+    this.cartAgent.getMenu().subscribe((res) => {
       this.menu = res;
     });
   }
