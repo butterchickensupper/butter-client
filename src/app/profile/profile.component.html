@@ -1,0 +1,18 @@
+<mat-card class="result">
+  <mat-card-title>Profile</mat-card-title>
+  <mat-card-content>
+    <section class="profile">
+      <!-- replace with google maps autocomplete -->
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" [(ngModel)]="address" name="address" />
+      </mat-form-field>
+    </section>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="save()">Save</button>
+      <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
