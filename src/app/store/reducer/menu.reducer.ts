@@ -4,7 +4,7 @@ import { AddMenu, ADD_MENU, REMOVE_MENU } from '../action/menu.actions';
 
 const initialState: Menu = { items: [] };
 
-export function menuReducer(state: Menu = { items: [] }, action: Action): Menu {
+export function menuReducer(state: Menu = initialState, action: Action): Menu {
   switch (action.type) {
     case ADD_MENU:
       return (action as AddMenu).newMenu;

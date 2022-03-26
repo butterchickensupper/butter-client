@@ -1,15 +1,22 @@
 import { Action, INIT } from '@ngrx/store';
 import { Order } from 'src/app/models/order';
-import { AddOrder, ADD_ORDER, REMOVE_ORDER } from '../action/order.actions';
+import { AddOrder, ADD_ORDER, RemoveOrder, REMOVE_ORDER } from '../action/order.actions';
 
 const initialState: Order = { name: '', address: '', items: [] };
 
-export function orderReducer(state: Order = { items: [], name: '', address: '' }, action: Action): Order {
+export function orderReducer(state: Order = initialState, action: Action): Order {
   switch (action.type) {
     case ADD_ORDER:
-      return (action as AddOrder).newOrder;
+      let n = (action as AddOrder).newOrder;
+      if (n.address) state.address = n.address;
+      if (n.name) state.name = n.name;
+      if (n.items) state.items = [...state.items, ...n.items];
+      return state;
     case REMOVE_ORDER:
-      return initialState; // reset
+      let i = (action as RemoveOrder).indexToRemove;
+      const newState = state;
+      newState.items.splice(i, 1);
+      return newState;
     case INIT:
       return initialState;
     default:

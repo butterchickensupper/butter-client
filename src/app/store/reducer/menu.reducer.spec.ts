@@ -1,13 +1,27 @@
-import { reducer, initialState } from './menu.reducer';
+import { Menu } from 'src/app/models/menu';
+import { AddMenu, RemoveMenu } from '../action/menu.actions';
+import { menuReducer } from './menu.reducer';
 
-describe('Menu Reducer', () => {
-  describe('an unknown action', () => {
-    it('should return the previous state', () => {
-      const action = {} as any;
-
-      const result = reducer(initialState, action);
-
-      expect(result).toBe(initialState);
-    });
+describe('MenuRecuder', () => {
+  let initialState: Menu;
+  beforeEach(() => {
+    initialState = { items: [] };
   });
+
+  it('called with AddHero action should return a state with the added menu', () => {
+    const addedMenu = { items: [] };
+    expect(menuReducer(initialState, new AddMenu(addedMenu))).toEqual(addedMenu);
+  });
+
+  // it('called with RemoveMenu action should return a state with the correct menu deleted', () => {
+  //   const indexOfTheHeroToBeRemoved = 1;
+  //   const expectedState = {
+  //     items: [
+  //       { name: '', description: '' },
+  //       { name: '', description: '' }
+  //     ]
+  //   };
+
+  //   expect(menuReducer(initialState, new RemoveMenu(indexOfTheHeroToBeRemoved))).toEqual(expectedState);
+  // });
 });
