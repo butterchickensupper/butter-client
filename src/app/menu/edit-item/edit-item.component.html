@@ -1,0 +1,58 @@
+<mat-card class="editor">
+  <mat-card-title>Edit Menu Item</mat-card-title>
+  <mat-card-content>
+    <section class="example-section">
+      <form [formGroup]="form" (ngSubmit)="onSave()">
+        <p>
+          <mat-checkbox class="example-margin">Active</mat-checkbox>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" />
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Description" formControlName="description"></textarea>
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="0.0" type="number" formControlName="price" />
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Available Quantity</mat-label>
+            <input matInput placeholder="0" type="number" formControlName="available" />
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Ingredients</mat-label>
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Ingredients" formControlName="ingredients"></textarea>
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Nutritional Info</mat-label>
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Nutritional Info" formControlName="nutrition"></textarea>
+            <!-- <mat-hint>Hint</mat-hint> -->
+          </mat-form-field>
+        </p>
+        <p>
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button mat-raised-button color="primary">Cancel</button>
+        </p>
+      </form>
+    </section>
+  </mat-card-content>
+</mat-card>

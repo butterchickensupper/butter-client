@@ -12,7 +12,7 @@ export class MenuAgent {
   constructor(private http: HttpClient) {}
 
   public getMenu(): Observable<Menu> {
-    return of(new Menu({ items: [new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken' })] }));
+    return of(new Menu({ items: [new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 })] }));
     // return this.http.get<Menu>(this.menuUrl);
   }
 

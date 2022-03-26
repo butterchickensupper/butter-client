@@ -1,0 +1,15 @@
+<mat-card class="editor">
+  <mat-card-title>Edit Menu</mat-card-title>
+  <mat-card-subtitle>Menu Items</mat-card-subtitle>
+  <mat-card-content>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+      <!-- <button mat-raised-button color="primary">Delete</button> -->
+    </div>
+    <mat-selection-list #menu [multiple]="false" (selectionChange)="selectionChange($event)">
+      <mat-list-option *ngFor="let item of menuItems" [value]="item">
+        {{ item.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

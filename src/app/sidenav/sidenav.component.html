@@ -3,6 +3,8 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="'/menu'" (click)="sidenav.toggle()"> Menu </a>
       <a mat-list-item [routerLink]="'/order-history'" (click)="sidenav.toggle()"> Order History </a>
+      <!-- only show for admin -->
+      <a mat-list-item [routerLink]="'/edit-menu'" (click)="sidenav.toggle()"> Edit Menu </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
