@@ -4,7 +4,7 @@
   <mat-card-content>
     <div class="example-button-row">
       <button mat-raised-button color="primary" (click)="edit()">Edit</button>
-      <!-- <button mat-raised-button color="primary">Delete</button> -->
+      <button mat-raised-button color="primary" class="button-space">Delete</button>
     </div>
     <mat-selection-list #menuList [multiple]="false" (selectionChange)="selectionChange($event)">
       <mat-list-option *ngFor="let item of menu.items" [value]="item">
