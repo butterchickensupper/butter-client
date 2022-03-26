@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Menu, MenuItem } from './models/menu';
+import { Menu, MenuItem } from '../models/menu';
 import { Observable, of, share } from 'rxjs';
-import { Order } from './models/order';
+import { Order } from '../models/order';
 
 @Injectable()
 export class MenuAgent {

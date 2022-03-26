@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MenuAgent } from '../menu/menu.agent';
-import { Order } from '../menu/models/order';
+import { Order } from '../models/order';
 import { OrderState } from '../store/reducer/order.reducer';
 import { selectOrder } from '../store/selector/order.selectors';
 

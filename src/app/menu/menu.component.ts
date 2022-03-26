@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Menu } from './models/menu';
+import { Menu } from '../models/menu';
 import { MenuViewerComponent } from './menu-viewer/menu-viewer.component';
-import { Order } from './models/order';
+import { Order } from '../models/order';
 import { MenuAgent } from './menu.agent';
 import { Router } from '@angular/router';
 import { OrderState } from '../store/reducer/order.reducer';
