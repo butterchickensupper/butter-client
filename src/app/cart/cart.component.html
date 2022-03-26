@@ -11,20 +11,32 @@
       <span>{{ getTotal() }}</span>
     </section>
     <section>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" [(ngModel)]="order.name" name="name" />
-      </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput placeholder="Address" [(ngModel)]="order.address" name="address" />
-      </mat-form-field>
+      <form [formGroup]="form" (ngSubmit)="onOrder()">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" />
+            <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address" />
+            <mat-error *ngIf="form.get('address')?.invalid">Address is required.</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <button mat-raised-button color="primary" type="submit">Order</button>
+          <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+        </p>
+      </form>
     </section>
   </mat-card-content>
-  <mat-card-actions>
+  <!-- <mat-card-actions>
     <div class="example-button-row">
       <button mat-raised-button color="primary" (click)="submitOrder()">Order</button>
       <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
     </div>
-  </mat-card-actions>
+  </mat-card-actions> -->
 </mat-card>

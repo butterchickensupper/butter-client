@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MenuAgent } from '../menu/menu.agent';
@@ -15,7 +16,12 @@ export class CartComponent implements OnInit {
   public order$: Observable<Order>;
   public order!: Order;
 
-  constructor(public menuAgent: MenuAgent, private store: Store<OrderState>) {
+  public form = this.fb.group({
+    name: ['', [Validators.required]],
+    address: ['', [Validators.required]]
+  });
+
+  constructor(public fb: FormBuilder, public menuAgent: MenuAgent, private store: Store<OrderState>) {
     this.order$ = this.store.pipe(select(selectOrder));
   }
 
@@ -49,4 +55,5 @@ export class CartComponent implements OnInit {
   }
 
   public cancel(): void {}
+  public onOrder(): void {}
 }

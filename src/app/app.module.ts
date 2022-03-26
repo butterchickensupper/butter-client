@@ -14,17 +14,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { MenuComponent } from './menu/menu.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
-import { CartComponent } from './cart/cart.component';
 import { MenuAgent } from './menu/menu.agent';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
@@ -34,9 +31,10 @@ import { EditorComponent } from './menu/editor/editor.component';
 import { EditItemComponent } from './menu/edit-item/edit-item.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AboutComponent } from './about/about.component';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, CartComponent, ProfileComponent, EditorComponent, EditItemComponent, AboutComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, OrderHistoryComponent, ProfileComponent, EditorComponent, EditItemComponent, AboutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -62,7 +60,8 @@ import { AboutComponent } from './about/about.component';
     MatCheckboxModule,
     MatProgressBarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CartModule
   ],
   providers: [MenuAgent],
   bootstrap: [AppComponent]
