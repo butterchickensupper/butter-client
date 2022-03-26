@@ -23,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MenuViewerComponent } from './menu/menu-viewer/menu-viewer.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { OrderViewerComponent } from './menu/order-viewer/order-viewer.component';
+import { OrderViewerComponent } from './menu/cart/order-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { MenuAgent } from './menu/menu.agent';
@@ -37,7 +37,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent, ProfileComponent, EditorComponent, EditItemComponent, AboutComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    SidenavComponent,
+    ToolbarComponent,
+    MenuComponent,
+    OrderHistoryComponent,
+    MenuViewerComponent,
+    OrderViewerComponent,
+    CartComponent,
+    ProfileComponent,
+    EditorComponent,
+    EditItemComponent,
+    AboutComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

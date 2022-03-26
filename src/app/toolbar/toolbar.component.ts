@@ -23,4 +23,8 @@ export class ToolbarComponent implements OnInit {
   public login(): void {
     this.router.navigate(['/profile']);
   }
+
+  public cart(): void {
+    this.router.navigate(['/cart']);
+  }
 }
