@@ -3,11 +3,11 @@ import { MenuItem } from '../../models/menu';
 import { MenuOrder } from '../../models/order';
 
 @Component({
-  selector: 'app-menu-viewer',
-  templateUrl: './menu-viewer.component.html',
-  styleUrls: ['./menu-viewer.component.scss']
+  selector: 'app-menu-item-viewer',
+  templateUrl: './menu-item-viewer.component.html',
+  styleUrls: ['./menu-item-viewer.component.scss']
 })
-export class MenuViewerComponent implements OnInit {
+export class MenuItemViewerComponent implements OnInit {
   @Input()
   item!: MenuItem;
   @Input()

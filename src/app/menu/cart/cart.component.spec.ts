@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CartAgent } from './cart.agent';
 import { provideMockStore } from '@ngrx/store/testing';
 import { CartComponent } from './cart.component';
-import { selectOrder } from '../store/selector/order.selectors';
+import { selectOrder } from '../../store/selector/order.selectors';
+import { MenuService } from '../menu.service';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -13,7 +13,7 @@ describe('CartComponent', () => {
       declarations: [CartComponent],
       providers: [
         {
-          provide: CartAgent,
+          provide: MenuService,
           useValue: {
             getMenu: jasmine.createSpy('getMenu'),
             submitOrder: jasmine.createSpy('submitOrder')

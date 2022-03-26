@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Order } from '../models/order';
-import { MenuService } from '../menu/menu.service';
+import { Order } from '../../models/order';
+import { MenuService } from '../menu.service';
 
 @Component({
   selector: 'app-cart',

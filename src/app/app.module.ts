@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
-import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderHistoryComponent } from './menu/order-history/order-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,11 +27,10 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ProfileComponent } from './core/profile/profile.component';
 import { AboutComponent } from './core/about/about.component';
-import { CartModule } from './cart/cart.module';
-import { EditorModule } from './editor/editor.module';
+import { MenuModule } from './menu/menu.module';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, OrderHistoryComponent, ProfileComponent, AboutComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -57,8 +56,7 @@ import { EditorModule } from './editor/editor.module';
     MatListModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    CartModule,
-    EditorModule
+    MenuModule
   ],
   bootstrap: [AppComponent]
 })

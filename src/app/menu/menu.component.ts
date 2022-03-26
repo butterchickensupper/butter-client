@@ -1,9 +1,9 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Menu } from '../models/menu';
-import { MenuViewerComponent } from './menu-viewer/menu-viewer.component';
 import { Order } from '../models/order';
 import { Router } from '@angular/router';
 import { MenuService } from './menu.service';
+import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +11,7 @@ import { MenuService } from './menu.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  @ViewChildren('viewer') items?: QueryList<MenuViewerComponent>;
+  @ViewChildren('viewer') items?: QueryList<MenuItemViewerComponent>;
   public adminMode = false;
   public menu!: Menu;
   public order: Order = new Order();

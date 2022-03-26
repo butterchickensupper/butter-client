@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
 import { selectOrder } from '../store/selector/order.selectors';
-import { CartAgent } from '../cart/cart.agent';
 
 import { MenuComponent } from './menu.component';
+import { MenuService } from './menu.service';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -15,7 +15,7 @@ describe('MenuComponent', () => {
       declarations: [MenuComponent],
       providers: [
         {
-          provide: CartAgent,
+          provide: MenuService,
           useValue: {
             getMenu: jasmine.createSpy('getMenu'),
             submitOrder: jasmine.createSpy('submitOrder')

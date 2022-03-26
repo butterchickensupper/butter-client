@@ -3,7 +3,8 @@
   <mat-card-content>
     <section class="menu">
       <div class="menu-item" *ngFor="let item of order.items">
-        <app-menu-viewer #viewer [item]="item.item" [quantity]="item.quantity" [readOnly]="true"></app-menu-viewer>
+        <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" [readOnly]="true">
+        </app-menu-item-viewer>
       </div>
     </section>
     <section>
