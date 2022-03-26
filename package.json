@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:pwa": "ng build && http-server -p 4200 -c-1 dist/client",
+    "start:pwa": "ng build && http-server -p 4200 -c-1 dist/butter-client",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
