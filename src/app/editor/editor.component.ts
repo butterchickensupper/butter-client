@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { MenuService } from '../menu/menu.service';
 import { Menu, MenuItem } from '../models/menu';
-import { MenuState } from '../store/reducer/menu.reducer';
-import { selectMenu } from '../store/selector/menu.selectors';
 
 @Component({
   selector: 'app-editor',
@@ -17,13 +15,14 @@ export class EditorComponent implements OnInit {
   public menu$: Observable<Menu>;
   public menu!: Menu;
 
-  constructor(private router: Router, private store: Store<MenuState>) {
-    this.menu$ = this.store.pipe(select(selectMenu));
+  constructor(private router: Router, private menuService: MenuService) {
+    this.menu$ = this.menuService.getMenu();
   }
 
   ngOnInit(): void {
     this.menu$.subscribe((a) => {
       this.menu = a;
+      console.log(this.menu);
     });
   }
 

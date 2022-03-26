@@ -26,14 +26,12 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ProfileComponent } from './core/profile/profile.component';
-import { EditorComponent } from './editor/editor.component';
-import { EditItemComponent } from './editor/edit-item/edit-item.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AboutComponent } from './core/about/about.component';
 import { CartModule } from './cart/cart.module';
+import { EditorModule } from './editor/editor.module';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, OrderHistoryComponent, ProfileComponent, EditorComponent, EditItemComponent, AboutComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, OrderHistoryComponent, ProfileComponent, AboutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -49,7 +47,6 @@ import { CartModule } from './cart/cart.module';
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule,
     MatSlideToggleModule,
     MatCardModule,
     FormsModule,
@@ -57,10 +54,11 @@ import { CartModule } from './cart/cart.module';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatProgressBarModule,
+    MatListModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    CartModule
+    CartModule,
+    EditorModule
   ],
   bootstrap: [AppComponent]
 })

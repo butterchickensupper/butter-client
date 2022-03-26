@@ -2,11 +2,8 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Menu } from '../models/menu';
 import { MenuViewerComponent } from './menu-viewer/menu-viewer.component';
 import { Order } from '../models/order';
-import { CartAgent } from '../cart/cart.agent';
 import { Router } from '@angular/router';
-import { OrderState } from '../store/reducer/order.reducer';
-import { Store } from '@ngrx/store';
-import { addOrder } from '../store/action/order.actions';
+import { MenuService } from './menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -19,10 +16,10 @@ export class MenuComponent implements OnInit {
   public menu!: Menu;
   public order: Order = new Order();
 
-  constructor(public cartAgent: CartAgent, public router: Router, private store: Store<OrderState>) {}
+  constructor(public router: Router, private menuService: MenuService) {}
 
   ngOnInit(): void {
-    this.cartAgent.getMenu().subscribe((res) => {
+    this.menuService.getMenu().subscribe((res) => {
       this.menu = res;
     });
   }
@@ -38,7 +35,7 @@ export class MenuComponent implements OnInit {
         this.order.items.push(i.order);
       }
     });
-    this.store.dispatch(addOrder(this.order));
+    this.menuService.addOrder(this.order);
     this.router.navigate(['cart']);
   }
 

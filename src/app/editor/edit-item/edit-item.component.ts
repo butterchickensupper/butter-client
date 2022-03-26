@@ -1,12 +1,10 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
 import { finalize, Observable, Subscription } from 'rxjs';
 import { Menu } from 'src/app/models/menu';
-import { MenuState } from 'src/app/store/reducer/menu.reducer';
-import { selectMenu } from 'src/app/store/selector/menu.selectors';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MenuService } from 'src/app/menu/menu.service';
 
 @Component({
   selector: 'app-edit-item',
@@ -28,8 +26,8 @@ export class EditItemComponent implements OnInit {
     nutrition: ['']
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient, private router: Router, private store: Store<MenuState>, private route: ActivatedRoute) {
-    this.menu$ = this.store.pipe(select(selectMenu));
+  constructor(public fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private menuService: MenuService) {
+    this.menu$ = this.menuService.getMenu();
   }
 
   ngOnInit(): void {
