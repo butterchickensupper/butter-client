@@ -33,6 +33,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ProfileComponent } from './profile/profile.component';
 import { EditorComponent } from './menu/editor/editor.component';
 import { EditItemComponent } from './menu/edit-item/edit-item.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent, ProfileComponent, EditorComponent, EditItemComponent],
@@ -59,6 +60,7 @@ import { EditItemComponent } from './menu/edit-item/edit-item.component';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatProgressBarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

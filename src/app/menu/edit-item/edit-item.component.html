@@ -10,47 +10,62 @@
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput placeholder="Name" formControlName="name" />
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Description" formControlName="description"></textarea>
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+              placeholder="Description" formControlName="description"></textarea>
+            <mat-error *ngIf="form.get('description')?.invalid">Description is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Price</mat-label>
             <input matInput placeholder="0.0" type="number" formControlName="price" />
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <mat-error *ngIf="form.get('price')?.invalid">Price is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Available Quantity</mat-label>
             <input matInput placeholder="0" type="number" formControlName="available" />
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <mat-error *ngIf="form.get('available')?.invalid">Available Quantity is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Ingredients</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Ingredients" formControlName="ingredients"></textarea>
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+              placeholder="Ingredients" formControlName="ingredients"></textarea>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Nutritional Info</mat-label>
-            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" placeholder="Nutritional Info" formControlName="nutrition"></textarea>
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+              placeholder="Nutritional Info" formControlName="nutrition"></textarea>
           </mat-form-field>
         </p>
         <p>
+          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload />
+        </p>
+        <div class="file-upload">
+          {{fileName || "No image uploaded yet."}}
+          <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.value='';fileUpload.click()">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+        </div>
+        <div class="progress">
+          <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+          </mat-progress-bar>
+          <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+        </div>
+        <p>
           <button mat-raised-button color="primary" type="submit">Save</button>
-          <button mat-raised-button color="primary">Cancel</button>
+          <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
         </p>
       </form>
     </section>
