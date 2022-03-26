@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { menuFeatureKey, reducer } from '../store/reducer/menu.reducer';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -19,18 +17,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @NgModule({
   declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent],
-  imports: [
-    CommonModule,
-    StoreModule.forFeature(menuFeatureKey, reducer),
-    MatButtonModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatIconModule,
-    MatProgressBarModule
-  ],
+  imports: [CommonModule, MatButtonModule, MatInputModule, MatCheckboxModule, MatCardModule, ReactiveFormsModule, MatListModule, MatIconModule, MatProgressBarModule],
   exports: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent]
 })
 export class MenuModule {}

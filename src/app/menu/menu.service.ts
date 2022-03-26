@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app.state';
 import { Menu, MenuItem } from '../models/menu';
 import { Order } from '../models/order';
 import { AddOrder } from '../store/action/order.actions';
-import { selectMenu } from '../store/selector/menu.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,7 @@ export class MenuService {
   }
 
   public getMenu(): Observable<Menu> {
-    this.store.pipe(select(selectMenu));
+    this.store.select('menu');
 
     return of(new Menu({ items: [new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 })] }));
     // return this.http.get<Menu>(this.menuUrl);

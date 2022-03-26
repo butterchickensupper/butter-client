@@ -1,22 +1,20 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, INIT } from '@ngrx/store';
 import { Menu } from 'src/app/models/menu';
-import { addMenu } from '../action/menu.actions';
+import { AddMenu, ADD_MENU, REMOVE_MENU } from '../action/menu.actions';
 
-export const menuFeatureKey = 'menu';
+const initialState: Menu = { items: [] };
 
-export interface MenuState {
-  menu: Menu;
-}
-
-export const initialState: MenuState = {
-  menu: new Menu({ items: [] })
-};
-
-export const customerReducer = createReducer(
-  initialState,
-  on(addMenu, (state: MenuState, { menu }) => ({ ...state, menu: menu }))
-);
-
-export function reducer(menu: MenuState | undefined, action: Action): any {
-  return customerReducer(menu, action);
+export function menuReducer(state: Menu = { items: [] }, action: Action): Menu {
+  switch (action.type) {
+    case ADD_MENU:
+      return (action as AddMenu).newMenu;
+    case REMOVE_MENU:
+      return initialState; // reset
+    case INIT:
+      return initialState;
+    default:
+      // return state
+      // or for learning what happens under the hood:
+      throw Error(`The action type "${action.type}" is not implemented`);
+  }
 }

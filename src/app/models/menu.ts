@@ -9,7 +9,17 @@ export class MenuItem {
   public sequenceNumber?: number;
   public thumbnailUrl?: string;
 
-  constructor(args: { description: string; imageUrl: string; name: string; price: number; sequenceNumber?: number; thumbnailUrl?: string; available: number; nutrition?: string; ingredients?: string }) {
+  constructor(args: {
+    description: string;
+    imageUrl: string;
+    name: string;
+    price: number;
+    sequenceNumber?: number;
+    thumbnailUrl?: string;
+    available: number;
+    nutrition?: string;
+    ingredients?: string;
+  }) {
     this.description = args.description;
     this.imageUrl = args.imageUrl;
     this.name = args.name;
@@ -23,13 +33,9 @@ export class MenuItem {
 }
 
 export class Menu {
-  private _items: MenuItem[];
-
-  public get items(): MenuItem[] {
-    return this._items;
-  }
+  public items: MenuItem[];
 
   constructor(args: { items: MenuItem[] }) {
-    this._items = args.items;
+    this.items = args.items;
   }
 }

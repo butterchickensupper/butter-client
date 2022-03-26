@@ -16,7 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
-import { OrderHistoryComponent } from './menu/order-history/order-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +27,7 @@ import { ProfileComponent } from './core/profile/profile.component';
 import { AboutComponent } from './core/about/about.component';
 import { MenuModule } from './menu/menu.module';
 import { orderReducer } from './store/reducer/order.reducer';
+import { menuReducer } from './store/reducer/menu.reducer';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
@@ -54,7 +54,7 @@ import { orderReducer } from './store/reducer/order.reducer';
     MatFormFieldModule,
     MatCheckboxModule,
     MatListModule,
-    StoreModule.forRoot({ order: orderReducer }),
+    StoreModule.forRoot({ order: orderReducer, menu: menuReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     MenuModule
   ],
