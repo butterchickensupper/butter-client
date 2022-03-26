@@ -12,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { EditorComponent } from '../editor/editor.component';
 import { EditItemComponent } from '../editor/edit-item/edit-item.component';
-import { orderFeatureKey } from '../store/reducer/order.reducer';
 import { CartComponent } from './cart/cart.component';
 import { MenuComponent } from './menu.component';
 import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
@@ -23,7 +22,6 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
   imports: [
     CommonModule,
     StoreModule.forFeature(menuFeatureKey, reducer),
-    StoreModule.forFeature(orderFeatureKey, reducer),
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,

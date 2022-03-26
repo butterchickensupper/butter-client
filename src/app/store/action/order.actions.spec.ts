@@ -1,7 +1,11 @@
-import * as fromOrder from './order.actions';
+import { AddOrder, RemoveOrder } from './order.actions';
 
-describe('Order action', () => {
-  it('should return an action', () => {
-    expect(fromOrder.loadOrder().type).toBe('[Order] Order');
+describe('OrderAction', () => {
+  it('should create an AddOrder Action', () => {
+    expect(new AddOrder({ name: 'TheHolyTester', address: '123 Main St', items: [] })).toBeTruthy();
+  });
+
+  it('should create a RemoveOrder Action', () => {
+    expect(new RemoveOrder(1)).toBeTruthy();
   });
 });

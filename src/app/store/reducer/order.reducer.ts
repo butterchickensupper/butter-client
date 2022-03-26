@@ -1,22 +1,20 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, INIT } from '@ngrx/store';
 import { Order } from 'src/app/models/order';
-import { addOrder } from '../action/order.actions';
+import { AddOrder, ADD_ORDER, REMOVE_ORDER } from '../action/order.actions';
 
-export const orderFeatureKey = 'order';
+const initialState: Order = { name: '', address: '', items: [] };
 
-export interface OrderState {
-  order: Order;
-}
-
-export const initialState: OrderState = {
-  order: { items: [], name: '', address: '' }
-};
-
-export const orderReducer = createReducer(
-  initialState,
-  on(addOrder, (state: OrderState, { order }) => ({ ...state, order: order }))
-);
-
-export function reducer(state: OrderState | undefined, action: Action): any {
-  return orderReducer(state, action);
+export function orderReducer(state: Order = { items: [], name: '', address: '' }, action: Action): Order {
+  switch (action.type) {
+    case ADD_ORDER:
+      return (action as AddOrder).newOrder;
+    case REMOVE_ORDER:
+      return initialState; // reset
+    case INIT:
+      return initialState;
+    default:
+      // return state
+      // or for learning what happens under the hood:
+      throw Error(`The action type "${action.type}" is not implemented`);
+  }
 }

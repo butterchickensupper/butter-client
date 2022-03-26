@@ -23,11 +23,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ProfileComponent } from './core/profile/profile.component';
 import { AboutComponent } from './core/about/about.component';
 import { MenuModule } from './menu/menu.module';
+import { orderReducer } from './store/reducer/order.reducer';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
@@ -54,7 +54,7 @@ import { MenuModule } from './menu/menu.module';
     MatFormFieldModule,
     MatCheckboxModule,
     MatListModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot({ order: orderReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     MenuModule
   ],
