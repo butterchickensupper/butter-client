@@ -1,8 +1,12 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { finalize, Subscription } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { finalize, Observable, Subscription } from 'rxjs';
+import { Menu } from 'src/app/models/menu';
+import { MenuState } from 'src/app/store/reducer/menu.reducer';
+import { selectMenu } from 'src/app/store/selector/menu.selectors';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-item',
@@ -12,6 +16,8 @@ import { finalize, Subscription } from 'rxjs';
 export class EditItemComponent implements OnInit {
   uploadProgress?: number;
   uploadSub?: Subscription;
+  public menu$: Observable<Menu>;
+  public menu!: Menu;
   public fileName = '';
   public form = this.fb.group({
     name: ['', [Validators.required]],
@@ -22,13 +28,25 @@ export class EditItemComponent implements OnInit {
     nutrition: ['']
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(public fb: FormBuilder, private http: HttpClient, private router: Router, private store: Store<MenuState>, private route: ActivatedRoute) {
+    this.menu$ = this.store.pipe(select(selectMenu));
+  }
 
   ngOnInit(): void {
-    console.log('init');
+    this.menu$.subscribe((a) => {
+      this.menu = a;
+    });
+    this.route.queryParams.subscribe((params) => {
+      let id = params['id'];
+      if (id) {
+        //let i = this.menu.items.find((a) => a.id === id);
+        //TODO: load menu item into ui
+      }
+    });
   }
 
   public onSave(): void {
+    // update store
     console.log(this.form.value);
   }
 

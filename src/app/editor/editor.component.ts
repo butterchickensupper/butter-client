@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
 import { Router } from '@angular/router';
-import { MenuItem } from '../models/menu';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Menu, MenuItem } from '../models/menu';
+import { MenuState } from '../store/reducer/menu.reducer';
+import { selectMenu } from '../store/selector/menu.selectors';
 
 @Component({
   selector: 'app-editor',
@@ -10,15 +14,17 @@ import { MenuItem } from '../models/menu';
 })
 export class EditorComponent implements OnInit {
   private selectedItem?: MenuItem;
-  public menuItems: MenuItem[] = [
-    new MenuItem({ description: 'delicious butter chickens', name: 'Butter Chicken', imageUrl: '', price: 13.99, available: 40 }),
-    new MenuItem({ description: 'delicious goat babies', name: 'Lamb Curry', imageUrl: '', price: 15.99, available: 20 })
-  ];
+  public menu$: Observable<Menu>;
+  public menu!: Menu;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private store: Store<MenuState>) {
+    this.menu$ = this.store.pipe(select(selectMenu));
+  }
 
   ngOnInit(): void {
-    console.log('init');
+    this.menu$.subscribe((a) => {
+      this.menu = a;
+    });
   }
 
   public selectionChange(change: MatSelectionListChange): void {
@@ -31,6 +37,6 @@ export class EditorComponent implements OnInit {
 
   public edit(): void {
     if (!this.selectedItem) return;
-    this.router.navigateByUrl('edit-item');
+    this.router.navigateByUrl('edit-item/123'); // pass field to update
   }
 }

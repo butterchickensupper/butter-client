@@ -6,8 +6,8 @@
       <button mat-raised-button color="primary" (click)="edit()">Edit</button>
       <!-- <button mat-raised-button color="primary">Delete</button> -->
     </div>
-    <mat-selection-list #menu [multiple]="false" (selectionChange)="selectionChange($event)">
-      <mat-list-option *ngFor="let item of menuItems" [value]="item">
+    <mat-selection-list #menuList [multiple]="false" (selectionChange)="selectionChange($event)">
+      <mat-list-option *ngFor="let item of menu.items" [value]="item">
         {{ item.name }}
       </mat-list-option>
     </mat-selection-list>
