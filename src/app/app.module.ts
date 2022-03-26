@@ -34,9 +34,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditorComponent } from './menu/editor/editor.component';
 import { EditItemComponent } from './menu/edit-item/edit-item.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent, ProfileComponent, EditorComponent, EditItemComponent],
+  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, MenuComponent, OrderHistoryComponent, MenuViewerComponent, OrderViewerComponent, CartComponent, ProfileComponent, EditorComponent, EditItemComponent, AboutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
