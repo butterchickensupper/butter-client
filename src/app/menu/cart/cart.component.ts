@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Order } from '../models/order';
 
 @Component({
-  selector: 'app-order-viewer',
-  templateUrl: './order-viewer.component.html',
-  styleUrls: ['./order-viewer.component.scss']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
-export class OrderViewerComponent implements OnInit {
+export class CartComponent implements OnInit {
   @Input()
   public order?: Order;
 
@@ -17,4 +17,5 @@ export class OrderViewerComponent implements OnInit {
   }
 
   public submitOrder(): void {}
+  public clearOrder(): void {}
 }
