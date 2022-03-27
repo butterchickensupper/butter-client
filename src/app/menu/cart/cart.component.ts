@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Order } from '../../models/order';
+import { MenuOrder, Order } from '../../models/order';
 import { MenuService } from '../menu.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { MenuService } from '../menu.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  public order$: Observable<Order>;
-  public order!: Order;
+  public orders$: Observable<MenuOrder[]>;
+  public orders: MenuOrder[] = [];
 
   public form = this.fb.group({
     name: ['', [Validators.required]],
@@ -19,38 +19,45 @@ export class CartComponent implements OnInit {
   });
 
   constructor(public fb: FormBuilder, private menuService: MenuService) {
-    this.order$ = this.menuService.getOrder();
+    this.orders$ = this.menuService.getOrders();
   }
 
   ngOnInit(): void {
-    this.order$.subscribe((a) => {
-      this.order = a;
+    this.orders$.subscribe((a) => {
+      this.orders = a;
     });
   }
 
   public getTotal(): number | undefined {
-    if (!this.order?.items) return undefined;
+    if (!this.orders) return undefined;
     let total = 0.0;
-    this.order.items.forEach((i) => {
+    this.orders.forEach((i) => {
       total += i.item.price * i.quantity;
     });
     return total;
   }
 
   public submitOrder(): void {
-    if (!this.order) {
+    if (!this.orders) {
       console.log('order is null');
       return;
     }
 
-    this.menuService.submitOrder(this.order).subscribe((res) => {
+    var o = new Order({ name: this.form.get('name')?.value, address: this.form.get('address')?.value, items: this.orders });
+    this.menuService.submitOrder(o).subscribe((res) => {
       console.log(res);
     });
 
     // clear order from store
-    console.log(this.order);
+    console.log(o);
+    this.menuService.clearOrders();
   }
 
-  public cancel(): void {}
-  public onOrder(): void {}
+  public cancel(): void {
+    // clear order from the store/server
+  }
+
+  public onOrder(): void {
+    // submit order to the service
+  }
 }

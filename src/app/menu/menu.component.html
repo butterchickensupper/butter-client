@@ -1,17 +1,13 @@
 <mat-card class="result">
-  <mat-card-title>Menu</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Menu</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <section class="menu">
       <div class="menu-item" *ngFor="let item of menu.items">
-        <app-menu-item-viewer #viewer [item]="item"></app-menu-item-viewer>
+        <app-menu-item-viewer #viewer [item]="item" (order)="add($event)"></app-menu-item-viewer>
         <p></p>
       </div>
     </section>
   </mat-card-content>
-  <mat-card-actions>
-    <div class="example-button-row">
-      <button mat-raised-button color="primary" (click)="add()">Add</button>
-      <button mat-raised-button color="primary" (click)="clear()" class="button-space">Clear</button>
-    </div>
-  </mat-card-actions>
 </mat-card>

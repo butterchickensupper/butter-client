@@ -1,5 +1,13 @@
 <mat-card class="result">
-  <mat-card-title>{{ item?.name }}</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>{{ item?.name }}</mat-card-title>
+    <div fxFlex></div>
+    <div *ngIf="quantity">
+      <button mat-fab color="primary" aria-label="remove from cart" (click)="onRemove()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
   <mat-card-content>
     <img class="image" [src]="item?.imageUrl" width="128" height="128" />
 
@@ -13,24 +21,15 @@
     </div>
   </mat-card-content>
 
-  <div *ngIf="readOnly">
+  <div *ngIf="quantity">
     <mat-card-footer>
       <mat-label>Order: </mat-label>
       <span>{{ quantity }}</span>
     </mat-card-footer>
   </div>
-  <div *ngIf="!readOnly">
-    <mat-card-footer>
-      <mat-checkbox class="example-margin" [(ngModel)]="selected"> Order </mat-checkbox>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Quantity</mat-label>
-        <mat-select (selectionChange)="selectionChanged($event)" [(value)]="quantity">
-          <mat-option [value]="0"></mat-option>
-          <mat-option *ngFor="let count of numbers" [value]="count">
-            {{ count }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-footer>
+  <div *ngIf="!quantity">
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onOrder()">Add</button>
+    </mat-card-actions>
   </div>
 </mat-card>

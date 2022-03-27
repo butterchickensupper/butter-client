@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Menu, MenuItem } from '../models/menu';
-import { Order } from '../models/order';
-import { AddOrder, RemoveOrder } from '../store/action/order.actions';
+import { MenuOrder, Order } from '../models/order';
+import { AddOrder, ClearOrders, RemoveOrder } from '../store/action/order.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +13,26 @@ import { AddOrder, RemoveOrder } from '../store/action/order.actions';
 export class MenuService {
   constructor(private store: Store<AppState>, private httpClient: HttpClient) {}
 
-  public addOrder(order: Order): void {
+  public addOrder(order: MenuOrder): void {
     this.store.dispatch(new AddOrder(order));
 
     // submit data to server
   }
 
-  public getOrder(): Observable<Order> {
-    this.store.select('order');
+  public removeOrder(index: number): void {
+    this.store.dispatch(new RemoveOrder(index));
+  }
 
-    // get order from the server, return latest
+  public getOrders(): Observable<MenuOrder[]> {
+    this.store.select('orders');
 
+    // get orders from the server, return latest
+
+    return of();
+  }
+
+  public clearOrders(): Observable<any> {
+    this.store.dispatch(new ClearOrders());
     return of();
   }
 
@@ -43,8 +52,6 @@ export class MenuService {
   }
 
   public submitOrder(order: Order): Observable<any> {
-    // TODO: remove item from the store?
-    // this.store.dispatch(new RemoveOrder(1));
     return of();
     // return this.http.post(this.orderUrl, order).pipe(share());
   }

@@ -1,9 +1,11 @@
 <mat-card class="result">
-  <mat-card-title>Cart</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Cart</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <section class="menu">
-      <div class="menu-item" *ngFor="let item of order?.items">
-        <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" [readOnly]="true">
+      <div class="menu-item" *ngFor="let item of orders">
+        <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity">
         </app-menu-item-viewer>
       </div>
     </section>
@@ -30,7 +32,7 @@
         </p>
         <p>
           <button mat-raised-button color="primary" type="submit" class="button-space">Order</button>
-          <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+          <button mat-raised-button color="primary" (click)="cancel()">Clear</button>
         </p>
       </form>
     </section>

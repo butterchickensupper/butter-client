@@ -1,7 +1,7 @@
 import { Menu } from './models/menu';
-import { Order } from './models/order';
+import { MenuOrder } from './models/order';
 
 export interface AppState {
-  readonly order: Order;
+  readonly orders: MenuOrder[];
   readonly menu: Menu;
 }

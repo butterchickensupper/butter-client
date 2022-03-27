@@ -14,4 +14,10 @@ export class Order {
   public items: MenuOrder[] = [];
   public name!: string;
   public address!: string;
+
+  constructor(args: { name: string; address: string; items: MenuOrder[] }) {
+    this.name = args.name;
+    this.address = args.address;
+    this.items = args.items;
+  }
 }
