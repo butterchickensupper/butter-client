@@ -30,7 +30,15 @@ export class MenuService {
   public getMenu(): Observable<Menu> {
     this.store.select('menu');
 
-    return of(new Menu({ items: [new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 })] }));
+    return of(
+      new Menu({
+        items: [
+          new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 }),
+          new MenuItem({ imageUrl: './assets/dal.jpg', price: 10.99, description: 'Lentil Dal Curry', name: 'Dal Curry', available: 25 }),
+          new MenuItem({ imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 })
+        ]
+      })
+    );
     // return this.http.get<Menu>(this.menuUrl);
   }
 

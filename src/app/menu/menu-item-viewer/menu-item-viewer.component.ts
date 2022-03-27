@@ -30,4 +30,9 @@ export class MenuItemViewerComponent implements OnInit {
       throw new Error('quantity should be defined');
     }
   }
+
+  public reset(): void {
+    this.quantity = 0;
+    this.selected = false;
+  }
 }

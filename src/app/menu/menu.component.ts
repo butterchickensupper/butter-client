@@ -42,4 +42,10 @@ export class MenuComponent implements OnInit {
   public reset(): void {
     this.order = new Order();
   }
+
+  public clear(): void {
+    this.items?.forEach((res) => {
+      res.reset();
+    });
+  }
 }
