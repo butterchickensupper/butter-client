@@ -40,7 +40,7 @@ export class MenuService {
   }
 
   public getMenu(): Observable<Menu> {
-    this.store.select('items');
+    // this.store.select('menuItems');
 
     return of(
       new Menu({

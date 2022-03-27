@@ -3,5 +3,5 @@ import { MenuOrder } from './models/order';
 
 export interface AppState {
   readonly orders: MenuOrder[];
-  readonly items: MenuItem[];
+  // readonly menuItems: MenuItem[];
 }
