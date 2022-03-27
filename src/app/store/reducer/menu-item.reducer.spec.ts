@@ -1,16 +1,16 @@
-import { Menu } from 'src/app/models/menu';
-import { AddMenu, RemoveMenu } from '../action/menu.actions';
-import { menuReducer } from './menu.reducer';
+import { MenuItem } from 'src/app/models/menu';
+import { AddMenu, RemoveMenuItem } from '../action/menu.actions';
+import { menuItemReducer } from './menu-item.reducer';
 
-describe('MenuRecuder', () => {
-  let initialState: Menu;
+describe('MenuItemRecuder', () => {
+  let initialState: MenuItem[];
   beforeEach(() => {
-    initialState = { items: [] };
+    initialState = [];
   });
 
   it('called with AddHero action should return a state with the added menu', () => {
-    const addedMenu = { items: [] };
-    expect(menuReducer(initialState, new AddMenu(addedMenu))).toEqual(addedMenu);
+    const addedMenu = { available: 1, description: '', imageUrl: '', name: '', price: 1.22 };
+    expect(menuItemReducer(initialState, new AddMenu(addedMenu))).toEqual([addedMenu]);
   });
 
   // it('called with RemoveMenu action should return a state with the correct menu deleted', () => {

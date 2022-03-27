@@ -27,7 +27,7 @@ import { ProfileComponent } from './core/profile/profile.component';
 import { AboutComponent } from './core/about/about.component';
 import { MenuModule } from './menu/menu.module';
 import { orderReducer } from './store/reducer/order.reducer';
-import { menuReducer } from './store/reducer/menu.reducer';
+import { menuItemReducer } from './store/reducer/menu-item.reducer';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
@@ -54,7 +54,7 @@ import { menuReducer } from './store/reducer/menu.reducer';
     MatFormFieldModule,
     MatCheckboxModule,
     MatListModule,
-    StoreModule.forRoot({ orders: orderReducer, menu: menuReducer }),
+    StoreModule.forRoot({ orders: orderReducer, items: menuItemReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     MenuModule
   ],

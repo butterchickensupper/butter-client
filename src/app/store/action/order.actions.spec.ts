@@ -2,7 +2,7 @@ import { AddOrder, RemoveOrder } from './order.actions';
 
 describe('OrderAction', () => {
   it('should create an AddOrder Action', () => {
-    expect(new AddOrder({ name: 'TheHolyTester', address: '123 Main St', items: [] })).toBeTruthy();
+    expect(new AddOrder({ item: { name: 'TheHolyTester', price: 1.11, imageUrl: '', available: 1, description: '' }, quantity: 1 })).toBeTruthy();
   });
 
   it('should create a RemoveOrder Action', () => {

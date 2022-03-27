@@ -1,17 +1,17 @@
 import { Action, INIT } from '@ngrx/store';
-import { MenuOrder } from 'src/app/models/order';
-import { AddOrder, ADD_ORDER, RemoveOrder, REMOVE_ORDER } from '../action/order.actions';
+import { MenuItem } from 'src/app/models/menu';
+import { AddMenu, ADD_MENU, RemoveMenuItem, REMOVE_MENU_ITEM } from '../action/menu.actions';
 
-const initialState: MenuOrder[] = [];
+const initialState: MenuItem[] = [];
 
-export function orderReducer(state: MenuOrder[] = initialState, action: Action): MenuOrder[] {
+export function menuItemReducer(state: MenuItem[] = initialState, action: Action): MenuItem[] {
   console.log(action);
   switch (action.type) {
-    case ADD_ORDER:
-      let n = (action as AddOrder).newOrder;
+    case ADD_MENU:
+      let n = (action as AddMenu).newItem;
       return [...state, n];
-    case REMOVE_ORDER:
-      let i = (action as RemoveOrder).indexToRemove;
+    case REMOVE_MENU_ITEM:
+      let i = (action as RemoveMenuItem).indexToRemove;
       const newState = [...state];
       newState.splice(i, 1);
       return newState;

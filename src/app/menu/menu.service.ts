@@ -24,7 +24,10 @@ export class MenuService {
   }
 
   public getOrders(): Observable<MenuOrder[]> {
-    this.store.select('orders');
+    this.store.select('orders').subscribe((res) => {
+      console.log('orders');
+      console.log(res);
+    });
 
     // get orders from the server, return latest
 
@@ -37,7 +40,7 @@ export class MenuService {
   }
 
   public getMenu(): Observable<Menu> {
-    this.store.select('menu');
+    this.store.select('items');
 
     return of(
       new Menu({
