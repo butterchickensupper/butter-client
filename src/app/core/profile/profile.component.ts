@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  public address = '';
-  constructor() {}
+  public form = this.fb.group({
+    name: ['', [Validators.required]],
+    address: ['', [Validators.required]]
+  });
+
+  constructor(public fb: FormBuilder) {}
 
   ngOnInit(): void {
     console.log('init');
