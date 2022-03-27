@@ -24,7 +24,8 @@
       <mat-checkbox class="example-margin" [(ngModel)]="selected"> Order </mat-checkbox>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Quantity</mat-label>
-        <mat-select>
+        <mat-select (selectionChange)="selectionChanged($event)">
+          <mat-option [value]="0"></mat-option>
           <mat-option *ngFor="let count of numbers" [value]="count">
             {{ count }}
           </mat-option>

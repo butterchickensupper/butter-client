@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,12 +6,8 @@ import { Router } from '@angular/router';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   constructor(public router: Router) {}
-
-  ngOnInit(): void {
-    console.log('init');
-  }
 
   @Output()
   public menuOpen = false;

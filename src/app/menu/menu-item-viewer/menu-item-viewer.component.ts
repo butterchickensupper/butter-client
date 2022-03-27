@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { MenuItem } from '../../models/menu';
 import { MenuOrder } from '../../models/order';
 
@@ -33,11 +34,18 @@ export class MenuItemViewerComponent implements OnInit {
 
     this.numbers = Array(this.item.available)
       .fill(0)
-      .map((x, i) => i);
+      .map((x, i) => i)
+      .filter((x) => x > 0);
   }
 
   public reset(): void {
     this.quantity = undefined;
     this.selected = false;
+  }
+
+  public selectionChanged(event: MatSelectChange): void {
+    if (event.value > 0) {
+      this.selected = true;
+    }
   }
 }
