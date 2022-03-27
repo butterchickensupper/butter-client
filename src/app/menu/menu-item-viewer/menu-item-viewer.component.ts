@@ -16,6 +16,7 @@ export class MenuItemViewerComponent implements OnInit {
   public quantity?: number = undefined; // this must be sent on readOnly mode
 
   public selected = false;
+  public numbers: number[] = [];
 
   public get order(): MenuOrder | undefined {
     if (!this.selected) return undefined;
@@ -29,10 +30,14 @@ export class MenuItemViewerComponent implements OnInit {
     if (this.readOnly && this.quantity === undefined) {
       throw new Error('quantity should be defined');
     }
+
+    this.numbers = Array(this.item.available)
+      .fill(0)
+      .map((x, i) => i);
   }
 
   public reset(): void {
-    this.quantity = 0;
+    this.quantity = undefined;
     this.selected = false;
   }
 }
