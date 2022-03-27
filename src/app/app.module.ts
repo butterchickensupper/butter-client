@@ -54,7 +54,7 @@ import { menuReducer } from './store/reducer/menu.reducer';
     MatFormFieldModule,
     MatCheckboxModule,
     MatListModule,
-    StoreModule.forRoot({ order: orderReducer, menu: menuReducer }),
+    StoreModule.forRoot({ orders: orderReducer, menu: menuReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     MenuModule
   ],
