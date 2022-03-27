@@ -16,6 +16,7 @@ import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.com
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent],
@@ -31,7 +32,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatProgressBarModule,
     FormsModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSnackBarModule
   ],
   exports: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent]
 })

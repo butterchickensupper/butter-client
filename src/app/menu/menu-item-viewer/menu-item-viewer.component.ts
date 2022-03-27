@@ -21,7 +21,6 @@ export class MenuItemViewerComponent {
 
   public onOrder(): void {
     this.order.emit(new MenuOrder({ item: this.item, quantity: 1 }));
-    // show toast
   }
   public onRemove(): void {
     this.remove.emit('orderId');
