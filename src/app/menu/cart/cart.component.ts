@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
   }
 
   public getTotal(): number | undefined {
-    if (!this.order.items) return undefined;
+    if (!this.order?.items) return undefined;
     let total = 0.0;
     this.order.items.forEach((i) => {
       total += i.item.price * i.quantity;

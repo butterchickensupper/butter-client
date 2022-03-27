@@ -2,7 +2,7 @@
   <mat-card-title>Cart</mat-card-title>
   <mat-card-content>
     <section class="menu">
-      <div class="menu-item" *ngFor="let item of order.items">
+      <div class="menu-item" *ngFor="let item of order?.items">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" [readOnly]="true">
         </app-menu-item-viewer>
       </div>
