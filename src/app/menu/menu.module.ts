@@ -15,10 +15,24 @@ import { MenuComponent } from './menu.component';
 import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent],
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatCheckboxModule, MatCardModule, ReactiveFormsModule, MatListModule, MatIconModule, MatProgressBarModule, FormsModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatIconModule,
+    MatProgressBarModule,
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule
+  ],
   exports: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent]
 })
 export class MenuModule {}
