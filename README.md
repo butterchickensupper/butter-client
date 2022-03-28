@@ -6,4 +6,4 @@ Client application for ordering the best butter chicken around!
 
 ## Contact
 
-To get more help contact ButterChickenSupper@gmail.com
+To get more information contact ButterChickenSupper@gmail.com
