@@ -11,3 +11,8 @@ body {
 .main-content {
   padding: 20px;
 }
+
+.mat-badge-small.mat-badge-overlap.mat-badge-after .mat-badge-content {
+  right: -1px !important;
+  top: -1px !important;
+}

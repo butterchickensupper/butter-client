@@ -4,7 +4,8 @@
   </button>
   <a class="title" href="">Butter Chicken Supper</a>
   <span class="toolbar-spacer"></span>
-  <button mat-icon-button aria-label="shopping bag button" (click)="cart()">
+  <button mat-icon-button aria-label="shopping bag button" (click)="cart()" [matBadge]="count" matBadgeColor="warn"
+    matBadgeSize="small" [matBadgeHidden]="count === 0">
     <span class="material-icons"> shopping_bag </span>
   </button>
   <button mat-icon-button aria-label="user account button" (click)="login()">

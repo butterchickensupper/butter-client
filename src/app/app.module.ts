@@ -27,7 +27,7 @@ import { ProfileComponent } from './core/profile/profile.component';
 import { AboutComponent } from './core/about/about.component';
 import { MenuModule } from './menu/menu.module';
 import { orderReducer } from './store/reducer/order.reducer';
-import { menuItemReducer } from './store/reducer/menu-item.reducer';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
@@ -56,7 +56,8 @@ import { menuItemReducer } from './store/reducer/menu-item.reducer';
     MatListModule,
     StoreModule.forRoot({ order: orderReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    MenuModule
+    MenuModule,
+    MatBadgeModule
   ],
   bootstrap: [AppComponent]
 })

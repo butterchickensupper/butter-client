@@ -1,5 +1,7 @@
 import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,7 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  constructor(public router: Router) {}
+  count = 4;
+
+  constructor(public router: Router, private store: Store<IAppState>) {
+    this.store.select('order').subscribe((res) => {
+      this.count = res.length;
+    });
+  }
 
   @Output()
   public menuOpen = false;
