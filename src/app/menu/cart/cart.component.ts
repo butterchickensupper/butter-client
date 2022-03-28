@@ -13,6 +13,13 @@ export class CartComponent implements OnInit {
   public orders$: Observable<MenuOrder[]>;
   public orders: MenuOrder[] = [];
 
+  public formattedAddress = '';
+
+  public handleAddressChange(address: any): void {
+    console.log(address);
+    this.formattedAddress = address.formatted_address;
+  }
+
   public form = this.fb.group({
     name: ['', [Validators.required]],
     address: ['', [Validators.required]]

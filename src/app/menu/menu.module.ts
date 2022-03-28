@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent, OrderDashboardComponent],
@@ -34,7 +35,8 @@ import { OrderDashboardComponent } from './order-dashboard/order-dashboard.compo
     FormsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    GooglePlaceModule
   ],
   exports: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent]
 })
