@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { MenuOrder, Order } from '../../models/order';
+
 import { MenuService } from '../menu.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -28,7 +29,6 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.address);
     this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
       componentRestrictions: { country: ['us'] },
       fields: ['address_components'],
