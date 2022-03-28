@@ -1,36 +1,46 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { SidenavComponent } from './core/sidenav/sidenav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { ToolbarComponent } from './core/toolbar/toolbar.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ProfileComponent } from './core/profile/profile.component';
+
 import { AboutComponent } from './core/about/about.component';
-import { MenuModule } from './menu/menu.module';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { CartComponent } from './menu/cart/cart.component';
+import { EditItemComponent } from './editor/edit-item/edit-item.component';
+import { EditorComponent } from './editor/editor.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './material/material.module';
+import { MenuComponent } from './menu/menu.component';
+import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewer.component';
+import { NgModule } from '@angular/core';
+import { OrderDashboardComponent } from './menu/order-dashboard/order-dashboard.component';
+import { OrderHistoryComponent } from './menu/order-history/order-history.component';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { ProfileComponent } from './core/profile/profile.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { SidenavComponent } from './core/sidenav/sidenav.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { environment } from '../environments/environment';
 import { orderReducer } from './store/reducer/order.reducer';
-import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, SidenavComponent, ToolbarComponent, ProfileComponent, AboutComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    SidenavComponent,
+    ToolbarComponent,
+    ProfileComponent,
+    AboutComponent,
+    EditorComponent,
+    EditItemComponent,
+    CartComponent,
+    MenuComponent,
+    MenuItemViewerComponent,
+    OrderHistoryComponent,
+    OrderDashboardComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -42,22 +52,11 @@ import { MatBadgeModule } from '@angular/material/badge';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatListModule,
     StoreModule.forRoot({ order: orderReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    MenuModule,
-    MatBadgeModule
+    MaterialModule
   ],
   bootstrap: [AppComponent]
 })
