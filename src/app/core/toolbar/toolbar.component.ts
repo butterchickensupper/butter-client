@@ -9,11 +9,13 @@ import { IAppState } from 'src/app/store/app.state';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  count = 4;
+  public total = 0;
 
   constructor(public router: Router, private store: Store<IAppState>) {
     this.store.select('order').subscribe((res) => {
-      this.count = res.length;
+      res.forEach((a) => {
+        this.total += a.quantity;
+      });
     });
   }
 

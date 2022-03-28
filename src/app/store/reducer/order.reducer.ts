@@ -5,11 +5,18 @@ import { AddOrder, ADD_ORDER, RemoveOrder, REMOVE_ORDER } from '../action/order.
 const initialState: MenuOrder[] = [];
 
 export function orderReducer(state = initialState, action: Action): MenuOrder[] {
-  console.log(action);
   switch (action.type) {
     case ADD_ORDER:
-      let n = (action as AddOrder).newOrder;
-      return [...state, n];
+      let newOrder = (action as AddOrder).newOrder;
+      let x = state.findIndex((a) => a.item.id === newOrder.item.id);
+      if (x === -1) return [...state, newOrder];
+      let target = state[x].quantity + newOrder.quantity;
+      if (state[x].item.available < target) throw new Error('not enough available');
+
+      let newState1 = [...state];
+      newState1.splice(x, 1);
+      let newItem = new MenuOrder({ quantity: target, item: newOrder.item });
+      return [...newState1, newItem];
     case REMOVE_ORDER:
       let i = (action as RemoveOrder).indexToRemove;
       const newState = [...state];
