@@ -1,9 +1,10 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { finalize, Observable, Subscription } from 'rxjs';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Observable, Subscription, finalize } from 'rxjs';
+
 import { Menu } from 'src/app/models/menu';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MenuService } from 'src/app/menu/menu.service';
 
 @Component({
@@ -35,6 +36,7 @@ export class EditItemComponent implements OnInit {
       this.menu = a;
     });
     this.route.queryParams.subscribe((params) => {
+      console.log(params);
       let id = params['id'];
       if (id) {
         //let i = this.menu.items.find((a) => a.id === id);

@@ -1,4 +1,5 @@
-import Dexie from 'dexie';
+import Dexie, { PromiseExtended } from 'dexie';
+
 import { Menu } from '../models/menu';
 
 export class MenuDB extends Dexie {
@@ -7,14 +8,15 @@ export class MenuDB extends Dexie {
   constructor() {
     super('MenuDB');
     const db = this;
-    //
     // Define tables and indexes
-    //
     db.version(1).stores({
-      menus: '&id, url'
+      menus: '&id, imageUrl'
     });
+    // & unique index
+    // ++ auto-increment unique PK
+    // * multi-entry index
+    // [A+B] compound index
 
-    // Let's physically map Menu class to Menu table.
     db.menus.mapToClass(Menu);
   }
 }
@@ -63,15 +65,15 @@ export function createMenu(menu: Menu): Promise<string> {
 /**
  * Read an Menu
  */
-// export function readMenuByID(id: string): Promise<Menu> {
-//   return db.menus.get(id);
-// }
+export function readMenuByID(id: string): PromiseExtended<Menu | undefined> {
+  return db.menus.get(id);
+}
 
 /**
- * Read Menus by URL
+ * Read Menus by imageUrl
  */
 export function readMenusByURL(url: string): Promise<Menu[]> {
-  return db.menus.where('url').equals(url).toArray();
+  return db.menus.where('imageUrl').equals(url).toArray();
 }
 
 /**

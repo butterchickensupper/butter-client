@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSelectionListChange } from '@angular/material/list';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { MenuService } from '../menu/menu.service';
 import { Menu, MenuItem } from '../models/menu';
+
+import { MatSelectionListChange } from '@angular/material/list';
+import { MenuService } from '../menu/menu.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editor',
@@ -11,7 +12,7 @@ import { Menu, MenuItem } from '../models/menu';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
-  private selectedItem?: MenuItem;
+  public selectedItem?: MenuItem;
   public menu$: Observable<Menu>;
   public menu!: Menu;
 
@@ -36,6 +37,6 @@ export class EditorComponent implements OnInit {
 
   public edit(): void {
     if (!this.selectedItem) return;
-    this.router.navigateByUrl('edit-item/123'); // pass field to update
+    this.router.navigateByUrl('edit-item/' + this.selectedItem.id);
   }
 }
