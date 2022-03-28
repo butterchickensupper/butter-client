@@ -4,7 +4,7 @@ import { AddOrder, ADD_ORDER, RemoveOrder, REMOVE_ORDER } from '../action/order.
 
 const initialState: MenuOrder[] = [];
 
-export function orderReducer(state: MenuOrder[] = initialState, action: Action): MenuOrder[] {
+export function orderReducer(state = initialState, action: Action): MenuOrder[] {
   console.log(action);
   switch (action.type) {
     case ADD_ORDER:

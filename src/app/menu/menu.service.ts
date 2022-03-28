@@ -2,16 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { AppState } from 'src/app/app.state';
 import { Menu, MenuItem } from '../models/menu';
 import { MenuOrder, Order } from '../models/order';
 import { AddOrder, ClearOrders, RemoveOrder } from '../store/action/order.actions';
+import { IAppState } from '../store/app.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
-  constructor(private store: Store<AppState>, private httpClient: HttpClient) {}
+  constructor(private store: Store<IAppState>, private httpClient: HttpClient) {}
 
   public addOrder(order: MenuOrder): void {
     this.store.dispatch(new AddOrder(order));
@@ -24,8 +24,8 @@ export class MenuService {
   }
 
   public getOrders(): Observable<MenuOrder[]> {
-    this.store.select('orders').subscribe((res) => {
-      console.log('orders');
+    this.store.select('order').subscribe((res) => {
+      console.log('order');
       console.log(res);
     });
 
@@ -40,7 +40,7 @@ export class MenuService {
   }
 
   public getMenu(): Observable<Menu> {
-    // this.store.select('menuItems');
+    // this.store.select('menu');
 
     return of(
       new Menu({
