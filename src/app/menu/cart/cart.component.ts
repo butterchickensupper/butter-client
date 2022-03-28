@@ -2,8 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormBuilder, Validators } from '@angular/forms';
 import { MenuOrder, Order } from '../../models/order';
 
-import { MenuService } from '../menu.service';
 import { Observable } from 'rxjs';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-cart',
@@ -24,8 +24,8 @@ export class CartComponent implements OnInit, AfterViewInit {
     address: ['', [Validators.required]]
   });
 
-  constructor(public fb: FormBuilder, private menuService: MenuService) {
-    this.orders$ = this.menuService.getOrders();
+  constructor(public fb: FormBuilder, private orderService: OrderService) {
+    this.orders$ = this.orderService.getOrders();
   }
 
   ngAfterViewInit(): void {
@@ -60,13 +60,13 @@ export class CartComponent implements OnInit, AfterViewInit {
     }
 
     var o = new Order({ name: this.form.get('name')?.value, address: this.form.get('address')?.value, items: this.orders });
-    this.menuService.submitOrder(o).subscribe((res) => {
+    this.orderService.submitOrder(o).subscribe((res) => {
       console.log(res);
     });
 
     // clear order from store
     console.log(o);
-    this.menuService.clearOrders();
+    this.orderService.clearOrders();
   }
 
   public cancel(): void {
