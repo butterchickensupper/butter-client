@@ -1,11 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { AddOrder, ClearOrders, RemoveOrder } from '../store/action/order.actions';
 import { Menu, MenuItem } from '../models/menu';
 import { MenuOrder, Order } from '../models/order';
-import { AddOrder, ClearOrders, RemoveOrder } from '../store/action/order.actions';
+import { Observable, of } from 'rxjs';
+
+import { HttpClient } from '@angular/common/http';
 import { IAppState } from '../store/app.state';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,7 @@ export class MenuService {
   }
 
   public getMenu(): Observable<Menu> {
-    // this.store.select('menu');
-
+    // return this.http.get<Menu>(this.menuUrl);
     return of(
       new Menu({
         items: [
@@ -44,7 +44,6 @@ export class MenuService {
         ]
       })
     );
-    // return this.http.get<Menu>(this.menuUrl);
   }
 
   public submitOrder(order: Order): Observable<any> {
