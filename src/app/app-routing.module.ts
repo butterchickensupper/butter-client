@@ -8,6 +8,7 @@ import { MenuComponent } from './menu/menu.component';
 import { OrderHistoryComponent } from './menu/order-history/order-history.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
+import { OrderDashboardComponent } from './menu/order-dashboard/order-dashboard.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'edit-item/:id', component: EditItemComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'order-history', component: OrderHistoryComponent },
+  { path: 'order-dashboard', component: OrderDashboardComponent },
   { path: '', redirectTo: '/menu', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

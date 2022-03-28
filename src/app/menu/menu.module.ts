@@ -17,9 +17,10 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 
 @NgModule({
-  declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent],
+  declarations: [EditorComponent, EditItemComponent, CartComponent, MenuComponent, MenuItemViewerComponent, OrderHistoryComponent, OrderDashboardComponent],
   imports: [
     CommonModule,
     MatButtonModule,
