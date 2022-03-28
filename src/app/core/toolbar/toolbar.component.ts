@@ -13,6 +13,7 @@ export class ToolbarComponent {
 
   constructor(public router: Router, private store: Store<IAppState>) {
     this.store.select('order').subscribe((res) => {
+      this.total = 0;
       res.forEach((a) => {
         this.total += a.quantity;
       });
