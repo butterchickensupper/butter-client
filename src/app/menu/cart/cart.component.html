@@ -28,7 +28,8 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" />
+            <input matInput type="text" #address placeholder="Search for a location" formControlName="address"
+              autocomplete="off" />
             <mat-error *ngIf="form.get('address')?.invalid">Address is required.</mat-error>
           </mat-form-field>
         </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MenuOrder, Order } from '../../models/order';
@@ -10,15 +10,13 @@ import { MenuService } from '../menu.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  private autocomplete!: google.maps.places.Autocomplete;
+
+  @ViewChild('address')
+  public address!: ElementRef<HTMLInputElement>;
+
   public orders$: Observable<MenuOrder[]>;
   public orders: MenuOrder[] = [];
-
-  public formattedAddress = '';
-
-  public handleAddressChange(address: any): void {
-    console.log(address);
-    this.formattedAddress = address.formatted_address;
-  }
 
   public form = this.fb.group({
     name: ['', [Validators.required]],
@@ -29,10 +27,17 @@ export class CartComponent implements OnInit {
     this.orders$ = this.menuService.getOrders();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.orders$.subscribe((a) => {
       this.orders = a;
     });
+    this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
+      componentRestrictions: { country: ['us'] },
+      fields: ['address_components'],
+      types: ['address']
+    });
+    this.address.nativeElement.focus();
+    this.autocomplete.addListener('place_changed', this.updateAddress);
   }
 
   public getTotal(): number | undefined {
@@ -66,5 +71,12 @@ export class CartComponent implements OnInit {
 
   public onOrder(): void {
     // submit order to the service
+  }
+
+  private updateAddress(): void {
+    const place = this.autocomplete.getPlace();
+    console.log(place);
+    const b = place.address_components as google.maps.GeocoderAddressComponent[];
+    console.log(b);
   }
 }
