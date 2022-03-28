@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MenuOrder, Order } from '../../models/order';
@@ -9,7 +9,7 @@ import { MenuService } from '../menu.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, AfterViewInit {
   private autocomplete!: google.maps.places.Autocomplete;
 
   @ViewChild('address')
@@ -27,10 +27,8 @@ export class CartComponent implements OnInit {
     this.orders$ = this.menuService.getOrders();
   }
 
-  public ngOnInit(): void {
-    this.orders$.subscribe((a) => {
-      this.orders = a;
-    });
+  ngAfterViewInit(): void {
+    console.log(this.address);
     this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
       componentRestrictions: { country: ['us'] },
       fields: ['address_components'],
@@ -38,6 +36,12 @@ export class CartComponent implements OnInit {
     });
     this.address.nativeElement.focus();
     this.autocomplete.addListener('place_changed', this.updateAddress);
+  }
+
+  ngOnInit(): void {
+    this.orders$.subscribe((a) => {
+      this.orders = a;
+    });
   }
 
   public getTotal(): number | undefined {
