@@ -26,4 +26,7 @@ export class MenuItemViewerComponent {
     console.log(this.item.id);
     this.remove.emit(this.item.id);
   }
+  public onEdit(): void {
+    // set control to edit mode
+  }
 }

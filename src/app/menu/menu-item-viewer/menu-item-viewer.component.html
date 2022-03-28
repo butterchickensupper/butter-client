@@ -3,6 +3,11 @@
     <mat-card-title>{{ item?.name }}</mat-card-title>
     <span class="fill-remaining-space"></span>
     <div *ngIf="quantity">
+      <button mat-mini-fab color="primary" class="edit-margin" aria-label="edit cart item" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="quantity">
       <button mat-mini-fab color="primary" aria-label="remove from cart" (click)="onRemove()">
         <mat-icon>delete</mat-icon>
       </button>

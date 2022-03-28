@@ -26,7 +26,11 @@
           </mat-form-field>
         </p>
         <p>
-          <input ngx-google-places-autocomplete #placesRef (onAddressChange)="handleAddressChange($event)" />
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address" />
+            <mat-error *ngIf="form.get('address')?.invalid">Address is required.</mat-error>
+          </mat-form-field>
         </p>
         <p>&nbsp;</p>
         <p>
