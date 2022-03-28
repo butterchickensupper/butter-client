@@ -23,6 +23,7 @@ export class MenuItemViewerComponent {
     this.order.emit(new MenuOrder({ item: this.item, quantity: 1 }));
   }
   public onRemove(): void {
-    this.remove.emit('orderId');
+    console.log(this.item.id);
+    this.remove.emit(this.item.id);
   }
 }

@@ -1,9 +1,9 @@
 <mat-card class="result">
   <mat-card-header>
     <mat-card-title>{{ item?.name }}</mat-card-title>
-    <div fxFlex></div>
+    <span class="fill-remaining-space"></span>
     <div *ngIf="quantity">
-      <button mat-fab color="primary" aria-label="remove from cart" (click)="onRemove()">
+      <button mat-mini-fab color="primary" aria-label="remove from cart" (click)="onRemove()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -23,8 +23,8 @@
 
   <div *ngIf="quantity">
     <mat-card-footer>
-      <mat-label>Order: </mat-label>
-      <span>{{ quantity }}</span>
+      <mat-label>Quantity: </mat-label>
+      <span class="item-price">{{ quantity }}</span>
     </mat-card-footer>
   </div>
   <div *ngIf="!quantity">

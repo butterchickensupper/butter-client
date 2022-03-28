@@ -1,4 +1,5 @@
 export class MenuItem {
+  public id?: string;
   public available: number;
   public description: string;
   public imageUrl: string;
@@ -14,6 +15,7 @@ export class MenuItem {
     imageUrl: string;
     name: string;
     price: number;
+    id?: string;
     sequenceNumber?: number;
     thumbnailUrl?: string;
     available: number;
@@ -29,6 +31,7 @@ export class MenuItem {
     this.available = args.available;
     this.nutrition = args.nutrition;
     this.ingredients = args.ingredients;
+    this.id = args.id;
   }
 }
 

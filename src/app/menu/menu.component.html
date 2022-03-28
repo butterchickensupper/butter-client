@@ -4,7 +4,8 @@
   </mat-card-header>
   <mat-card-content>
     <div class="menu-item" *ngFor="let item of menu.items">
-      <app-menu-item-viewer #viewer [item]="item" (order)="add($event)"></app-menu-item-viewer>
+      <app-menu-item-viewer #viewer [item]="item" (order)="add($event)" (remove)="onRemove($event)">
+      </app-menu-item-viewer>
       <p></p>
     </div>
   </mat-card-content>

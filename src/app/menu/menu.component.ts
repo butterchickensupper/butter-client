@@ -28,4 +28,8 @@ export class MenuComponent implements OnInit {
     this.menuService.addOrder(order);
     this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
   }
+
+  public onRemove(id: any): void {
+    console.log(id);
+  }
 }

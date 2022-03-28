@@ -24,14 +24,7 @@ export class MenuService {
   }
 
   public getOrders(): Observable<MenuOrder[]> {
-    this.store.select('order').subscribe((res) => {
-      console.log('order');
-      console.log(res);
-    });
-
-    // get orders from the server, return latest
-
-    return of();
+    return this.store.select('order');
   }
 
   public clearOrders(): Observable<any> {
@@ -45,9 +38,9 @@ export class MenuService {
     return of(
       new Menu({
         items: [
-          new MenuItem({ imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 }),
-          new MenuItem({ imageUrl: './assets/dal.jpg', price: 10.99, description: 'Lentil Dal Curry', name: 'Dal Curry', available: 25 }),
-          new MenuItem({ imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 })
+          new MenuItem({ id: '1', imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 }),
+          new MenuItem({ id: '2', imageUrl: './assets/dal.jpg', price: 10.99, description: 'Lentil Dal Curry', name: 'Dal Curry', available: 25 }),
+          new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 })
         ]
       })
     );
