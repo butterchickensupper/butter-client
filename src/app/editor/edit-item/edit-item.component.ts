@@ -2,9 +2,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Menu, MenuItem } from 'src/app/models/menu';
 import { Observable, Subscription, finalize } from 'rxjs';
 
-import { Menu } from 'src/app/models/menu';
 import { MenuService } from 'src/app/menu/menu.service';
 
 @Component({
@@ -41,6 +41,7 @@ export class EditItemComponent implements OnInit {
       if (id) {
         let i = this.menu?.items.find((a) => a.id === id);
         if (i) {
+          this.fileName = i.imageUrl;
           this.form.setValue({
             name: i.name,
             available: i.available,
@@ -56,8 +57,11 @@ export class EditItemComponent implements OnInit {
   }
 
   public onSave(): void {
-    this.menuService.addMenu;
-    console.log(this.form.value);
+    const menu = this.form.getRawValue() as MenuItem;
+    console.log(menu);
+    if (!this.menuService.updateMenuItem('default', menu)) {
+      console.error('failed to update menuItem on default menu');
+    }
   }
 
   public onFileSelected(event: any) {

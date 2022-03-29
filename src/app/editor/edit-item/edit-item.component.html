@@ -6,7 +6,7 @@
     <section class="example-section">
       <form [formGroup]="form" (ngSubmit)="onSave()">
         <p>
-          <mat-checkbox class="example-margin" formControlName="isActive">Active</mat-checkbox>
+          <mat-checkbox class="active-box" formControlName="isActive">Active</mat-checkbox>
         </p>
         <p>
           <mat-form-field appearance="outline">
@@ -15,6 +15,21 @@
             <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
           </mat-form-field>
         </p>
+        <div>
+          <div class="file-upload">
+            <p [hidden]="fileName">No image uploaded yet.</p>
+            <img [hidden]="!fileName" class="image" [src]="fileName" width="128" height="128" />
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.value='';fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+          <div class="progress">
+            <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+            </mat-progress-bar>
+            <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+          </div>
+        </div>
+        <p></p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
@@ -51,24 +66,13 @@
               placeholder="Nutritional Info" formControlName="nutrition"></textarea>
           </mat-form-field>
         </p>
-        <p>
+        <div>
           <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload />
-        </p>
-        <div class="file-upload">
-          {{fileName || "No image uploaded yet."}}
-          <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.value='';fileUpload.click()">
-            <mat-icon>attach_file</mat-icon>
-          </button>
         </div>
-        <div class="progress">
-          <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
-          </mat-progress-bar>
-          <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
-        </div>
-        <p>
+        <div>
           <button mat-raised-button color="primary" type="submit" class="button-space">Save</button>
           <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
-        </p>
+        </div>
       </form>
     </section>
   </mat-card-content>
