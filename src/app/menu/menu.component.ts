@@ -31,7 +31,7 @@ export class MenuComponent implements OnInit {
     this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
   }
 
-  public onRemove(id: any): void {
-    console.log(id);
+  public onRemove(id: string): void {
+    console.log('remove');
   }
 }

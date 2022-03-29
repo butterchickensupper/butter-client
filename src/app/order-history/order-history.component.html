@@ -8,7 +8,7 @@
         (opened)="setStep(i)" (opened)="panelOpenState === true" (closed)="panelOpenState === false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Order Time: {{ order.date | date:'short' }}
+            Order Time: {{ order.date | date:'medium' }}
           </mat-panel-title>
           <mat-panel-description>
             Delivery Address: {{ order.address }}

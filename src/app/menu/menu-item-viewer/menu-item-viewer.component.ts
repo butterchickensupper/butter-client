@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { MenuItem } from '../../models/menu';
 import { MenuOrder } from '../../models/order';
 
@@ -23,7 +24,6 @@ export class MenuItemViewerComponent {
     this.order.emit(new MenuOrder({ item: this.item, quantity: 1 }));
   }
   public onRemove(): void {
-    console.log(this.item.id);
     this.remove.emit(this.item.id);
   }
   public onEdit(): void {
