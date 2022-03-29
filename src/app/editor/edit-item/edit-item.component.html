@@ -6,7 +6,7 @@
     <section class="example-section">
       <form [formGroup]="form" (ngSubmit)="onSave()">
         <p>
-          <mat-checkbox class="example-margin">Active</mat-checkbox>
+          <mat-checkbox class="example-margin" formControlName="isActive">Active</mat-checkbox>
         </p>
         <p>
           <mat-form-field appearance="outline">

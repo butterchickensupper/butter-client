@@ -11,7 +11,7 @@
       <button mat-raised-button color="primary" [disabled]="!selectedItem">Delete</button>
     </div>
     <mat-selection-list #menuList [multiple]="false" (selectionChange)="selectionChange($event)">
-      <mat-list-option *ngFor="let item of menu.items" [value]="item">
+      <mat-list-option *ngFor="let item of menu?.items" [value]="item">
         {{ item.name }}
       </mat-list-option>
     </mat-selection-list>

@@ -13,10 +13,10 @@ import { MenuService } from 'src/app/menu/menu.service';
   styleUrls: ['./edit-item.component.scss']
 })
 export class EditItemComponent implements OnInit {
-  uploadProgress?: number;
-  uploadSub?: Subscription;
-  public menu$: Observable<Menu>;
-  public menu!: Menu;
+  public uploadProgress?: number;
+  public uploadSub?: Subscription;
+  public menu$: Observable<Menu | undefined>;
+  public menu?: Menu;
   public fileName = '';
   public form = this.fb.group({
     name: ['', [Validators.required]],
@@ -24,35 +24,46 @@ export class EditItemComponent implements OnInit {
     price: ['', [Validators.required]],
     available: [0, [Validators.min(1), Validators.required]],
     ingredients: [''],
-    nutrition: ['']
+    nutrition: [''],
+    isActive: []
   });
 
   constructor(public fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private menuService: MenuService) {
-    this.menu$ = this.menuService.getMenu();
+    this.menu$ = this.menuService.getMenu('default');
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.menu$.subscribe((a) => {
       this.menu = a;
     });
-    this.route.queryParams.subscribe((params) => {
-      console.log(params);
-      let id = params['id'];
+    this.route.params.subscribe((p) => {
+      let id = p['id'];
       if (id) {
-        //let i = this.menu.items.find((a) => a.id === id);
-        //TODO: load menu item into ui
+        let i = this.menu?.items.find((a) => a.id === id);
+        if (i) {
+          this.form.setValue({
+            name: i.name,
+            available: i.available,
+            description: i.description ?? '',
+            ingredients: i.ingredients ?? '',
+            nutrition: i.nutrition ?? '',
+            price: i.price,
+            isActive: i.isActive ?? false
+          });
+        }
       }
     });
   }
 
   public onSave(): void {
-    // update store
+    this.menuService.addMenu;
     console.log(this.form.value);
   }
 
   public onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
+    // TODO: upload image to s3
     if (file) {
       this.fileName = file.name;
       const formData = new FormData();
@@ -79,7 +90,6 @@ export class EditItemComponent implements OnInit {
   }
 
   public cancel(): void {
-    // clear out ngrx store
     this.router.navigateByUrl('edit-menu');
   }
 

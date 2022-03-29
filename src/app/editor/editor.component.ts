@@ -13,17 +13,16 @@ import { Router } from '@angular/router';
 })
 export class EditorComponent implements OnInit {
   public selectedItem?: MenuItem;
-  public menu$: Observable<Menu>;
-  public menu!: Menu;
+  public menu$: Observable<Menu | undefined>;
+  public menu?: Menu;
 
   constructor(private router: Router, private menuService: MenuService) {
-    this.menu$ = this.menuService.getMenu();
+    this.menu$ = this.menuService.getMenu('default');
   }
 
   ngOnInit(): void {
     this.menu$.subscribe((a) => {
       this.menu = a;
-      console.log(this.menu);
     });
   }
 

@@ -1,9 +1,10 @@
 export class MenuItem {
-  public id?: string;
   public available: number;
   public description: string;
+  public id?: string;
   public imageUrl: string;
   public ingredients?: string;
+  public isActive?: boolean;
   public name: string;
   public nutrition?: string;
   public price: number;
@@ -21,6 +22,7 @@ export class MenuItem {
     available: number;
     nutrition?: string;
     ingredients?: string;
+    isActive?: boolean;
   }) {
     this.description = args.description;
     this.imageUrl = args.imageUrl;
@@ -32,13 +34,16 @@ export class MenuItem {
     this.nutrition = args.nutrition;
     this.ingredients = args.ingredients;
     this.id = args.id;
+    this.isActive = args.isActive;
   }
 }
 
 export class Menu {
+  public id: string;
   public items: MenuItem[];
 
-  constructor(args: { items: MenuItem[] }) {
+  constructor(args: { id: string; items: MenuItem[] }) {
     this.items = args.items;
+    this.id = args.id;
   }
 }

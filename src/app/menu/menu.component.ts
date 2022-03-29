@@ -16,12 +16,12 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
   @ViewChildren('viewer') items?: QueryList<MenuItemViewerComponent>;
   public adminMode = false;
-  public menu!: Menu;
+  public menu?: Menu;
 
   constructor(public router: Router, private orderService: OrderService, private menuService: MenuService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.menuService.getMenu().subscribe((res) => {
+    this.menuService.getMenu('default').subscribe((res) => {
       this.menu = res;
     });
   }
