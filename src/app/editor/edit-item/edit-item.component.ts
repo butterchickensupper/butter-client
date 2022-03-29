@@ -5,7 +5,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Menu, MenuItem } from 'src/app/models/menu';
 import { Observable, Subscription, finalize } from 'rxjs';
 
-import { MenuService } from 'src/app/menu/menu.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-edit-item',

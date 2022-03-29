@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Menu } from '../models/menu';
 import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 import { MenuOrder } from '../models/order';
-import { MenuService } from './menu.service';
-import { OrderService } from './order.service';
+import { MenuService } from '../services/menu.service';
+import { OrderService } from '../services/order.service';
 import { Router } from '@angular/router';
 
 @Component({

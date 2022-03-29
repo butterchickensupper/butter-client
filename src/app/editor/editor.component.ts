@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { Menu, MenuItem } from '../models/menu';
 
-import { MenuService } from '../menu/menu.service';
+import { MenuService } from '../services/menu.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
