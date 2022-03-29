@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './core/about/about.component';
-import { CartComponent } from './menu/cart/cart.component';
+import { CartComponent } from './cart/cart.component';
 import { EditItemComponent } from './editor/edit-item/edit-item.component';
 import { EditorComponent } from './editor/editor.component';
 import { MenuComponent } from './menu/menu.component';

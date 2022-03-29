@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MenuOrder, Order } from '../../models/order';
+import { MenuOrder, Order } from '../models/order';
 
 import { Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
