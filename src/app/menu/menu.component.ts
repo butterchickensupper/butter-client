@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
   }
 
   public add(order: MenuOrder): void {
-    this.orderService.addOrder(order);
+    this.orderService.addMenuOrder(order);
     this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
   }
 

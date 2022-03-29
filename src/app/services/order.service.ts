@@ -17,22 +17,30 @@ export class OrderService {
     return of();
   }
 
-  public addOrder(order: MenuOrder): void {
+  public getOrders(): Observable<Order[]> {
+    return of([
+      new Order({ name: 'John', address: '123 Main St', items: [], date: new Date(2022, 1, 12, 6, 23) }),
+      new Order({ name: 'John', address: '123 Main St', items: [], date: new Date(2021, 5, 12, 3, 22) }),
+      new Order({ name: 'John', address: '123 Main St', items: [], date: new Date(2020, 4, 12, 1, 1) })
+    ]);
+  }
+
+  public addMenuOrder(order: MenuOrder): void {
     this.store.dispatch(new AddOrder(order));
     // submit data to server
   }
 
-  public removeOrder(index: number): void {
+  public removeMenuOrder(index: number): void {
     // submit data to server
     this.store.dispatch(new RemoveOrder(index));
   }
 
-  public getOrders(): Observable<MenuOrder[]> {
+  public getMenuOrders(): Observable<MenuOrder[]> {
     // data to server, set store
     return this.store.select('order');
   }
 
-  public clearOrders(): Observable<any> {
+  public clearMenuOrders(): Observable<any> {
     // submit data to server
     this.store.dispatch(new ClearOrders());
     return of();

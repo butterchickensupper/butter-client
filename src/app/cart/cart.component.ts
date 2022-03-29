@@ -25,7 +25,7 @@ export class CartComponent implements OnInit, AfterViewInit {
   });
 
   constructor(public fb: FormBuilder, private orderService: OrderService) {
-    this.orders$ = this.orderService.getOrders();
+    this.orders$ = this.orderService.getMenuOrders();
   }
 
   ngAfterViewInit(): void {
@@ -58,14 +58,14 @@ export class CartComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    var o = new Order({ name: this.form.get('name')?.value, address: this.form.get('address')?.value, items: this.orders });
+    var o = new Order({ name: this.form.get('name')?.value, address: this.form.get('address')?.value, items: this.orders, date: new Date() });
     this.orderService.submitOrder(o).subscribe((res) => {
       console.log(res);
     });
 
     // clear order from store
     console.log(o);
-    this.orderService.clearOrders();
+    this.orderService.clearMenuOrders();
   }
 
   public cancel(): void {
