@@ -8,7 +8,7 @@
       <button mat-raised-button color="primary" (click)="edit()" class="button-space">Add</button>
       <button mat-raised-button color="primary" (click)="edit()" class="button-space"
         [disabled]="!selectedItem">Edit</button>
-      <button mat-raised-button color="primary" [disabled]="!selectedItem">Delete</button>
+      <button mat-raised-button color="primary" [disabled]="!selectedItem" (click)="deleteItem()">Delete</button>
     </div>
     <mat-selection-list #menuList [multiple]="false" (selectionChange)="selectionChange($event)">
       <mat-list-option *ngFor="let item of menu?.items" [value]="item">

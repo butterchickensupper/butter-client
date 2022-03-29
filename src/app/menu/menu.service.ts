@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from '../models/menu';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -58,6 +58,19 @@ export class MenuService {
       return true;
     }
     this.menus[index].items[index1] = item;
+    return true;
+  }
+
+  public deleteMenuItem(id: string, itemId: string): boolean {
+    const menuIndex = this.menus.findIndex((x) => x.id === id);
+    if (menuIndex === -1) {
+      return false;
+    }
+    const menuItemIndex = this.menus[menuIndex].items.findIndex((y) => y.id === itemId);
+    if (menuItemIndex === -1) {
+      return false;
+    }
+    this.menus[menuIndex].items.splice(menuItemIndex, 1);
     return true;
   }
 }

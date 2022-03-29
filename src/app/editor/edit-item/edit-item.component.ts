@@ -51,6 +51,8 @@ export class EditItemComponent implements OnInit {
             price: i.price,
             isActive: i.isActive ?? false
           });
+        } else {
+          // new entry, default to active?
         }
       }
     });
@@ -94,6 +96,7 @@ export class EditItemComponent implements OnInit {
   }
 
   public cancel(): void {
+    // prompt if form isDirty
     this.router.navigateByUrl('edit-menu');
   }
 

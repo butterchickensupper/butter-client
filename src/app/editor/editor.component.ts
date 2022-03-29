@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { Menu, MenuItem } from '../models/menu';
 
-import { MatSelectionListChange } from '@angular/material/list';
 import { MenuService } from '../menu/menu.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
+  @ViewChild('menuList')
+  public menuList?: MatSelectionList;
+
   public selectedItem?: MenuItem;
   public menu$: Observable<Menu | undefined>;
   public menu?: Menu;
@@ -35,7 +38,19 @@ export class EditorComponent implements OnInit {
   }
 
   public edit(): void {
-    if (!this.selectedItem) return;
-    this.router.navigateByUrl('edit-item/' + this.selectedItem.id);
+    this.router.navigateByUrl(`edit-item/${this.selectedItem?.id ?? ''}`);
+  }
+
+  public deleteItem(): void {
+    if (!this.selectedItem?.id) {
+      console.error('selectedItem?.id is null', this.selectedItem);
+      return;
+    }
+    if (this.menuService.deleteMenuItem('default', this.selectedItem.id)) {
+      this.menuList?.deselectAll();
+      this.selectedItem = undefined;
+    } else {
+      console.error('failed to delete menu');
+    }
   }
 }
