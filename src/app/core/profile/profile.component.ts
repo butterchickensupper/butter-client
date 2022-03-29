@@ -25,7 +25,6 @@ export class ProfileComponent implements AfterViewInit {
       fields: ['address_components'],
       types: ['address']
     });
-    this.address.nativeElement.focus();
     this.autocomplete.addListener('place_changed', this.updateAddress);
   }
 
