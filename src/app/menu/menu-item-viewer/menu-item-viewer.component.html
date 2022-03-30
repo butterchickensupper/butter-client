@@ -19,7 +19,7 @@
   <mat-card-content>
     <img class="image" [src]="item?.imageUrl" width="128" height="128" />
 
-    <div>
+    <div *ngIf="!quantity">
       <mat-label>Description: </mat-label>
       <span>{{ item?.description }}</span>
     </div>
