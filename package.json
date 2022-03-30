@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint --fix"
+    "lint": "npx prettier --write ./src/**/*.ts --config .prettierrc.json"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +55,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier": "2.6.1",
     "typescript": "~4.6.2"
   }
 }

@@ -28,7 +28,13 @@ export class EditItemComponent implements OnInit {
     isActive: []
   });
 
-  constructor(public fb: FormBuilder, private http: HttpClient, private router: Router, private route: ActivatedRoute, private menuService: MenuService) {
+  constructor(
+    public fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
+    private menuService: MenuService
+  ) {
     this.menu$ = this.menuService.getMenu('default');
   }
 

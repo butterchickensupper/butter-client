@@ -15,8 +15,22 @@ export class MenuService {
         let defaultMenu = new Menu({
           id: 'default',
           items: [
-            new MenuItem({ id: '1', imageUrl: './assets/chicken.jpg', price: 13.99, description: 'Tandoori Chicken Butter', name: 'Butter Chicken', available: 20 }),
-            new MenuItem({ id: '2', imageUrl: './assets/dal.jpg', price: 10.99, description: 'Lentil Dal Curry', name: 'Dal Curry', available: 25 }),
+            new MenuItem({
+              id: '1',
+              imageUrl: './assets/chicken.jpg',
+              price: 13.99,
+              description: 'Tandoori Chicken Butter',
+              name: 'Butter Chicken',
+              available: 20
+            }),
+            new MenuItem({
+              id: '2',
+              imageUrl: './assets/dal.jpg',
+              price: 10.99,
+              description: 'Lentil Dal Curry',
+              name: 'Dal Curry',
+              available: 25
+            }),
             new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 })
           ]
         });
@@ -50,11 +64,11 @@ export class MenuService {
     return db.update(menu);
   }
 
-  public updateMenuItem(id: string, item: MenuItem) {
+  public updateMenuItem(id: string, item: MenuItem): Observable<number> {
     return db.updateMenuItem(id, item);
   }
 
-  public deleteMenuItem(id: string, itemId: string) {
+  public deleteMenuItem(id: string, itemId: string): Observable<number> {
     return db.deleteMenuItem(id, itemId);
   }
 }

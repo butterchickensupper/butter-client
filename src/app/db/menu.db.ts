@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from '../models/menu';
-import { Observable, filter, forkJoin, from, map } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 import Dexie from 'dexie';
 

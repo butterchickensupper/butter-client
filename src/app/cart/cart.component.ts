@@ -58,7 +58,12 @@ export class CartComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    var o = new Order({ name: this.form.get('name')?.value, address: this.form.get('address')?.value, items: this.orders, date: new Date() });
+    var o = new Order({
+      name: this.form.get('name')?.value,
+      address: this.form.get('address')?.value,
+      items: this.orders,
+      date: new Date()
+    });
     this.orderService.submitOrder(o).subscribe((res) => {
       console.log(res);
     });
