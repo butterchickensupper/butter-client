@@ -35,4 +35,15 @@
       <span class="item-price">{{ quantity }}</span>
     </mat-card-footer>
   </div>
+  <div *ngIf="!quantity">
+    <mat-form-field appearance="outline">
+      <mat-label>Quantity</mat-label>
+      <mat-select [(value)]="orderQuantity">
+        <mat-option *ngFor="let count of numbers" [value]="count">
+          {{ count }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MenuItem } from '../../models/menu';
 import { MenuOrder } from '../../models/order';
@@ -8,7 +8,7 @@ import { MenuOrder } from '../../models/order';
   templateUrl: './menu-item-viewer.component.html',
   styleUrls: ['./menu-item-viewer.component.scss']
 })
-export class MenuItemViewerComponent {
+export class MenuItemViewerComponent implements OnInit {
   @Input()
   item!: MenuItem;
   @Input()
@@ -18,14 +18,28 @@ export class MenuItemViewerComponent {
   @Output()
   public remove = new EventEmitter<string>();
 
+  public numbers: number[] = [];
+  public orderQuantity = 1;
+
   constructor() {}
 
-  public onOrder(): void {
-    this.order.emit(new MenuOrder({ item: this.item, quantity: 1 }));
+  ngOnInit(): void {
+    this.numbers = Array(this.item.available)
+      .fill(0)
+      .map((x, i) => i)
+      .map((x, i) => i)
+      .filter((x) => x > 0);
+    this.orderQuantity = this.numbers[0];
   }
+
+  public onOrder(): void {
+    this.order.emit(new MenuOrder({ item: this.item, quantity: this.orderQuantity }));
+  }
+
   public onRemove(): void {
     this.remove.emit(this.item.id);
   }
+
   public onEdit(): void {
     // set control to edit mode
   }
