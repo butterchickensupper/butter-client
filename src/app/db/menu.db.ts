@@ -1,8 +1,10 @@
+import { Menu, MenuItem } from '../models/menu';
+import { Observable, filter, forkJoin, from, map } from 'rxjs';
+
 import Dexie from 'dexie';
-import { Menu } from '../models/menu';
 
 export class MenuDB extends Dexie {
-  public menus!: Dexie.Table<Menu, string>;
+  private menus!: Dexie.Table<Menu, string>;
 
   constructor() {
     super('MenuDB');
@@ -19,28 +21,55 @@ export class MenuDB extends Dexie {
     db.menus.mapToClass(Menu);
   }
 
-  async resetDb() {
-    await db.transaction('rw', 'menus', () => {
-      this.menus.clear();
-    });
+  public resetDb(): Observable<void> {
+    return from(
+      db.transaction('rw', 'menus', () => {
+        this.menus.clear();
+      })
+    );
   }
-  async getAll(): Promise<Menu[]> {
-    return await db.menus.toArray();
+  public getAll(): Observable<Menu[]> {
+    return from(db.menus.toArray());
   }
-  async createMenu(menu: Menu): Promise<string> {
-    return await db.menus.put(menu, menu.id);
+  public createMenu(menu: Menu): Observable<string> {
+    return from(db.menus.put(menu, menu.id));
   }
-  async getById(id: string): Promise<Menu | undefined> {
-    return await db.menus.get(id);
+  public getById(id: string): Observable<Menu | undefined> {
+    return from(db.menus.get(id));
   }
-  async getByUrl(url: string): Promise<Menu[]> {
-    return await db.menus.where('imageUrl').equals(url).toArray();
+  public getByUrl(url: string): Observable<Menu[]> {
+    return from(db.menus.where('imageUrl').equals(url).toArray());
   }
-  async update(menu: Menu): Promise<string> {
-    return await db.menus.put(menu, menu.id);
+  public update(menu: Menu): Observable<string> {
+    return from(db.menus.put(menu, menu.id));
   }
-  async deleteMenu(id: string) {
-    await db.menus.where('id').equals(id).delete();
+  public deleteMenu(id: string): Observable<number> {
+    return from(db.menus.where('id').equals(id).delete());
+  }
+  public updateMenuItem(menuId: string, menuItem: MenuItem) {
+    return from(
+      db.menus
+        .where('id')
+        .equals(menuId)
+        .modify((menu) => {
+          const index = menu?.items.findIndex((a) => a.id === menuItem.id);
+          if (!index || index === -1) return;
+          menu?.items.splice(index, 1);
+          menu?.items.push(menuItem);
+        })
+    );
+  }
+  public deleteMenuItem(menuId: string, menuItemId: string): Observable<number> {
+    return from(
+      db.menus
+        .where('id')
+        .equals(menuId)
+        .modify((menu) => {
+          const index = menu?.items.findIndex((a) => a.id === menuItemId);
+          if (!index || index === -1) return;
+          menu?.items.splice(index, 1);
+        })
+    );
   }
 }
 
