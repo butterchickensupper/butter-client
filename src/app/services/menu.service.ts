@@ -31,7 +31,23 @@ export class MenuService {
               name: 'Dal Curry',
               available: 25
             }),
-            new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 })
+            new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 }),
+            new MenuItem({
+              id: '4',
+              imageUrl: './assets/tandoori.jpg',
+              price: 12.99,
+              description: 'Tandoori Chicken Description',
+              name: 'Tandoori Chicken',
+              available: 30
+            }),
+            new MenuItem({
+              id: '5',
+              imageUrl: './assets/samosa.jpg',
+              price: 8.99,
+              description: 'Potato and Pea Samosa',
+              name: 'Veggie Samosa',
+              available: 27
+            })
           ]
         });
         db.createMenu(defaultMenu).subscribe();
