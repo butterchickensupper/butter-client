@@ -11,7 +11,7 @@ import { db } from '../db/menu.db';
 export class MenuService {
   constructor(private httpClient: HttpClient) {
     db.getAll().subscribe((res) => {
-      if (!res) {
+      if (res.length === 0) {
         let defaultMenu = new Menu({
           id: 'default',
           items: [
@@ -35,7 +35,6 @@ export class MenuService {
           ]
         });
         db.createMenu(defaultMenu).subscribe();
-        res = [defaultMenu];
       }
     });
   }
