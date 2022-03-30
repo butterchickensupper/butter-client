@@ -2,6 +2,9 @@
   <mat-card-header>
     <mat-card-title>{{ item?.name }}</mat-card-title>
     <span class="fill-remaining-space"></span>
+    <div *ngIf="!quantity">
+      <button mat-raised-button color="primary" (click)="onOrder()">Add</button>
+    </div>
     <div *ngIf="quantity">
       <button mat-mini-fab color="primary" class="edit-margin" aria-label="edit cart item" (click)="onEdit()">
         <mat-icon>edit</mat-icon>
@@ -31,10 +34,5 @@
       <mat-label>Quantity: </mat-label>
       <span class="item-price">{{ quantity }}</span>
     </mat-card-footer>
-  </div>
-  <div *ngIf="!quantity">
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onOrder()">Add</button>
-    </mat-card-actions>
   </div>
 </mat-card>
