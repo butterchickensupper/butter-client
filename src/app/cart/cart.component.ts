@@ -1,40 +1,25 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuOrder, Order } from '../models/order';
 
+import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
+import { UserInfoComponent } from '../core/user-info/user-info.component';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, AfterViewInit {
-  private autocomplete!: google.maps.places.Autocomplete;
-
-  @ViewChild('address')
-  public address!: ElementRef<HTMLInputElement>;
+export class CartComponent implements OnInit {
+  @ViewChild('userInfo')
+  public userInfo!: UserInfoComponent;
 
   public orders$: Observable<MenuOrder[]>;
   public orders: MenuOrder[] = [];
 
-  public form = this.fb.group({
-    name: ['', [Validators.required]],
-    address: ['', [Validators.required]]
-  });
-
   constructor(public fb: FormBuilder, private orderService: OrderService) {
     this.orders$ = this.orderService.getMenuOrders();
-  }
-
-  ngAfterViewInit(): void {
-    this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
-      componentRestrictions: { country: ['us'] },
-      fields: ['address_components'],
-      types: ['address']
-    });
-    this.autocomplete.addListener('place_changed', this.updateAddress);
   }
 
   ngOnInit(): void {
@@ -59,8 +44,8 @@ export class CartComponent implements OnInit, AfterViewInit {
     }
 
     var o = new Order({
-      name: this.form.get('name')?.value,
-      address: this.form.get('address')?.value,
+      name: this.userInfo.name,
+      address: this.userInfo.addressResult,
       items: this.orders,
       date: new Date()
     });
@@ -87,12 +72,5 @@ export class CartComponent implements OnInit, AfterViewInit {
 
   public onDelete(itemId: any): void {
     this.orderService.removeMenuOrder(itemId);
-  }
-
-  private updateAddress(): void {
-    const place = this.autocomplete.getPlace();
-    console.log(place);
-    const b = place.address_components as google.maps.GeocoderAddressComponent[];
-    console.log(b);
   }
 }

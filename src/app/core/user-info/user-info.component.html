@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" />
+            <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput type="text" #address placeholder="Search for a location" formControlName="address"
+                autocomplete="off" />
+            <mat-error *ngIf="form.get('address')?.invalid">Address is required.</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="text" placeholder="(XXX)XXX-XXX" formControlName="phone" autocomplete="off" />
+            <mat-error *ngIf="form.get('phone')?.invalid">Phone Number is required.</mat-error>
+        </mat-form-field>
+    </p>
+</form>

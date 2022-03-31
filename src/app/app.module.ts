@@ -24,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { environment } from '../environments/environment';
 import { orderReducer } from './store/reducer/order.reducer';
+import { UserInfoComponent } from './core/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { orderReducer } from './store/reducer/order.reducer';
     MenuComponent,
     MenuItemViewerComponent,
     OrderHistoryComponent,
-    OrderDashboardComponent
+    OrderDashboardComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
