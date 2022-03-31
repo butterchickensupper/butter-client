@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order.service';
+import { OrdersRequest } from '../models/orders-request';
 
 @Component({
   selector: 'app-order-history',
@@ -14,7 +15,8 @@ export class OrderHistoryComponent {
   public panelOpenState = false;
 
   constructor(private orderServce: OrderService) {
-    this.orders$ = this.orderServce.getOrders();
+    // TODO: get userId from context? claims?
+    this.orders$ = this.orderServce.getOrders(new OrdersRequest({ userId: 'test123' }));
   }
 
   public setStep(index: number) {
