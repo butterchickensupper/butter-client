@@ -6,7 +6,7 @@
     <div class="menu">
       <div class="menu-item" *ngFor="let item of orders">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" (addItem)="onEdit($event)"
-          (deleteItem)="onDelete($event)" [readOnly]="true">
+          (deleteItem)="onDelete($event)" [readOnly]="true" [imageSize]="64">
         </app-menu-item-viewer>
         <p></p>
       </div>

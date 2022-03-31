@@ -19,7 +19,7 @@
     </div>
   </mat-card-header>
   <mat-card-content>
-    <img class="image" [src]="item?.imageUrl" width="128" height="128" />
+    <img class="image" [src]="item?.imageUrl" width="{{imageSize}}" height="{{imageSize}}" />
 
     <div *ngIf="!readOnly">
       <mat-label>Description: </mat-label>
