@@ -34,9 +34,6 @@ export class MenuItemViewerComponent implements OnInit {
 
   public onAdd(): void {
     this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.quantity }));
-    if (!this.readOnly) {
-      this.readOnly = true;
-    }
   }
 
   public onDelete(): void {
