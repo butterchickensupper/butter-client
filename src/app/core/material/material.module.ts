@@ -1,9 +1,12 @@
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,6 +27,7 @@ import { NgModule } from '@angular/core';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatSidenavModule,
     MatSlideToggleModule,
     MatCardModule,
@@ -36,7 +40,10 @@ import { NgModule } from '@angular/core';
     MatSnackBarModule,
     MatAutocompleteModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   exports: [
     CommonModule,
@@ -46,6 +53,7 @@ import { NgModule } from '@angular/core';
     MatSidenavModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
@@ -55,7 +63,10 @@ import { NgModule } from '@angular/core';
     MatSnackBarModule,
     MatAutocompleteModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ]
 })
 export class MaterialModule {}

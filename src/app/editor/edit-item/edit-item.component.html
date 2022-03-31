@@ -41,14 +41,14 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Price</mat-label>
-            <input matInput placeholder="0.0" type="number" formControlName="price" />
+            <input matInput placeholder="0.0" type="number" formControlName="price" pattern="[0-9]*" />
             <mat-error *ngIf="form.get('price')?.invalid">Price is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Available Quantity</mat-label>
-            <input matInput placeholder="0" type="number" formControlName="available" />
+            <input matInput placeholder="0" type="number" formControlName="available" pattern="[0-9]*" />
             <mat-error *ngIf="form.get('available')?.invalid">Available Quantity is required.</mat-error>
           </mat-form-field>
         </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { Menu, MenuItem } from '../models/menu';
 
@@ -11,16 +11,30 @@ import { Router } from '@angular/router';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, AfterViewInit {
+  private autocomplete!: google.maps.places.Autocomplete;
+
+  @ViewChild('address')
+  public address!: ElementRef<HTMLInputElement>;
   @ViewChild('menuList')
   public menuList?: MatSelectionList;
 
   public selectedItem?: MenuItem;
   public menu$: Observable<Menu | undefined>;
   public menu?: Menu;
+  public menuOpen: any;
+  public menuClose: any;
 
   constructor(private router: Router, private menuService: MenuService) {
     this.menu$ = this.menuService.getMenu('default');
+  }
+  ngAfterViewInit(): void {
+    this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
+      componentRestrictions: { country: ['us'] },
+      fields: ['address_components'],
+      types: ['address']
+    });
+    this.autocomplete.addListener('place_changed', this.updateAddress);
   }
 
   ngOnInit(): void {
@@ -52,5 +66,12 @@ export class EditorComponent implements OnInit {
     } else {
       console.error('failed to delete menu');
     }
+  }
+
+  private updateAddress(): void {
+    const place = this.autocomplete.getPlace();
+    console.log(place);
+    const b = place.address_components as google.maps.GeocoderAddressComponent[];
+    console.log(b);
   }
 }
