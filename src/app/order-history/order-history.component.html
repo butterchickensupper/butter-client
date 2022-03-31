@@ -20,20 +20,20 @@
             <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
           </ng-container>
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <th mat-header-cell *matHeaderCellDef> Item </th>
             <td mat-cell *matCellDef="let element"> {{element.item.name}} </td>
           </ng-container>
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef> Price </th>
             <td mat-cell *matCellDef="let element"> {{element.item.price | currency}} </td>
           </ng-container>
-
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <p style="margin-top: 15px;text-align: right;">
-          Total: {{order.total | currency}}
-        </p>
+        <div style="margin-top: 15px;text-align: right;">
+          <mat-label>Total: </mat-label>
+          <span style="font-weight: 500;">{{ order.total | currency }}</span>
+        </div>
 
         <mat-action-row>
           <button mat-button color="primary" (click)="nextStep()">Next</button>
