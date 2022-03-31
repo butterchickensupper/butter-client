@@ -90,7 +90,7 @@ export class OrderService {
     return this.store.select('order');
   }
 
-  public clearMenuOrders(): Observable<any> {
+  public clearMenuOrders(): Observable<void> {
     // submit data to server
     this.store.dispatch(new ClearOrders());
     return of();
