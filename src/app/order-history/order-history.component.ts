@@ -13,6 +13,7 @@ export class OrderHistoryComponent {
   public orders$: Observable<Order[]>;
   public step = 0;
   public panelOpenState = false;
+  public displayedColumns: string[] = ['quantity', 'name', 'price'];
 
   constructor(private orderServce: OrderService) {
     // TODO: get userId from context? claims?

@@ -38,11 +38,12 @@ export class OrderService {
             })
           })
         ],
+        total: 8.99 * 1.06,
         date: new Date(2022, 1, 12, 6, 23)
       }),
       new Order({
         name: 'John',
-        address: '123 Main St',
+        address: '456 West Rd',
         items: [
           new MenuOrder({
             quantity: 3,
@@ -67,6 +68,7 @@ export class OrderService {
             })
           })
         ],
+        total: (10.99 * 3 + 4.99 * 2) * 1.06,
         date: new Date(2021, 5, 12, 3, 22)
       }),
       new Order({ name: 'John', address: '123 Main St', items: [], date: new Date(2020, 4, 12, 1, 1) })
