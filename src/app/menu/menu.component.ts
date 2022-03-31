@@ -32,6 +32,8 @@ export class MenuComponent implements OnInit {
   }
 
   public onDelete(id: string): void {
-    console.log('delete');
+    this.menuService.deleteMenuItem('default', id).subscribe(() => {
+      this.snackBar.open('Item Deleted!', 'Dismiss', { duration: 3 * 1000 });
+    });
   }
 }
