@@ -74,7 +74,6 @@ export class OrderService {
   }
 
   public addMenuOrder(order: MenuOrder): Observable<string> {
-    console.log(order);
     return db.updateOrder(order);
   }
 

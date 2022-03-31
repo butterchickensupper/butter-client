@@ -36,12 +36,7 @@ export class AppDB extends Dexie {
     return from(db.cart.toArray());
   }
   public updateOrder(order: MenuOrder): Observable<string> {
-    return from(db.cart.put(order, order.id)).pipe(
-      map((r) => {
-        console.log(r); //TODO:
-        return r;
-      })
-    );
+    return from(db.cart.put(order, order.id));
   }
   public deleteOrder(id: string): Observable<number> {
     return from(db.cart.where('id').equals(id).delete());
