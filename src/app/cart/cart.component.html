@@ -3,20 +3,20 @@
     <mat-card-title>Cart</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <section class="menu">
+    <div class="menu">
       <div class="menu-item" *ngFor="let item of orders">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity">
         </app-menu-item-viewer>
         <p></p>
       </div>
-    </section>
+    </div>
     <p></p>
-    <section>
+    <div>
       <mat-label>Total: </mat-label>
       <span>{{ getTotal() | currency }}</span>
-    </section>
+    </div>
     <p></p>
-    <section>
+    <div>
       <form [formGroup]="form" (ngSubmit)="onOrder()">
         <p>
           <mat-form-field appearance="outline">
@@ -38,6 +38,7 @@
           <button mat-raised-button color="primary" (click)="cancel()">Clear</button>
         </p>
       </form>
-    </section>
+    </div>
+    <p style="height: 60px;"></p>
   </mat-card-content>
 </mat-card>
