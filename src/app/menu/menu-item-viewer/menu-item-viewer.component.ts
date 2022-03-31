@@ -14,14 +14,13 @@ export class MenuItemViewerComponent implements OnInit {
   @Input()
   public item!: MenuItem;
   @Input()
-  public quantity?: number = undefined; // this must be sent on readOnly mode
+  public quantity: number = 1;
   @Output()
   public addItem = new EventEmitter<MenuOrder>();
   @Output()
   public deleteItem = new EventEmitter<string>();
 
   public numbers: number[] = [];
-  public orderQuantity = 1;
 
   constructor() {}
 
@@ -31,15 +30,10 @@ export class MenuItemViewerComponent implements OnInit {
       .map((x, i) => i)
       .map((x, i) => i)
       .filter((x) => x > 0);
-    if (this.quantity) {
-      this.orderQuantity = this.quantity;
-    } else {
-      this.orderQuantity = this.numbers[0];
-    }
   }
 
   public onAdd(): void {
-    this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.orderQuantity }));
+    this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.quantity }));
     if (!this.readOnly) {
       this.readOnly = true;
     }

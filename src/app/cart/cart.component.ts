@@ -82,11 +82,11 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   public onEdit(order: MenuOrder): void {
-    this.orderService.addMenuOrder(order); //TODO: ensure UI updates
+    this.orderService.addMenuOrder(order);
   }
 
   public onDelete(itemId: any): void {
-    this.orderService.removeMenuOrder(itemId); //TODO: ensure UI updates
+    this.orderService.removeMenuOrder(itemId);
   }
 
   private updateAddress(): void {

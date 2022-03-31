@@ -40,7 +40,7 @@
   <div *ngIf="!readOnly">
     <mat-form-field appearance="outline">
       <mat-label>Quantity</mat-label>
-      <mat-select [(value)]="orderQuantity">
+      <mat-select [(value)]="quantity">
         <mat-option *ngFor="let count of numbers" [value]="count">
           {{ count }}
         </mat-option>
