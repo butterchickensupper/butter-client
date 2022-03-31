@@ -1,6 +1,7 @@
+import { ADD_ORDER, AddOrder, REMOVE_ORDER, RemoveOrder } from '../action/order.actions';
 import { Action, INIT } from '@ngrx/store';
+
 import { MenuOrder } from 'src/app/models/order';
-import { AddOrder, ADD_ORDER, RemoveOrder, REMOVE_ORDER } from '../action/order.actions';
 
 const initialState: MenuOrder[] = [];
 
@@ -18,9 +19,11 @@ export function orderReducer(state = initialState, action: Action): MenuOrder[] 
       let newItem = new MenuOrder({ quantity: target, item: newOrder.item });
       return [...newState1, newItem];
     case REMOVE_ORDER:
-      let i = (action as RemoveOrder).indexToRemove;
+      let i = (action as RemoveOrder).idToRemove;
       const newState = [...state];
-      newState.splice(i, 1);
+      const t = state.findIndex((a) => a.item.id === i);
+      if (t === -1) return newState;
+      newState.splice(t, 1);
       return newState;
     case INIT:
       return initialState;

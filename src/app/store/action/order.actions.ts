@@ -14,7 +14,7 @@ export const REMOVE_ORDER = 'REMOVE_ORDER';
 export class RemoveOrder implements Action {
   type: string = REMOVE_ORDER;
 
-  constructor(public indexToRemove: number) {}
+  constructor(public idToRemove: string) {}
 }
 
 export const CLEAR_ORDERS = 'CLEAR_ORDERS';

@@ -81,6 +81,14 @@ export class CartComponent implements OnInit, AfterViewInit {
     // submit order to the service
   }
 
+  public onEdit(order: MenuOrder): void {
+    this.orderService.addMenuOrder(order); //TODO: ensure UI updates
+  }
+
+  public onDelete(itemId: any): void {
+    this.orderService.removeMenuOrder(itemId); //TODO: ensure UI updates
+  }
+
   private updateAddress(): void {
     const place = this.autocomplete.getPlace();
     console.log(place);

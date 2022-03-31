@@ -30,7 +30,7 @@ export class OrderService {
     // submit data to server
   }
 
-  public removeMenuOrder(index: number): void {
+  public removeMenuOrder(index: string): void {
     // submit data to server
     this.store.dispatch(new RemoveOrder(index));
   }
