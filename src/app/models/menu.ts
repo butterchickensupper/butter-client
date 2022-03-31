@@ -40,10 +40,20 @@ export class MenuItem {
 
 export class Menu {
   public id: string;
+  public isActive: boolean;
   public items: MenuItem[];
+  public open: Date;
+  public close: Date;
+  public radius: number;
+  public address: string;
 
-  constructor(args: { id: string; items: MenuItem[] }) {
+  constructor(args: { id: string; items: MenuItem[]; isActive: boolean; open: Date; close: Date; radius: number; address: string }) {
     this.items = args.items;
     this.id = args.id;
+    this.isActive = args.isActive;
+    this.open = args.open;
+    this.close = args.close;
+    this.radius = args.radius;
+    this.address = args.address;
   }
 }

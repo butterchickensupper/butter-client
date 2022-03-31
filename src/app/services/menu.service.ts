@@ -14,6 +14,11 @@ export class MenuService {
       if (res.length === 0) {
         let defaultMenu = new Menu({
           id: 'default',
+          address: '123 Main St, Livonia, MI 48154',
+          open: new Date(2000, 1, 1, 11, 0, 0),
+          close: new Date(2000, 1, 1, 14, 0, 0),
+          radius: 15,
+          isActive: false,
           items: [
             new MenuItem({
               id: '1',

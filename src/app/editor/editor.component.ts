@@ -22,12 +22,17 @@ export class EditorComponent implements OnInit, AfterViewInit {
   public selectedItem?: MenuItem;
   public menu$: Observable<Menu | undefined>;
   public menu?: Menu;
+
   public menuOpen: any;
   public menuClose: any;
+  public businessAddress?: any;
+  public radius?: number;
+  public active: any;
 
   constructor(private router: Router, private menuService: MenuService) {
     this.menu$ = this.menuService.getMenu('default');
   }
+
   ngAfterViewInit(): void {
     this.autocomplete = new google.maps.places.Autocomplete(this.address.nativeElement, {
       componentRestrictions: { country: ['us'] },
@@ -40,7 +45,25 @@ export class EditorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.menu$.subscribe((a) => {
       this.menu = a;
+      this.menuOpen = this.menu?.open;
+      this.menuClose = this.menu?.close;
+      this.radius = this.menu?.radius;
+      this.active = this.menu?.isActive;
+      this.businessAddress = this.menu?.address;
     });
+  }
+
+  public onSave(): void {
+    if (!this.menu) return;
+    this.menu.open = this.menuOpen;
+    this.menu.close = this.menuClose;
+    this.menu.radius = this.radius ?? 1; // TODO:
+    this.menu.isActive = this.active;
+    this.businessAddress = this.menu?.address;
+    console.log(this.menu);
+    if (!this.menuService.updateMenu(this.menu)) {
+      console.error('failed to update menu');
+    }
   }
 
   public selectionChange(change: MatSelectionListChange): void {
