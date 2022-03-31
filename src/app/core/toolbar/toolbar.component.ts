@@ -1,7 +1,7 @@
 import { Component, Output } from '@angular/core';
+
+import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { IAppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,10 +9,10 @@ import { IAppState } from 'src/app/store/app.state';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  public total = 0;
+  public total: number = 0;
 
-  constructor(public router: Router, private store: Store<IAppState>) {
-    this.store.select('order').subscribe((res) => {
+  constructor(public router: Router, private orderService: OrderService) {
+    this.orderService.getMenuOrders().subscribe((res) => {
       this.total = 0;
       res.forEach((a) => {
         this.total += a.quantity;

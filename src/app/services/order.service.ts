@@ -1,18 +1,16 @@
-import { AddOrder, ClearOrders, RemoveOrder } from '../store/action/order.actions';
 import { MenuOrder, Order } from '../models/order';
 import { Observable, of } from 'rxjs';
 
-import { IAppState } from '../store/app.state';
 import { Injectable } from '@angular/core';
 import { MenuItem } from '../models/menu';
 import { OrdersRequest } from '../models/orders-request';
-import { Store } from '@ngrx/store';
+import { db } from '../db/app.db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  constructor(private store: Store<IAppState>) {}
+  constructor() {}
 
   public submitOrder(order: Order): Observable<any> {
     // submit data to server
@@ -75,24 +73,20 @@ export class OrderService {
     ]);
   }
 
-  public addMenuOrder(order: MenuOrder): void {
-    this.store.dispatch(new AddOrder(order));
-    // submit data to server
+  public addMenuOrder(order: MenuOrder): Observable<string> {
+    console.log(order);
+    return db.updateOrder(order);
   }
 
-  public removeMenuOrder(index: string): void {
-    // submit data to server
-    this.store.dispatch(new RemoveOrder(index));
+  public removeMenuOrder(id: string): Observable<number> {
+    return db.deleteOrder(id);
   }
 
   public getMenuOrders(): Observable<MenuOrder[]> {
-    // data to server, set store
-    return this.store.select('order');
+    return db.getCart();
   }
 
   public clearMenuOrders(): Observable<void> {
-    // submit data to server
-    this.store.dispatch(new ClearOrders());
-    return of();
+    return db.resetCart();
   }
 }

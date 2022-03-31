@@ -1,12 +1,14 @@
 import { MenuItem } from './menu';
 
 export class MenuOrder {
+  public id?: string;
   public item: MenuItem;
   public quantity: number;
 
   constructor(args: { quantity: number; item: MenuItem }) {
     this.quantity = args.quantity;
     this.item = args.item;
+    this.id = args.item.id;
   }
 }
 

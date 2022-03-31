@@ -1,17 +1,20 @@
 import { Menu, MenuItem } from '../models/menu';
-import { Observable, from } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 
 import Dexie from 'dexie';
+import { MenuOrder } from '../models/order';
 
-export class MenuDB extends Dexie {
+export class AppDB extends Dexie {
   private menus!: Dexie.Table<Menu, string>;
+  private cart!: Dexie.Table<MenuOrder, string>;
 
   constructor() {
-    super('MenuDB');
+    super('AppDB');
     const db = this;
     // Define tables and indexes
     db.version(1).stores({
-      menus: '&id, imageUrl'
+      menus: '&id, imageUrl',
+      cart: '&id'
     });
     // & unique index
     // ++ auto-increment unique PK
@@ -19,28 +22,44 @@ export class MenuDB extends Dexie {
     // [A+B] compound index
 
     db.menus.mapToClass(Menu);
+    db.cart.mapToClass(MenuOrder);
   }
 
-  public resetDb(): Observable<void> {
-    return from(
-      db.transaction('rw', 'menus', () => {
-        this.menus.clear();
+  public resetDb(): Observable<any> {
+    return from(Promise.all([db.menus.clear(), db.cart.clear()]));
+  }
+
+  public resetCart(): Observable<void> {
+    return from(db.cart.clear());
+  }
+  public getCart(): Observable<MenuOrder[]> {
+    return from(db.cart.toArray());
+  }
+  public updateOrder(order: MenuOrder): Observable<string> {
+    return from(db.cart.put(order, order.id)).pipe(
+      map((r) => {
+        console.log(r); //TODO:
+        return r;
       })
     );
   }
-  public getAll(): Observable<Menu[]> {
+  public deleteOrder(id: string): Observable<number> {
+    return from(db.cart.where('id').equals(id).delete());
+  }
+
+  public getMenus(): Observable<Menu[]> {
     return from(db.menus.toArray());
   }
   public createMenu(menu: Menu): Observable<string> {
     return from(db.menus.put(menu, menu.id));
   }
-  public getById(id: string): Observable<Menu | undefined> {
+  public getMenuById(id: string): Observable<Menu | undefined> {
     return from(db.menus.get(id));
   }
-  public getByUrl(url: string): Observable<Menu[]> {
+  public getMenuByUrl(url: string): Observable<Menu[]> {
     return from(db.menus.where('imageUrl').equals(url).toArray());
   }
-  public update(menu: Menu): Observable<string> {
+  public updateMenu(menu: Menu): Observable<string> {
     return from(db.menus.put(menu, menu.id));
   }
   public deleteMenu(id: string): Observable<number> {
@@ -73,4 +92,4 @@ export class MenuDB extends Dexie {
   }
 }
 
-export const db: MenuDB = new MenuDB();
+export const db: AppDB = new AppDB();

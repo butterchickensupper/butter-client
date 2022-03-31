@@ -19,12 +19,9 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { ProfileComponent } from './core/profile/profile.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
-import { environment } from '../environments/environment';
-import { orderReducer } from './store/reducer/order.reducer';
 import { UserInfoComponent } from './core/user-info/user-info.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -56,8 +53,6 @@ import { UserInfoComponent } from './core/user-info/user-info.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ order: orderReducer }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
     MaterialModule
   ],
   bootstrap: [AppComponent]

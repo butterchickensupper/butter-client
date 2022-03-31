@@ -3,14 +3,14 @@ import { Observable, map } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { db } from '../db/menu.db';
+import { db } from '../db/app.db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
   constructor(private httpClient: HttpClient) {
-    db.getAll().subscribe((res) => {
+    db.getMenus().subscribe((res) => {
       if (res.length === 0) {
         let defaultMenu = new Menu({
           id: 'default',
@@ -61,15 +61,15 @@ export class MenuService {
   }
 
   public getMenus(): Observable<Menu[]> {
-    return db.getAll();
+    return db.getMenus();
   }
 
   public getMenu(id: string): Observable<Menu | undefined> {
-    return db.getById(id);
+    return db.getMenuById(id);
   }
 
   public getMenuItem(id: string, itemId: string): Observable<MenuItem | undefined> {
-    return db.getById(id).pipe(
+    return db.getMenuById(id).pipe(
       map((r) => {
         const index = r?.items.findIndex((a) => a.id === itemId);
         if (!index || index === -1) {
@@ -81,7 +81,7 @@ export class MenuService {
   }
 
   public updateMenu(menu: Menu): Observable<string> {
-    return db.update(menu);
+    return db.updateMenu(menu);
   }
 
   public updateMenuItem(id: string, item: MenuItem): Observable<number> {
