@@ -23,10 +23,11 @@ export class OrderService {
     console.log(request);
     return this.httpClient.get<Order[]>('/assets/orders.json');
   }
-  public addMenuOrder(order: MenuOrder): Observable<string> {
+  public addMenuOrder(order: MenuOrder, fromMenu = false): Observable<string> {
     const i = this.cart.findIndex((x) => x.id === order.id);
     if (i !== -1) {
-      this.cart[i].quantity += order.quantity;
+      if (fromMenu) this.cart[i].quantity += order.quantity;
+      else this.cart[i].quantity = order.quantity;
     } else {
       this.cart.push(order);
     }

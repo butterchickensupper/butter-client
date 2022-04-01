@@ -18,7 +18,7 @@ export class MenuItemViewerComponent implements OnInit {
   @Input()
   public imageSize = 128;
   @Output()
-  public addItem = new EventEmitter<MenuOrder>();
+  public addItem = new EventEmitter();
   @Output()
   public deleteItem = new EventEmitter<string>();
 
