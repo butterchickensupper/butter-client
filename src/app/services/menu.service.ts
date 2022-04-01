@@ -9,58 +9,9 @@ import { db } from '../db/app.db';
   providedIn: 'root'
 })
 export class MenuService {
-  constructor(private httpClient: HttpClient) {
-    db.getMenus().subscribe((res) => {
-      if (res.length === 0) {
-        let defaultMenu = new Menu({
-          id: 'default',
-          address: '123 Main St, Livonia, MI 48154',
-          open: new Date(2000, 1, 1, 11, 0, 0),
-          close: new Date(2000, 1, 1, 14, 0, 0),
-          radius: 15,
-          isActive: false,
-          items: [
-            new MenuItem({
-              id: '1',
-              imageUrl: './assets/chicken.jpg',
-              price: 13.99,
-              description: 'Tandoori Chicken Butter',
-              name: 'Butter Chicken',
-              available: 20
-            }),
-            new MenuItem({
-              id: '2',
-              imageUrl: './assets/dal.jpg',
-              price: 10.99,
-              description: 'Lentil Dal Curry',
-              name: 'Dal Curry',
-              available: 25
-            }),
-            new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 }),
-            new MenuItem({
-              id: '4',
-              imageUrl: './assets/tandoori.jpg',
-              price: 12.99,
-              description: 'Tandoori Chicken Description',
-              name: 'Tandoori Chicken',
-              available: 30
-            }),
-            new MenuItem({
-              id: '5',
-              imageUrl: './assets/samosa.jpg',
-              price: 8.99,
-              description: 'Potato and Pea Samosa',
-              name: 'Veggie Samosa',
-              available: 27
-            })
-          ]
-        });
-        db.createMenu(defaultMenu).subscribe();
-      }
-    });
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  public getMenus(): Observable<Menu[]> {
+  public getMenus() {
     return db.getMenus();
   }
 

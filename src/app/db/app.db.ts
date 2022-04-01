@@ -1,8 +1,9 @@
+import Dexie, { liveQuery } from 'dexie';
 import { Menu, MenuItem } from '../models/menu';
-import { Observable, from, map } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
-import Dexie from 'dexie';
 import { MenuOrder } from '../models/order';
+import { dexieToRx } from './db-utility';
 
 export class AppDB extends Dexie {
   private menus!: Dexie.Table<Menu, string>;
@@ -12,14 +13,62 @@ export class AppDB extends Dexie {
     super('AppDB');
     const db = this;
     // Define tables and indexes
-    db.version(1).stores({
-      menus: '&id, imageUrl',
-      cart: '&id'
-    });
     // & unique index
     // ++ auto-increment unique PK
     // * multi-entry index
     // [A+B] compound index
+    db.version(1).stores({
+      menus: '&id, imageUrl',
+      cart: '&id'
+    });
+    db.on('populate', () => {
+      db.menus.add(
+        new Menu({
+          id: 'default',
+          address: '123 Main St, Livonia, MI 48154',
+          open: new Date(2000, 1, 1, 11, 0, 0),
+          close: new Date(2000, 1, 1, 14, 0, 0),
+          radius: 15,
+          isActive: false,
+          items: [
+            new MenuItem({
+              id: '1',
+              imageUrl: './assets/chicken.jpg',
+              price: 13.99,
+              description: 'Tandoori Chicken Butter',
+              name: 'Butter Chicken',
+              available: 20
+            }),
+            new MenuItem({
+              id: '2',
+              imageUrl: './assets/dal.jpg',
+              price: 10.99,
+              description: 'Lentil Dal Curry',
+              name: 'Dal Curry',
+              available: 25
+            }),
+            new MenuItem({ id: '3', imageUrl: './assets/naan.jpg', price: 4.99, description: 'Naan Bread', name: 'Naan', available: 25 }),
+            new MenuItem({
+              id: '4',
+              imageUrl: './assets/tandoori.jpg',
+              price: 12.99,
+              description: 'Tandoori Chicken Description',
+              name: 'Tandoori Chicken',
+              available: 30
+            }),
+            new MenuItem({
+              id: '5',
+              imageUrl: './assets/samosa.jpg',
+              price: 8.99,
+              description: 'Potato and Pea Samosa',
+              name: 'Veggie Samosa',
+              available: 27
+            })
+          ]
+        })
+      );
+    });
+    db.open();
 
     db.menus.mapToClass(Menu);
     db.cart.mapToClass(MenuOrder);
@@ -33,7 +82,7 @@ export class AppDB extends Dexie {
     return from(db.cart.clear());
   }
   public getCart(): Observable<MenuOrder[]> {
-    return from(db.cart.toArray());
+    return dexieToRx(liveQuery(() => db.cart.toArray()));
   }
   public updateOrder(order: MenuOrder): Observable<string> {
     return from(db.cart.put(order, order.id));
@@ -43,7 +92,7 @@ export class AppDB extends Dexie {
   }
 
   public getMenus(): Observable<Menu[]> {
-    return from(db.menus.toArray());
+    return dexieToRx(liveQuery(() => db.menus.toArray()));
   }
   public createMenu(menu: Menu): Observable<string> {
     return from(db.menus.put(menu, menu.id));
