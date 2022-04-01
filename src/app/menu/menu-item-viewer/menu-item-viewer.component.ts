@@ -9,6 +9,7 @@ import { MenuOrder } from '../../models/order';
   styleUrls: ['./menu-item-viewer.component.scss']
 })
 export class MenuItemViewerComponent implements OnInit {
+  private editMode: boolean = false;
   @Input()
   public readOnly!: boolean;
   @Input()
@@ -36,6 +37,10 @@ export class MenuItemViewerComponent implements OnInit {
 
   public onAdd(): void {
     this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.quantity }));
+    if (this.editMode) {
+      this.readOnly = true;
+      this.editMode = false;
+    }
   }
 
   public onDelete(): void {
@@ -44,5 +49,6 @@ export class MenuItemViewerComponent implements OnInit {
 
   public onEdit(): void {
     this.readOnly = false;
+    this.editMode = true;
   }
 }
