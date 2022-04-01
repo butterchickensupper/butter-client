@@ -12,11 +12,8 @@ export class ToolbarComponent {
   public total: number = 0;
 
   constructor(public router: Router, private orderService: OrderService) {
-    this.orderService.getMenuOrders().subscribe((res) => {
-      this.total = 0;
-      res.forEach((a) => {
-        this.total += a.quantity;
-      });
+    this.orderService.totalItems$.asObservable().subscribe((res) => {
+      this.total = res;
     });
   }
 

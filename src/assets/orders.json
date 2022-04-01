@@ -1,0 +1,52 @@
+[
+  {
+    "name": "John",
+    "address": "123 Main St",
+    "items": [
+      {
+        "quantity": 1,
+        "item": {
+          "id": "5",
+          "imageUrl": "./assets/samosa.jpg",
+          "price": 8.99,
+          "description": "Potato and Pea Samosa",
+          "name": "Veggie Samosa",
+          "available": 27
+        }
+      }
+    ],
+    "total": 10.05,
+    "date": "Dec 15, 2018, 5:03:01 PM"
+  },
+  {
+    "name": "John",
+    "address": "456 West Rd",
+    "items": [
+      {
+        "quantity": 3,
+        "item": {
+          "id": "2",
+          "imageUrl": "./assets/dal.jpg",
+          "price": 10.99,
+          "description": "Lentil Dal Curry",
+          "name": "Dal Curry",
+          "available": 25
+        }
+      },
+      {
+        "quantity": 2,
+        "item": {
+          "id": "3",
+          "imageUrl": "./assets/naan.jpg",
+          "price": 4.99,
+          "description": "Naan Bread",
+          "name": "Naan",
+          "available": 25
+        }
+      }
+    ],
+    "total": 45.53,
+    "date": "Jan 15, 2015, 4:03:01 AM"
+  },
+  { "name": "John", "address": "123 Main St", "items": [], "date": "Jun 15, 2015, 12:03:01 AM", "total": 0.0 }
+]
