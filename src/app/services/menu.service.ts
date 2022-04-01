@@ -40,6 +40,7 @@ export class MenuService {
   }
 
   public deleteMenuItem(id: string, itemId: string): Observable<number> {
+    // TODO: delete all images from s3
     return db.deleteMenuItem(id, itemId);
   }
 }

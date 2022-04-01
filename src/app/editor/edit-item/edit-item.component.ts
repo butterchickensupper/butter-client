@@ -5,6 +5,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Menu, MenuItem } from 'src/app/models/menu';
 import { Observable, Subscription, finalize } from 'rxjs';
 
+import { ImageService } from 'src/app/services/image.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -33,7 +34,8 @@ export class EditItemComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private imageService: ImageService
   ) {
     this.menu$ = this.menuService.getMenu('default');
   }
@@ -74,19 +76,9 @@ export class EditItemComponent implements OnInit {
 
   public onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
-    // TODO: upload image to s3
     if (file) {
       this.fileName = file.name;
-      const formData = new FormData();
-      formData.append('thumbnail', file);
-
-      const upload$ = this.http
-        .post('/api/thumbnail-upload', formData, {
-          reportProgress: true,
-          observe: 'events'
-        })
-        .pipe(finalize(() => this.reset()));
+      const upload$ = this.imageService.uploadImage(file).pipe(finalize(() => this.reset()));
 
       this.uploadSub = upload$.subscribe((event: any) => {
         if (event.type == HttpEventType.UploadProgress) {
