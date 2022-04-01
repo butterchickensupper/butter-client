@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { MenuOrder, Order } from '../models/order';
 
 import { HttpClient } from '@angular/common/http';
@@ -21,7 +21,14 @@ export class OrderService {
   }
   public getOrders(request: OrdersRequest): Observable<Order[]> {
     console.log(request);
-    return this.httpClient.get<Order[]>('/assets/orders.json');
+    return this.httpClient.get<Order[]>('/assets/orders.json').pipe(
+      map((a) => {
+        a.forEach((b) => {
+          b.date = new Date(b.date);
+        });
+        return a;
+      })
+    );
   }
   public addMenuOrder(order: MenuOrder, fromMenu = false): Observable<string> {
     const i = this.cart.findIndex((x) => x.id === order.id);

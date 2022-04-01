@@ -16,6 +16,10 @@ export class MenuService {
     if (this.menus) return of(this.menus);
     return this.httpClient.get<Menu[]>('/assets/menu.json').pipe(
       map((m) => {
+        m.forEach((a) => {
+          a.open = new Date(a.open);
+          a.close = new Date(a.close);
+        });
         this.menus = m;
         return m;
       })
