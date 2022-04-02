@@ -1,10 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Menu, MenuItem } from 'src/app/models/menu';
 import { Observable, Subscription, finalize } from 'rxjs';
 
+import { HttpEventType } from '@angular/common/http';
 import { ImageService } from 'src/app/services/image.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -31,7 +31,6 @@ export class EditItemComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private menuService: MenuService,
@@ -72,6 +71,7 @@ export class EditItemComponent implements OnInit {
     if (!this.menuService.updateMenuItem('default', menu)) {
       console.error('failed to update menuItem on default menu');
     }
+    this.router.navigateByUrl('edit-menu');
   }
 
   public onFileSelected(event: any) {

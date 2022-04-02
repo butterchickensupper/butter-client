@@ -11,7 +11,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" />
+            <input matInput placeholder="Name" formControlName="name" autocomplete="off" />
             <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
           </mat-form-field>
         </p>
@@ -34,21 +34,23 @@
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
-              placeholder="Description" formControlName="description"></textarea>
+              placeholder="Description" formControlName="description" autocomplete="off"></textarea>
             <mat-error *ngIf="form.get('description')?.invalid">Description is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Price</mat-label>
-            <input matInput placeholder="0.0" type="number" formControlName="price" pattern="[0-9]*" />
+            <input matInput placeholder="0.0" type="number" formControlName="price" pattern="[0-9.]*"
+              autocomplete="off" />
             <mat-error *ngIf="form.get('price')?.invalid">Price is required.</mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Available Quantity</mat-label>
-            <input matInput placeholder="0" type="number" formControlName="available" pattern="[0-9]*" />
+            <input matInput placeholder="0" type="number" formControlName="available" pattern="[0-9]*"
+              autocomplete="off" />
             <mat-error *ngIf="form.get('available')?.invalid">Available Quantity is required.</mat-error>
           </mat-form-field>
         </p>
@@ -56,14 +58,14 @@
           <mat-form-field appearance="outline">
             <mat-label>Ingredients</mat-label>
             <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
-              placeholder="Ingredients" formControlName="ingredients"></textarea>
+              placeholder="Ingredients" formControlName="ingredients" autocomplete="off"></textarea>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Nutritional Info</mat-label>
             <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
-              placeholder="Nutritional Info" formControlName="nutrition"></textarea>
+              placeholder="Nutritional Info" formControlName="nutrition" autocomplete="off"></textarea>
           </mat-form-field>
         </p>
         <div>
