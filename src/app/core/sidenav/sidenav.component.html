@@ -13,7 +13,7 @@
       <a mat-list-item [routerLink]="'/about'" (click)="sidenav.toggle()"> About </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content #content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
