@@ -74,8 +74,16 @@ export class EditorComponent implements OnInit, AfterViewInit {
     console.warn('menuItem is missing', change.source._value);
   }
 
+  public add(): void {
+    this.router.navigateByUrl(`edit-item/}`);
+  }
+
   public edit(): void {
-    this.router.navigateByUrl(`edit-item/${this.selectedItem?.id ?? ''}`);
+    if (!this.selectedItem?.id) {
+      console.error('id is missing', this.selectedItem);
+      return;
+    }
+    this.router.navigateByUrl(`edit-item/${this.selectedItem.id}`);
   }
 
   public deleteItem(): void {
