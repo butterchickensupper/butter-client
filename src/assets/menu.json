@@ -5,7 +5,7 @@
     "open": "Dec 15, 2018, 11:00:00 AM",
     "close": "Dec 15, 2018, 3:00:00 PM",
     "radius": 15,
-    "isActive": false,
+    "isActive": true,
     "items": [
       {
         "id": "1",
@@ -13,7 +13,8 @@
         "price": 13.99,
         "description": "Tandoori Chicken Butter",
         "name": "Butter Chicken",
-        "available": 20
+        "available": 20,
+        "isActive": true
       },
       {
         "id": "2",
@@ -21,16 +22,26 @@
         "price": 10.99,
         "description": "Lentil Dal Curry",
         "name": "Dal Curry",
-        "available": 25
+        "available": 25,
+        "isActive": true
       },
-      { "id": "3", "imageUrl": "./assets/naan.jpg", "price": 4.99, "description": "Naan Bread", "name": "Naan", "available": 25 },
+      {
+        "id": "3",
+        "imageUrl": "./assets/naan.jpg",
+        "price": 4.99,
+        "description": "Naan Bread",
+        "name": "Naan",
+        "available": 25,
+        "isActive": true
+      },
       {
         "id": "4",
         "imageUrl": "./assets/tandoori.jpg",
         "price": 12.99,
         "description": "Tandoori Chicken Description",
         "name": "Tandoori Chicken",
-        "available": 30
+        "available": 30,
+        "isActive": true
       },
       {
         "id": "5",
@@ -38,7 +49,8 @@
         "price": 8.99,
         "description": "Potato and Pea Samosa",
         "name": "Veggie Samosa",
-        "available": 27
+        "available": 27,
+        "isActive": true
       }
     ]
   }

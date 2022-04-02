@@ -4,7 +4,7 @@ export class MenuItem {
   public id?: string;
   public imageUrl: string;
   public ingredients?: string;
-  public isActive?: boolean;
+  public isActive: boolean;
   public name: string;
   public nutrition?: string;
   public price: number;
@@ -22,7 +22,7 @@ export class MenuItem {
     available: number;
     nutrition?: string;
     ingredients?: string;
-    isActive?: boolean;
+    isActive: boolean;
   }) {
     this.description = args.description;
     this.imageUrl = args.imageUrl;

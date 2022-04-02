@@ -3,11 +3,14 @@
     <mat-card-title>Menu</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="menu-item" *ngFor="let item of menu?.items">
-      <app-menu-item-viewer #viewer [item]="item" (addItem)="onAdd($event)" (deleteItem)="onDelete($event)"
-        [readOnly]="false">
+    <div class="menu-item" [hidden]="!menu?.isActive" *ngFor="let item of menu?.items">
+      <app-menu-item-viewer #viewer [hidden]="!item.isActive" [item]="item" (addItem)="onAdd($event)"
+        (deleteItem)="onDelete($event)" [readOnly]="false">
       </app-menu-item-viewer>
       <p></p>
+    </div>
+    <div [hidden]="menu?.isActive">
+      <p>The menu is not currently available.</p>
     </div>
   </mat-card-content>
 </mat-card>
