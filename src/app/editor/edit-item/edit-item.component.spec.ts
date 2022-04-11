@@ -7,6 +7,7 @@ import { EditItemComponent } from './edit-item.component';
 import { ImageService } from 'src/app/services/image.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MenuService } from 'src/app/services/menu.service';
 import { of } from 'rxjs';
@@ -18,7 +19,15 @@ describe('EditItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditItemComponent],
-      imports: [BrowserAnimationsModule, FormsModule, ReactiveFormsModule, MatInputModule, MatCardModule, MatCheckboxModule],
+      imports: [
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatFormFieldModule
+      ],
       providers: [
         {
           provide: Router,
