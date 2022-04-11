@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatCardModule } from '@angular/material/card';
 import { MenuItemViewerComponent } from './menu-item-viewer.component';
 
 describe('MenuItemViewerComponent', () => {
@@ -9,7 +10,7 @@ describe('MenuItemViewerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MenuItemViewerComponent],
-      imports: []
+      imports: [MatCardModule]
     }).compileComponents();
   });
 

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatCardModule } from '@angular/material/card';
 import { OrderDashboardComponent } from './order-dashboard.component';
 
 describe('OrderDashboardComponent', () => {
@@ -8,7 +9,8 @@ describe('OrderDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrderDashboardComponent]
+      declarations: [OrderDashboardComponent],
+      imports: [MatCardModule]
     }).compileComponents();
   });
 

@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CartComponent } from './cart.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { OrderService } from '../services/order.service';
 import { of } from 'rxjs';
 
@@ -12,7 +14,7 @@ describe('CartComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CartComponent],
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [FormsModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule],
       providers: [
         {
           provide: OrderService,
