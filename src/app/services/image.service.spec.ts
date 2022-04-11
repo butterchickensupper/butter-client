@@ -1,12 +1,19 @@
-import { TestBed } from '@angular/core/testing';
-
+import { HttpClient } from '@angular/common/http';
 import { ImageService } from './image.service';
+import { TestBed } from '@angular/core/testing';
 
 describe('ImageService', () => {
   let service: ImageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: HttpClient,
+          useValue: jasmine.createSpyObj('HttpClient', [''])
+        }
+      ]
+    });
     service = TestBed.inject(ImageService);
   });
 

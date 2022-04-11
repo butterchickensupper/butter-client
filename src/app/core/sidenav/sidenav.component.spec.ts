@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Router } from '@angular/router';
 import { SidenavComponent } from './sidenav.component';
+import { of } from 'rxjs';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -8,7 +10,15 @@ describe('SidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SidenavComponent]
+      declarations: [SidenavComponent],
+      providers: [
+        {
+          provide: Router,
+          useValue: {
+            events: of({})
+          }
+        }
+      ]
     }).compileComponents();
   });
 

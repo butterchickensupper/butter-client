@@ -1,6 +1,8 @@
+import { BehaviorSubject, of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 
+import { OrderService } from 'src/app/services/order.service';
+import { Router } from '@angular/router';
 import { ToolbarComponent } from './toolbar.component';
 
 describe('ToolbarComponent', () => {
@@ -15,6 +17,12 @@ describe('ToolbarComponent', () => {
           provide: Router,
           useValue: {
             navigate: jasmine.createSpy('navigate')
+          }
+        },
+        {
+          provide: OrderService,
+          useValue: {
+            totalItems$: new BehaviorSubject(0)
           }
         }
       ]

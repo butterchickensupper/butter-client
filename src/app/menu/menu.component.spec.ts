@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { provideMockStore } from '@ngrx/store/testing';
-import { selectOrder } from '../store/selector/order.selectors';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MenuComponent } from './menu.component';
-import { MenuService } from './menu.service';
+import { MenuService } from '../services/menu.service';
+import { OrderService } from '../services/order.service';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -13,12 +14,19 @@ describe('MenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MenuComponent],
+      imports: [MatSnackBarModule],
       providers: [
         {
           provide: MenuService,
           useValue: {
-            getMenu: jasmine.createSpy('getMenu'),
-            submitOrder: jasmine.createSpy('submitOrder')
+            getMenu: jasmine.createSpy('getMenu').and.returnValue(of([]))
+          }
+        },
+        {
+          provide: OrderService,
+          useValue: {
+            addMenuOrder: jasmine.createSpy('addMenuOrder'),
+            deleteMenuItem: jasmine.createSpy('deleteMenuItem')
           }
         },
         {
@@ -26,11 +34,7 @@ describe('MenuComponent', () => {
           useValue: {
             navigate: jasmine.createSpy('navigate')
           }
-        },
-        provideMockStore({
-          initialState: { order: { items: [], name: '', address: '' } },
-          selectors: [{ selector: selectOrder, value: { name: 'Butter Chicken', address: '123 Main St' } }]
-        })
+        }
       ]
     }).compileComponents();
   });

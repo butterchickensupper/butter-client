@@ -26,7 +26,7 @@ export class EditItemComponent implements OnInit {
     available: [0, [Validators.min(1), Validators.required]],
     ingredients: [''],
     nutrition: [''],
-    isActive: []
+    isActive: [false]
   });
 
   constructor(

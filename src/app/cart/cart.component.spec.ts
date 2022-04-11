@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { CartComponent } from './cart.component';
-import { selectOrder } from '../../store/selector/order.selectors';
-import { MenuService } from '../menu.service';
+import { OrderService } from '../services/order.service';
+import { of } from 'rxjs';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -11,18 +12,14 @@ describe('CartComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CartComponent],
+      imports: [FormsModule, ReactiveFormsModule],
       providers: [
         {
-          provide: MenuService,
+          provide: OrderService,
           useValue: {
-            getMenu: jasmine.createSpy('getMenu'),
-            submitOrder: jasmine.createSpy('submitOrder')
+            getMenuOrders: jasmine.createSpy('getMenuOrders').and.returnValue(of([]))
           }
-        },
-        provideMockStore({
-          initialState: { order: { items: [], name: '', address: '' } },
-          selectors: [{ selector: selectOrder, value: { name: 'Butter Chicken', address: '123 Main St', items: [] } }]
-        })
+        }
       ]
     }).compileComponents();
   });

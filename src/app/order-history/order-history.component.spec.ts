@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderHistoryComponent } from './order-history.component';
+import { OrderService } from '../services/order.service';
 
 describe('OrderHistoryComponent', () => {
   let component: OrderHistoryComponent;
@@ -8,7 +9,15 @@ describe('OrderHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OrderHistoryComponent]
+      declarations: [OrderHistoryComponent],
+      providers: [
+        {
+          provide: OrderService,
+          useValue: {
+            getOrders: jasmine.createSpy('getOrders')
+          }
+        }
+      ]
     }).compileComponents();
   });
 

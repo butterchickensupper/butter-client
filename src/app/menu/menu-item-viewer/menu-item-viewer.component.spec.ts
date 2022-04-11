@@ -16,10 +16,16 @@ describe('MenuItemViewerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuItemViewerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create ex', () => {
+    expect(component).toBeTruthy();
+    // set intut values then
+
+    // fixture.detectChanges();
   });
 });
