@@ -6,7 +6,6 @@ import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.com
 import { MenuOrder } from '../models/order';
 import { MenuService } from '../services/menu.service';
 import { OrderService } from '../services/order.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +17,7 @@ export class MenuComponent implements OnInit {
   public adminMode = false;
   public menu?: Menu;
 
-  constructor(public router: Router, private orderService: OrderService, private menuService: MenuService, private snackBar: MatSnackBar) {}
+  constructor(private orderService: OrderService, private menuService: MenuService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.menuService.getMenu('default').subscribe((res) => {
@@ -33,8 +32,8 @@ export class MenuComponent implements OnInit {
   }
 
   public onDelete(id: string): void {
-    this.menuService.deleteMenuItem('default', id).subscribe(() => {
-      this.snackBar.open('Item Deleted!', 'Dismiss', { duration: 3 * 1000 });
+    this.orderService.removeMenuOrder(id).subscribe(() => {
+      this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
     });
   }
 }
