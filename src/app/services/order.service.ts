@@ -3,7 +3,7 @@ import { MenuOrder, Order } from '../models/order';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OrdersRequest } from '../models/orders-request';
+import { OrderHistoryRequest } from '../models/order-history-request';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class OrderService {
     // submit data to server
     return of();
   }
-  public getOrders(request: OrdersRequest): Observable<Order[]> {
+
+  public getHistory(request: OrderHistoryRequest): Observable<Order[]> {
     console.log(request);
     return this.httpClient.get<Order[]>('/assets/orders.json').pipe(
       map((a) => {
@@ -30,6 +31,7 @@ export class OrderService {
       })
     );
   }
+
   public addMenuOrder(order: MenuOrder, fromMenu = false): Observable<string> {
     const i = this.cart.findIndex((x) => x.id === order.id);
     if (i !== -1) {
@@ -41,6 +43,7 @@ export class OrderService {
     this.updateTotals();
     return of('added');
   }
+
   public removeMenuOrder(id: string): Observable<boolean> {
     const i = this.cart.findIndex((x) => x.id === id);
     if (i === -1) return of(false);
@@ -48,14 +51,17 @@ export class OrderService {
     this.updateTotals();
     return of(true);
   }
+
   public getMenuOrders(): Observable<MenuOrder[]> {
     return of(this.cart);
   }
+
   public clearMenuOrders(): Observable<void> {
     this.cart = [];
     this.updateTotals();
     return of();
   }
+
   private updateTotals(): void {
     let t = 0;
     this.cart.forEach((i) => {

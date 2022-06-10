@@ -12,6 +12,9 @@ export class MenuService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Get all menus
+   */
   public getMenus(): Observable<Menu[]> {
     if (this.menus) return of(this.menus);
     return this.httpClient.get<Menu[]>('/assets/menu.json').pipe(
@@ -25,6 +28,7 @@ export class MenuService {
       })
     );
   }
+
   public getMenu(id: string): Observable<Menu | undefined> {
     return this.getMenus().pipe(
       map((r) => {
@@ -34,6 +38,7 @@ export class MenuService {
       })
     );
   }
+
   public getMenuItem(id: string, itemId: string): Observable<MenuItem | undefined> {
     return this.getMenu(id).pipe(
       map((r) => {
@@ -45,6 +50,7 @@ export class MenuService {
       })
     );
   }
+
   public updateMenu(menu: Menu): Observable<string> {
     if (!this.menus) return of();
     const i = this.menus.findIndex((x) => x.id === menu.id);
@@ -54,6 +60,7 @@ export class MenuService {
     this.menus.push(menu);
     return of('added');
   }
+
   public updateMenuItem(id: string, item: MenuItem): Observable<number> {
     if (!this.menus) return of();
     const i = this.menus.findIndex((x) => x.id === id);
@@ -66,6 +73,7 @@ export class MenuService {
     }
     return of(0);
   }
+
   public deleteMenuItem(id: string, itemId: string): Observable<number> {
     if (!this.menus) return of();
     // TODO: delete all images from s3

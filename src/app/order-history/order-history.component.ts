@@ -2,8 +2,8 @@ import { Observable, map } from 'rxjs';
 
 import { Component } from '@angular/core';
 import { Order } from '../models/order';
+import { OrderHistoryRequest } from '../models/order-history-request';
 import { OrderService } from '../services/order.service';
-import { OrdersRequest } from '../models/orders-request';
 
 @Component({
   selector: 'app-order-history',
@@ -18,7 +18,7 @@ export class OrderHistoryComponent {
 
   constructor(private orderServce: OrderService) {
     // TODO: get userId from context? claims?
-    this.orders$ = this.orderServce.getOrders(new OrdersRequest({ userId: 'test123' }));
+    this.orders$ = this.orderServce.getHistory(new OrderHistoryRequest({ userId: 'test123' }));
   }
 
   public setStep(index: number) {

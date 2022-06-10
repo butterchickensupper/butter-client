@@ -1,4 +1,4 @@
-export class OrdersRequest {
+export class OrderHistoryRequest {
   public startDate?: Date;
   public endDate?: Date;
   public userId?: string;
