@@ -18,7 +18,7 @@ describe('OrderHistoryComponent', () => {
         {
           provide: OrderService,
           useValue: {
-            getOrders: jasmine.createSpy('getOrders')
+            getHistory: jasmine.createSpy('getHistory')
           }
         }
       ]
