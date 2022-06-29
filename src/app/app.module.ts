@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CartComponent } from './cart/cart.component';
-import { EditItemComponent } from './editor/edit-item/edit-item.component';
-import { EditorComponent } from './editor/editor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './core/material/material.module';
 import { MenuComponent } from './menu/menu.component';
@@ -31,8 +29,6 @@ import { environment } from '../environments/environment';
     ToolbarComponent,
     ProfileComponent,
     AboutComponent,
-    EditorComponent,
-    EditItemComponent,
     CartComponent,
     MenuComponent,
     MenuItemViewerComponent,

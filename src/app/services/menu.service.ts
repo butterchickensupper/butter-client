@@ -50,41 +50,4 @@ export class MenuService {
       })
     );
   }
-
-  public updateMenu(menu: Menu): Observable<string> {
-    if (!this.menus) return of();
-    const i = this.menus.findIndex((x) => x.id === menu.id);
-    if (i !== -1) {
-      this.menus.splice(i, 1);
-    }
-    this.menus.push(menu);
-    return of('added');
-  }
-
-  public updateMenuItem(id: string, item: MenuItem): Observable<number> {
-    if (!this.menus) return of();
-    const i = this.menus.findIndex((x) => x.id === id);
-    if (i !== -1) {
-      const i2 = this.menus[i].items.findIndex((y) => y.id === item.id);
-      if (i2 !== -1) {
-        this.menus[i].items[i2] = item;
-        return of(1);
-      }
-    }
-    return of(0);
-  }
-
-  public deleteMenuItem(id: string, itemId: string): Observable<number> {
-    if (!this.menus) return of();
-    // TODO: delete all images from s3
-    const i = this.menus.findIndex((x) => x.id === id);
-    if (i !== -1) {
-      const i2 = this.menus[i].items.findIndex((y) => y.id === itemId);
-      if (i2 !== -1) {
-        this.menus[i].items.splice(i2, 1);
-        return of(1);
-      }
-    }
-    return of(0);
-  }
 }
