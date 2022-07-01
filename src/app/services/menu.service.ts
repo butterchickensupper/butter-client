@@ -3,6 +3,7 @@ import { Observable, map, of } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class MenuService {
    */
   public getMenus(): Observable<Menu[]> {
     if (this.menus) return of(this.menus);
-    return this.httpClient.get<Menu[]>('/assets/menu.json').pipe(
+    return this.httpClient.get<Menu[]>(environment.apiGatewayUrl + 'menu').pipe(
       map((m) => {
         m.forEach((a) => {
           a.open = new Date(a.open);
