@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CartComponent } from './cart/cart.component';
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './core/material/material.module';
 import { MenuComponent } from './menu/menu.component';
@@ -51,6 +52,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     MaterialModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [CookieService]
 })
 export class AppModule {}

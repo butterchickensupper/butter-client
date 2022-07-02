@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { MenuOrder, Order } from '../models/order';
 
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OrderHistoryRequest } from '../models/order-history-request';
@@ -13,7 +14,12 @@ export class OrderService {
   public totalItems$ = new BehaviorSubject<number>(0);
   public total$ = new BehaviorSubject<number>(0);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {
+    var cart = this.cookieService.get('cart');
+    if (cart) {
+      this.cart = JSON.parse(cart) as MenuOrder[];
+    }
+  }
 
   public submitOrder(order: Order): Observable<any> {
     // submit data to server
