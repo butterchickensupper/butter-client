@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
 
   public submitOrder(): void {
     if (!this.orders) {
-      console.log('orders is null');
+      console.log('orders are null');
       return;
     }
 

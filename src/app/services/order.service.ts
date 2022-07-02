@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OrderHistoryRequest } from '../models/order-history-request';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,9 @@ export class OrderService {
 
   public submitOrder(order: Order): Observable<any> {
     // submit data to server
-    return of();
+    return this.httpClient.post(environment.apiGatewayUrl + 'menu', order).pipe(map(() => {
+      this.cart = [];
+    }));
   }
 
   public getHistory(request: OrderHistoryRequest): Observable<Order[]> {
