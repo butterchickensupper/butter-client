@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MenuComponent } from './menu.component';
 import { MenuService } from '../services/menu/menu.service';
-import { OrderService } from '../services/order.service';
+import { OrderService } from '../services/order/order.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
