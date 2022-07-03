@@ -23,36 +23,36 @@ import { UserInfoComponent } from './core/user-info/user-info.component';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    SidenavComponent,
-    ToolbarComponent,
-    ProfileComponent,
-    AboutComponent,
-    CartComponent,
-    MenuComponent,
-    MenuItemViewerComponent,
-    OrderHistoryComponent,
-    OrderDashboardComponent,
-    UserInfoComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule
-  ],
-  bootstrap: [AppComponent],
-  providers: [CookieService]
+    declarations: [
+        AppComponent,
+        PageNotFoundComponent,
+        SidenavComponent,
+        ToolbarComponent,
+        ProfileComponent,
+        AboutComponent,
+        CartComponent,
+        MenuComponent,
+        MenuItemViewerComponent,
+        OrderHistoryComponent,
+        OrderDashboardComponent,
+        UserInfoComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000',
+        }),
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+    ],
+    bootstrap: [AppComponent],
+    providers: [CookieService],
 })
 export class AppModule {}

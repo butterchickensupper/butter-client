@@ -3,74 +3,74 @@ import { MenuOrder, Order } from '../models/order';
 
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { OrderService } from 'src/app/services/order.service';
+import { OrderService } from '../services/order/order.service';
 import { UserInfoComponent } from '../core/user-info/user-info.component';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+    selector: 'app-cart',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  @ViewChild('userInfo')
-  public userInfo!: UserInfoComponent;
+    @ViewChild('userInfo')
+    public userInfo!: UserInfoComponent;
 
-  public orders$: Observable<MenuOrder[]>;
-  public orders: MenuOrder[] = [];
+    public orders$: Observable<MenuOrder[]>;
+    public orders: MenuOrder[] = [];
 
-  constructor(public fb: FormBuilder, private orderService: OrderService) {
-    this.orders$ = this.orderService.getMenuOrders();
-  }
-
-  ngOnInit(): void {
-    this.orders$.subscribe((a) => {
-      this.orders = a;
-    });
-  }
-
-  public getTotal(): number | undefined {
-    if (!this.orders) return undefined;
-    let total = 0.0;
-    this.orders.forEach((i) => {
-      total += i.item.price * i.quantity;
-    });
-    return total;
-  }
-
-  public submitOrder(): void {
-    if (!this.orders) {
-      console.log('orders are null');
-      return;
+    constructor(public fb: FormBuilder, private orderService: OrderService) {
+        this.orders$ = this.orderService.getMenuOrders();
     }
 
-    var o = new Order({
-      name: this.userInfo.name,
-      address: this.userInfo.addressResult,
-      items: this.orders,
-      date: new Date()
-    });
-    this.orderService.submitOrder(o).subscribe((res) => {
-      console.log(res);
-    });
+    ngOnInit(): void {
+        this.orders$.subscribe((a) => {
+            this.orders = a;
+        });
+    }
 
-    // clear order from store
-    console.log(o);
-    this.orderService.clearMenuOrders();
-  }
+    public getTotal(): number | undefined {
+        if (!this.orders) return undefined;
+        let total = 0.0;
+        this.orders.forEach((i) => {
+            total += i.item.price * i.quantity;
+        });
+        return total;
+    }
 
-  public cancel(): void {
-    // clear order from the store/server
-  }
+    public submitOrder(): void {
+        if (!this.orders) {
+            console.log('orders are null');
+            return;
+        }
 
-  public onOrder(): void {
-    // submit order to the service
-  }
+        var o = new Order({
+            name: this.userInfo.name,
+            address: this.userInfo.addressResult,
+            items: this.orders,
+            date: new Date(),
+        });
+        this.orderService.submitOrder(o).subscribe((res) => {
+            console.log(res);
+        });
 
-  public onEdit(order: MenuOrder): void {
-    this.orderService.addMenuOrder(order);
-  }
+        // clear order from store
+        console.log(o);
+        this.orderService.clearMenuOrders();
+    }
 
-  public onDelete(itemId: any): void {
-    this.orderService.removeMenuOrder(itemId);
-  }
+    public cancel(): void {
+        // clear order from the store/server
+    }
+
+    public onOrder(): void {
+        // submit order to the service
+    }
+
+    public onEdit(order: MenuOrder): void {
+        this.orderService.addMenuOrder(order);
+    }
+
+    public onDelete(itemId: any): void {
+        this.orderService.removeMenuOrder(itemId);
+    }
 }
