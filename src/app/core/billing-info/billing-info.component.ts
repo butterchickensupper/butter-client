@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 @Component({
     selector: 'app-billing-info',
@@ -15,6 +16,18 @@ export class BillingInfoComponent implements OnInit {
         state: ['', [Validators.required]],
         zip: ['', [Validators.required]],
     });
+
+    public get user(): User | undefined {
+        if (this.form.invalid) return undefined;
+        return new User({
+            firstName: this.form.get('firstName')?.value,
+            lastName: this.form.get('lastName')?.value,
+            address: this.form.get('address')?.value,
+            city: this.form.get('city')?.value,
+            state: this.form.get('state')?.value,
+            zip: this.form.get('zip')?.value,
+        });
+    }
 
     constructor(public fb: UntypedFormBuilder) {}
 

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+import { BillingInfoComponent } from '../core/billing-info/billing-info.component';
 import { MenuOrder, Order } from '../models/order';
-import { User } from '../models/user';
 import { OrderService } from '../services/order/order.service';
 
 @Component({
@@ -12,6 +12,9 @@ import { OrderService } from '../services/order/order.service';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+    @ViewChild('billingInfo')
+    public billingInfo!: BillingInfoComponent;
+
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
@@ -39,9 +42,14 @@ export class CartComponent implements OnInit {
             console.log('orders are null');
             return;
         }
+        const user = this.billingInfo.user;
+        if (!user) {
+            console.log('user is null');
+            return;
+        }
 
         var o = new Order({
-            user: new User({ firstName: 'John', lastName: 'Smith', address: '123 Main St', city: 'Livonia', state: 'MI', zip: '48154' }),
+            user: user,
             items: this.orders,
             date: new Date(),
         });
