@@ -21,6 +21,7 @@ import { SidenavComponent } from './core/sidenav/sidenav.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
 import { UserInfoComponent } from './core/user-info/user-info.component';
 import { environment } from '../environments/environment';
+import { BillingInfoComponent } from './core/billing-info/billing-info.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { environment } from '../environments/environment';
         OrderHistoryComponent,
         OrderDashboardComponent,
         UserInfoComponent,
+        BillingInfoComponent,
     ],
     imports: [
         BrowserModule,

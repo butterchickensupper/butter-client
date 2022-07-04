@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,9 +7,6 @@ import { UntypedFormBuilder } from '@angular/forms';
     styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent {
-    @ViewChild('address')
-    public address!: ElementRef<HTMLInputElement>;
-
     public form = this.fb.group({
         name: ['', []],
         phone: ['', []],
