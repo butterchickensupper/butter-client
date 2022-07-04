@@ -11,8 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { AboutComponent } from './core/about/about.component';
-import { BillingInfoComponent } from './core/billing-info/billing-info.component';
 import { MaterialModule } from './core/material/material.module';
+import { OrderInfoComponent } from './core/order-info/order-info.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { PaymentInfoComponent } from './core/payment-info/payment-info.component';
 import { ProfileComponent } from './core/profile/profile.component';
@@ -38,7 +38,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
         OrderHistoryComponent,
         OrderDashboardComponent,
         UserInfoComponent,
-        BillingInfoComponent,
+        OrderInfoComponent,
         PaymentInfoComponent,
     ],
     imports: [

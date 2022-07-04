@@ -3,11 +3,11 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 
 @Component({
-    selector: 'app-billing-info',
-    templateUrl: './billing-info.component.html',
-    styleUrls: ['./billing-info.component.scss'],
+    selector: 'app-order-info',
+    templateUrl: './order-info.component.html',
+    styleUrls: ['./order-info.component.scss'],
 })
-export class BillingInfoComponent implements OnInit {
+export class OrderInfoComponent implements OnInit {
     public selectedOption: string | undefined = undefined;
     public form = this.fb.group({
         firstName: ['', [Validators.required]],

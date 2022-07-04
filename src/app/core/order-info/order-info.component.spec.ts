@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MaterialModule } from '../material/material.module';
-import { BillingInfoComponent } from './billing-info.component';
+import { OrderInfoComponent } from './order-info.component';
 
-describe('BillingInfoComponent', () => {
-    let component: BillingInfoComponent;
-    let fixture: ComponentFixture<BillingInfoComponent>;
+describe('OrderInfoComponent', () => {
+    let component: OrderInfoComponent;
+    let fixture: ComponentFixture<OrderInfoComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [MaterialModule],
-            declarations: [BillingInfoComponent],
+            declarations: [OrderInfoComponent],
         }).compileComponents();
 
-        fixture = TestBed.createComponent(BillingInfoComponent);
+        fixture = TestBed.createComponent(OrderInfoComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
