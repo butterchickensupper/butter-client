@@ -8,7 +8,7 @@
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "lint": "npx prettier --write ./src/**/*.ts --config .prettierrc.json"
+        "lint": "npx prettier --write ./src/**/*.ts --config src/.prettierrc.js"
     },
     "private": true,
     "dependencies": {

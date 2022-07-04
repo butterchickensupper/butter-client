@@ -4,25 +4,25 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ImageService {
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  public deleteImage(id: string): Observable<Object> {
-    return this.http.delete('/api/image/' + id);
-  }
-
-  public uploadImage(file: File): Observable<HttpEvent<Object>> {
-    if (file) {
-      const formData = new FormData();
-      formData.append('image', file);
-
-      return this.http.post('/api/image-upload', formData, {
-        reportProgress: true,
-        observe: 'events'
-      });
+    public deleteImage(id: string): Observable<Object> {
+        return this.http.delete('/api/image/' + id);
     }
-    return of();
-  }
+
+    public uploadImage(file: File): Observable<HttpEvent<Object>> {
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            return this.http.post('/api/image-upload', formData, {
+                reportProgress: true,
+                observe: 'events',
+            });
+        }
+        return of();
+    }
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuOrder, Order } from '../models/order';
-
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
+
+import { MenuOrder, Order } from '../models/order';
+import { User } from '../models/user';
 import { OrderService } from '../services/order/order.service';
-import { UserInfoComponent } from '../core/user-info/user-info.component';
 
 @Component({
     selector: 'app-cart',
@@ -12,9 +12,6 @@ import { UserInfoComponent } from '../core/user-info/user-info.component';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-    @ViewChild('userInfo')
-    public userInfo!: UserInfoComponent;
-
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
@@ -44,8 +41,7 @@ export class CartComponent implements OnInit {
         }
 
         var o = new Order({
-            name: this.userInfo.name,
-            address: this.userInfo.addressResult,
+            user: new User({ firstName: 'John', lastName: 'Smith', address: '123 Main St', city: 'Livonia', state: 'MI', zip: '48154' }),
             items: this.orders,
             date: new Date(),
         });

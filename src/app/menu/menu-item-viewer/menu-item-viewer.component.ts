@@ -4,51 +4,51 @@ import { MenuItem } from '../../models/menu';
 import { MenuOrder } from '../../models/order';
 
 @Component({
-  selector: 'app-menu-item-viewer',
-  templateUrl: './menu-item-viewer.component.html',
-  styleUrls: ['./menu-item-viewer.component.scss']
+    selector: 'app-menu-item-viewer',
+    templateUrl: './menu-item-viewer.component.html',
+    styleUrls: ['./menu-item-viewer.component.scss'],
 })
 export class MenuItemViewerComponent implements OnInit {
-  private editMode: boolean = false;
-  @Input()
-  public readOnly!: boolean;
-  @Input()
-  public item!: MenuItem;
-  @Input()
-  public quantity: number = 1;
-  @Input()
-  public imageSize = 128;
-  @Output()
-  public addItem = new EventEmitter();
-  @Output()
-  public deleteItem = new EventEmitter<string>();
+    private editMode: boolean = false;
+    @Input()
+    public readOnly!: boolean;
+    @Input()
+    public item!: MenuItem;
+    @Input()
+    public quantity: number = 1;
+    @Input()
+    public imageSize = 128;
+    @Output()
+    public addItem = new EventEmitter();
+    @Output()
+    public deleteItem = new EventEmitter<string>();
 
-  public numbers: number[] = [];
+    public numbers: number[] = [];
 
-  constructor() {}
+    constructor() {}
 
-  ngOnInit(): void {
-    this.numbers = Array(this.item.available)
-      .fill(0)
-      .map((x, i) => i)
-      .map((x, i) => i)
-      .filter((x) => x > 0);
-  }
-
-  public onAdd(): void {
-    this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.quantity }));
-    if (this.editMode) {
-      this.readOnly = true;
-      this.editMode = false;
+    ngOnInit(): void {
+        this.numbers = Array(this.item.available)
+            .fill(0)
+            .map((x, i) => i)
+            .map((x, i) => i)
+            .filter((x) => x > 0);
     }
-  }
 
-  public onDelete(): void {
-    this.deleteItem.emit(this.item.id);
-  }
+    public onAdd(): void {
+        this.addItem.emit(new MenuOrder({ item: this.item, quantity: this.quantity }));
+        if (this.editMode) {
+            this.readOnly = true;
+            this.editMode = false;
+        }
+    }
 
-  public onEdit(): void {
-    this.readOnly = false;
-    this.editMode = true;
-  }
+    public onDelete(): void {
+        this.deleteItem.emit(this.item.id);
+    }
+
+    public onEdit(): void {
+        this.readOnly = false;
+        this.editMode = true;
+    }
 }

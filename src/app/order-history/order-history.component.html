@@ -11,7 +11,7 @@
             Order Time: {{ order.date | date:'medium' }}
           </mat-panel-title>
           <mat-panel-description>
-            Delivery Address: {{ order.address }}
+            Delivery Address: {{ order.user.address }}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <table mat-table [dataSource]="order?.items ?? []" class="mat-elevation-z8" style="width: 100%;">

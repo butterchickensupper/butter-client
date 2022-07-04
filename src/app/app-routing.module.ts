@@ -10,18 +10,18 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { ProfileComponent } from './core/profile/profile.component';
 
 const routes: Routes = [
-  { path: 'about', component: AboutComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'order-history', component: OrderHistoryComponent },
-  { path: 'order-dashboard', component: OrderDashboardComponent },
-  { path: '', redirectTo: '/menu', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+    { path: 'about', component: AboutComponent },
+    { path: 'cart', component: CartComponent },
+    { path: 'menu', component: MenuComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'order-history', component: OrderHistoryComponent },
+    { path: 'order-dashboard', component: OrderDashboardComponent },
+    { path: '', redirectTo: '/menu', pathMatch: 'full' },
+    { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}
