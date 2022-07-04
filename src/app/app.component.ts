@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+
 import { LoadingService } from './services/loading/loading.service';
-import { of } from 'rxjs';
 
 @Component({
     selector: 'app-root',
