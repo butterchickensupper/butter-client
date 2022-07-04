@@ -3,12 +3,11 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 
 @Component({
-    selector: 'app-billing-info',
-    templateUrl: './billing-info.component.html',
-    styleUrls: ['./billing-info.component.scss'],
+    selector: 'app-payment-info',
+    templateUrl: './payment-info.component.html',
+    styleUrls: ['./payment-info.component.scss'],
 })
-export class BillingInfoComponent implements OnInit {
-    public selectedOption: string | undefined = undefined;
+export class PaymentInfoComponent implements OnInit {
     public form = this.fb.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
@@ -31,14 +30,6 @@ export class BillingInfoComponent implements OnInit {
     }
 
     constructor(public fb: UntypedFormBuilder) {}
-
-    public showDelivery() {
-        this.selectedOption = 'delivery';
-    }
-
-    public showPickup() {
-        this.selectedOption = 'pickup';
-    }
 
     ngOnInit(): void {
         console.log('init');

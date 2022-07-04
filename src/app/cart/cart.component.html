@@ -1,8 +1,12 @@
 <mat-accordion class="result">
   <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-description>
+      <mat-panel-title>
         Cart
+      </mat-panel-title>
+      <mat-panel-description>
+        <div *ngIf="step !== 0">{{ getTotal() | currency }}</div>
+        <div *ngIf="step === 0"> </div>
         <mat-icon>shopping_bag</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -29,12 +33,28 @@
   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-description>
-        Billing Info
+        Order Info
         <mat-icon>account_circle</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <app-billing-info #billingInfo></app-billing-info>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Back</button>
+      <button mat-button color="primary" (click)="nextStep()">Payment</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Payment Info
+        <mat-icon>payment</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <app-payment-info #paymentInfo></app-payment-info>
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Back</button>
