@@ -1,6 +1,5 @@
-import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
-
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +19,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgModule } from '@angular/core';
 
 @NgModule({
     declarations: [],
@@ -44,9 +42,6 @@ import { NgModule } from '@angular/core';
         MatAutocompleteModule,
         MatBadgeModule,
         MatExpansionModule,
-        NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
-        NgxMatNativeDateModule,
         MatTableModule,
     ],
     exports: [
@@ -69,9 +64,6 @@ import { NgModule } from '@angular/core';
         MatAutocompleteModule,
         MatBadgeModule,
         MatExpansionModule,
-        NgxMatDatetimePickerModule,
-        NgxMatTimepickerModule,
-        NgxMatNativeDateModule,
         MatTableModule,
     ],
 })
