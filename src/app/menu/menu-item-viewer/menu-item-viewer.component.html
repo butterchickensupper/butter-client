@@ -8,12 +8,13 @@
       </button>
     </div>
     <div *ngIf="readOnly">
-      <button mat-mini-fab color="primary" class="edit-margin" aria-label="edit cart item" (click)="onEdit()">
+      <button class="button-scale edit-margin" mat-mini-fab color="primary" aria-label="edit cart item"
+        (click)="onEdit()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
     <div *ngIf="readOnly">
-      <button mat-mini-fab color="primary" aria-label="remove from cart" (click)="onDelete()">
+      <button class="button-scale" mat-mini-fab color="primary" aria-label="remove from cart" (click)="onDelete()">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

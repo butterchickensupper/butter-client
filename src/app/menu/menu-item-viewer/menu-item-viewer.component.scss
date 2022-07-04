@@ -1,12 +1,19 @@
 .example-margin {
   margin: 0 10px;
 }
+
 .item-price {
   font-weight: bold;
 }
+
 .fill-remaining-space {
   flex: 1 1 auto;
 }
+
 .edit-margin {
   margin-right: 5px;
+}
+
+.button-scale {
+  transform: scale(0.8);
 }

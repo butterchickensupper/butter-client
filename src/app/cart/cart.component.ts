@@ -14,7 +14,7 @@ import { OrderService } from '../services/order/order.service';
 export class CartComponent implements OnInit {
     @ViewChild('billingInfo')
     public billingInfo!: BillingInfoComponent;
-
+    public step = 0;
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
@@ -26,6 +26,18 @@ export class CartComponent implements OnInit {
         this.orders$.subscribe((a) => {
             this.orders = a;
         });
+    }
+
+    public setStep(index: number): void {
+        this.step = index;
+    }
+
+    public nextStep(): void {
+        this.step++;
+    }
+
+    public prevStep(): void {
+        this.step--;
     }
 
     public getTotal(): number | undefined {

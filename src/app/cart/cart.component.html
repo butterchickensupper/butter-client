@@ -1,8 +1,12 @@
-<mat-card class="result">
-  <mat-card-header>
-    <mat-card-title>Cart</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<mat-accordion class="result">
+  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Cart
+        <mat-icon>shopping_bag</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
     <div class="menu">
       <div class="menu-item" *ngFor="let item of orders">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" (addItem)="onEdit($event)"
@@ -17,13 +21,25 @@
       <span>{{ getTotal() | currency }}</span>
     </div>
     <p></p>
-    <div>
-      <app-billing-info #billingInfo></app-billing-info>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onOrder()" class="button-space">Order</button>
-    <button mat-raised-button color="primary" (click)="cancel()">Clear</button>
-  </mat-card-actions>
-</mat-card>
-<p class="bottom-space"></p>
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Checkout</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        Billing Info
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <app-billing-info #billingInfo></app-billing-info>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Back</button>
+      <button mat-button color="primary" (click)="submitOrder()">Order</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

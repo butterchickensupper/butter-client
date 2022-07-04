@@ -1,9 +1,9 @@
-import { Menu, MenuItem } from '../../models/menu';
-import { Observable, map, of } from 'rxjs';
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
+import { Menu } from '../../models/menu';
 
 @Injectable({
     providedIn: 'root',
@@ -36,18 +36,6 @@ export class MenuService {
                 const i = r.findIndex((x) => x.id === id);
                 if (i === -1) return undefined;
                 return r[i];
-            })
-        );
-    }
-
-    public getMenuItem(id: string, itemId: string): Observable<MenuItem | undefined> {
-        return this.getMenu(id).pipe(
-            map((r) => {
-                const index = r?.items.findIndex((a) => a.id === itemId);
-                if (!index || index === -1) {
-                    return undefined;
-                }
-                return r?.items[index];
             })
         );
     }
