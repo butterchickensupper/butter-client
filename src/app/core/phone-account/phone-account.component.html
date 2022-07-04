@@ -1,0 +1,33 @@
+<mat-accordion class="result">
+    <mat-expansion-panel expanded hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-description>
+                Phone Verification
+                <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="phone-container">
+            <form [formGroup]="form">
+                <p>
+                    <mat-form-field appearance="outline" class="same-line-spacer">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput placeholder="Phone Number" formControlName="phoneNumber" />
+                        <mat-error *ngIf="form.get('phoneNumber')?.invalid">Phone Number is required.</mat-error>
+                    </mat-form-field>
+                </p>
+                <p *ngIf="form.get('phoneNumber')?.value && form.get('phoneNumber')?.valid">
+                    <mat-form-field appearance="outline" class="same-line-spacer">
+                        <mat-label>Verification Code</mat-label>
+                        <input matInput placeholder="Verification Code" formControlName="code" />
+                        <mat-error *ngIf="form.get('code')?.invalid">Code is invalid.</mat-error>
+                    </mat-form-field>
+                </p>
+            </form>
+        </div>
+        <mat-action-row>
+            <button mat-button color="primary" (click)="prevStep()">Back</button>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>

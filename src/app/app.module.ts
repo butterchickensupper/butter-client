@@ -23,6 +23,7 @@ import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewe
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { PhoneAccountComponent } from './core/phone-account/phone-account.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
         UserInfoComponent,
         OrderInfoComponent,
         PaymentInfoComponent,
+        PhoneAccountComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { OrderInfoComponent } from '../core/order-info/order-info.component';
@@ -14,11 +15,10 @@ import { OrderService } from '../services/order/order.service';
 export class CartComponent implements OnInit {
     @ViewChild('orderInfo')
     public orderInfo!: OrderInfoComponent;
-    public step = 0;
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
-    constructor(public fb: UntypedFormBuilder, private orderService: OrderService) {
+    constructor(public fb: UntypedFormBuilder, private orderService: OrderService, private router: Router) {
         this.orders$ = this.orderService.getMenuOrders();
     }
 
@@ -28,16 +28,8 @@ export class CartComponent implements OnInit {
         });
     }
 
-    public setStep(index: number): void {
-        this.step = index;
-    }
-
-    public nextStep(): void {
-        this.step++;
-    }
-
-    public prevStep(): void {
-        this.step--;
+    public phoneVerify(): void {
+        this.router.navigate(['/phone']);
     }
 
     public getTotal(): number | undefined {

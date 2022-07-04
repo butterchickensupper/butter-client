@@ -1,12 +1,11 @@
 <mat-accordion class="result">
-  <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+  <mat-expansion-panel expanded hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Cart
       </mat-panel-title>
       <mat-panel-description>
-        <div *ngIf="step !== 0">{{ getTotal() | currency }}</div>
-        <div *ngIf="step === 0"> </div>
+        <div> </div>
         <mat-icon>shopping_bag</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -25,41 +24,9 @@
       <span>{{ getTotal() | currency }}</span>
     </div>
     <p></p>
-    <mat-action-row>
-      <button mat-button color="primary" (click)="nextStep()">Checkout</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-description>
-        Order Info
-        <mat-icon>account_circle</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-order-info #orderInfo></app-order-info>
 
     <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()">Back</button>
-      <button mat-button color="primary" (click)="nextStep()" [disabled]="!orderInfo.selectedOption">Payment</button>
+      <button mat-button color="primary" (click)="phoneVerify()">Checkout</button>
     </mat-action-row>
   </mat-expansion-panel>
-
-  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-description>
-        Payment Info
-        <mat-icon>payment</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <app-payment-info #paymentInfo></app-payment-info>
-
-    <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()">Back</button>
-      <button mat-button color="primary" (click)="submitOrder()">Order</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-
 </mat-accordion>

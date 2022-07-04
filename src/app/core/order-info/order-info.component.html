@@ -1,7 +1,11 @@
 <ng-container [ngSwitch]="selectedOption">
-    <ng-container *ngSwitchDefault [ngTemplateOutlet]="selection"></ng-container>
-    <ng-container *ngSwitchCase="'pickup'" [ngTemplateOutlet]="pickup"></ng-container>
-    <ng-container *ngSwitchCase="'delivery'" [ngTemplateOutlet]="delivery"></ng-container>
+    <mat-accordion class="result">
+        <mat-expansion-panel expanded hideToggle>
+            <ng-container *ngSwitchDefault [ngTemplateOutlet]="selection"></ng-container>
+            <ng-container *ngSwitchCase="'pickup'" [ngTemplateOutlet]="pickup"></ng-container>
+            <ng-container *ngSwitchCase="'delivery'" [ngTemplateOutlet]="delivery"></ng-container>
+        </mat-expansion-panel>
+    </mat-accordion>
 </ng-container>
 
 <ng-template #selection>
