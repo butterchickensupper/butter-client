@@ -42,7 +42,7 @@
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Back</button>
-      <button mat-button color="primary" (click)="nextStep()">Payment</button>
+      <button mat-button color="primary" (click)="nextStep()" [disabled]="!orderInfo.selectedOption">Payment</button>
     </mat-action-row>
   </mat-expansion-panel>
 
