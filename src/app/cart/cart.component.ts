@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuOrder, Order } from '../models/order';
 
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { OrderService } from '../services/order/order.service';
 import { UserInfoComponent } from '../core/user-info/user-info.component';
@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
-    constructor(public fb: FormBuilder, private orderService: OrderService) {
+    constructor(public fb: UntypedFormBuilder, private orderService: OrderService) {
         this.orders$ = this.orderService.getMenuOrders();
     }
 

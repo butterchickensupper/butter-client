@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-user-info',
@@ -23,5 +23,5 @@ export class UserInfoComponent {
         return this.form.get('address')?.value;
     }
 
-    constructor(public fb: FormBuilder) {}
+    constructor(public fb: UntypedFormBuilder) {}
 }
