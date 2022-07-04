@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-billing-info',
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillingInfoComponent implements OnInit {
     public form = this.fb.group({
-        name: ['', []],
-        phone: ['', []],
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        address: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        zip: ['', [Validators.required]],
     });
 
     constructor(public fb: UntypedFormBuilder) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log('init');
+    }
 }

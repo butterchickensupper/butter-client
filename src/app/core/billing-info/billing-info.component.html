@@ -1,13 +1,13 @@
 <form [formGroup]="form">
     <mat-form-field appearance="outline">
         <mat-label>First Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name" />
-        <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
+        <input matInput placeholder="First Name" formControlName="firstName" />
+        <mat-error *ngIf="form.get('firstName')?.invalid">First Name is required.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Last Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name" />
-        <mat-error *ngIf="form.get('name')?.invalid">Name is required.</mat-error>
+        <input matInput placeholder="Last Name" formControlName="lastName" />
+        <mat-error *ngIf="form.get('lastName')?.invalid">Last Name is required.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
