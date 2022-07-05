@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { AboutComponent } from './core/about/about.component';
+import { AuthComponent } from './core/auth/auth.component';
 import { MaterialModule } from './core/material/material.module';
 import { OrderInfoComponent } from './core/order-info/order-info.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
@@ -53,6 +54,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         OrderInfoComponent,
         PaymentInfoComponent,
         PhoneAccountComponent,
+        AuthComponent,
     ],
     imports: [
         BrowserModule,
@@ -73,6 +75,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     ],
     bootstrap: [AppComponent],
-    providers: [CookieService, { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost:9099'] : undefined }],
+    providers: [
+        CookieService,
+        { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost:9099'] : undefined },
+        {
+            provide: SETTINGS,
+            useValue: { appVerificationDisabledForTesting: !environment.production },
+        },
+    ],
 })
 export class AppModule {}
