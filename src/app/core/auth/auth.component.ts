@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from 'firebaseui-angular';
@@ -9,34 +9,53 @@ import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from '
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements AfterViewInit {
-    private appVerifier?: firebase.auth.RecaptchaVerifier;
+    private recaptchaVerifier?: firebase.auth.RecaptchaVerifier;
+
+    public showCodeInput = false;
+    @ViewChild('recaptcha-container')
+    public recaptchaWrapperRef?: ElementRef;
 
     constructor(private afAuth: AngularFireAuth) {
         this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
     }
 
     public ngAfterViewInit(): void {
-        this.appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+        this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            size: 'invisible',
+            callback: this.phoneLogin,
+        });
     }
 
     public phoneLogin(phoneNumber: any): void {
-        if (!this.appVerifier) {
+        if (!this.recaptchaVerifier) {
             console.log('error');
             return;
         }
         this.afAuth
-            .signInWithPhoneNumber(phoneNumber, this.appVerifier)
+            .signInWithPhoneNumber(phoneNumber, this.recaptchaVerifier)
             .then((confirmationResult) => {
-                // SMS sent. Prompt user to type the code from the message
-                // then sign the user in with confirmationResult.confirm(code).
-                this.appVerifier?.clear();
+                this.showCodeInput = true;
                 console.log(confirmationResult);
                 const verificationCode = window.prompt('Please enter the verification ' + 'code that was sent to your mobile device.');
                 if (!verificationCode) return;
-                return confirmationResult.confirm(verificationCode);
+                return confirmationResult.confirm(verificationCode).then((res) => {
+                    if (res) {
+                        if (res && this.recaptchaWrapperRef && this.recaptchaVerifier) {
+                            this.recaptchaVerifier.clear();
+                            this.recaptchaWrapperRef.nativeElement.innerHTML = `<div id="recaptcha-container"></div>`;
+
+                            // Initialize new reCaptcha verifier
+                            this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                                size: 'invisible',
+                                callback: this.phoneLogin,
+                            });
+                            this.showCodeInput = false;
+                        }
+                    }
+                });
             })
             .catch((error) => {
-                this.appVerifier?.clear();
+                this.recaptchaVerifier?.clear();
                 console.log('SMS not sent', error);
             });
     }

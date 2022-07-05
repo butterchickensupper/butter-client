@@ -1,13 +1,12 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-
-import { LoadingService } from '../services/loading/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Menu } from '../models/menu';
-import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 import { MenuOrder } from '../models/order';
+import { LoadingService } from '../services/loading/loading.service';
 import { MenuService } from '../services/menu/menu.service';
 import { OrderService } from '../services/order/order.service';
-import { delay } from 'rxjs';
+import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 
 @Component({
     selector: 'app-menu',

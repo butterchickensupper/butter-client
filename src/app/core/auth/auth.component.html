@@ -1,3 +1,14 @@
 <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"
     (uiShown)="uiShownCallback()"></firebase-ui>
 <div id="recaptcha-container"></div>
+<div id="code-container" *ngIf="showCodeInput">
+    <form>
+        <p>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Verification Code</mat-label>
+                <input matInput #postalCode maxlength="6" placeholder="Ex. 123456" value="123456">
+                <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+            </mat-form-field>
+        </p>
+    </form>
+</div>
