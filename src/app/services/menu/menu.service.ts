@@ -11,7 +11,10 @@ import { Menu } from '../../models/menu';
 export class MenuService {
     private menus?: Menu[] = undefined;
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {
+        const menu = localStorage.getItem('menu');
+        if (menu) this.menus = JSON.parse(menu);
+    }
 
     /**
      * Get all menus
@@ -25,6 +28,7 @@ export class MenuService {
                     a.close = new Date(a.close);
                 });
                 this.menus = m;
+                localStorage.setItem('menu', JSON.stringify(m));
                 return m;
             })
         );
