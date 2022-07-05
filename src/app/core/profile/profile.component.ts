@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from 'firebaseui-angular';
 
 import { UserInfoComponent } from '../user-info/user-info.component';
 
@@ -13,7 +14,15 @@ export class ProfileComponent {
 
     constructor() {}
 
-    public save(): void {}
+    public successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
+        console.log('signInSuccessData', signInSuccessData);
+    }
 
-    public cancel(): void {}
+    public errorCallback(errorData: FirebaseUISignInFailure) {
+        console.log('errorData', errorData);
+    }
+
+    public uiShownCallback() {
+        console.log('uiShownCallback');
+    }
 }

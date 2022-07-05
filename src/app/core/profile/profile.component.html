@@ -1,14 +1,6 @@
 <mat-card class="result">
-  <mat-card-header>
-    <mat-card-title>Profile</mat-card-title>
-  </mat-card-header>
   <mat-card-content>
-    <app-user-info #userInfo></app-user-info>
+    <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"
+      (uiShown)="uiShownCallback()"></firebase-ui>
   </mat-card-content>
-  <mat-card-actions>
-    <div class="example-button-row">
-      <button mat-raised-button color="primary" (click)="save()" class="button-space">Save</button>
-      <button mat-raised-button color="primary" (click)="cancel()">Cancel</button>
-    </div>
-  </mat-card-actions>
 </mat-card>
