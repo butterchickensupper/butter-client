@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
         setTimeout(() => this.loadingService.show(), 0);
         this.menuService.getMenu('default').subscribe((res) => {
             this.menu = res;
-            this.loadingService.hide();
+            setTimeout(() => this.loadingService.hide(), 0);
         });
     }
 
