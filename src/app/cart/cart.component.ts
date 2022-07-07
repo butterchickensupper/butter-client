@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { MenuOrder, Order } from '../models/order';
 import { OrderService } from '../services/order/order.service';
-import { OrderInfoComponent } from './order-info/order-info.component';
+import { BillingInfoComponent } from './billing-info/billing-info.component';
 
 @Component({
     selector: 'app-cart',
@@ -14,7 +14,7 @@ import { OrderInfoComponent } from './order-info/order-info.component';
 })
 export class CartComponent implements OnInit {
     @ViewChild('orderInfo')
-    public orderInfo!: OrderInfoComponent;
+    public orderInfo!: BillingInfoComponent;
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 

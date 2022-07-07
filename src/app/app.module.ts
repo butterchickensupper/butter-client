@@ -14,8 +14,8 @@ import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
+import { BillingInfoComponent } from './cart/billing-info/billing-info.component';
 import { CartComponent } from './cart/cart.component';
-import { OrderInfoComponent } from './cart/order-info/order-info.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { LoginComponent } from './core/login/login.component';
 import { MaterialModule } from './core/material/material.module';
@@ -49,7 +49,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         MenuItemViewerComponent,
         OrderHistoryComponent,
         OrderDashboardComponent,
-        OrderInfoComponent,
+        BillingInfoComponent,
         PaymentInfoComponent,
         AccountSelectorComponent,
         LoginComponent,
