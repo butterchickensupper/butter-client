@@ -4,11 +4,11 @@ import firebase from 'firebase/compat/app';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from 'firebaseui-angular';
 
 @Component({
-    selector: 'app-auth',
-    templateUrl: './auth.component.html',
-    styleUrls: ['./auth.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
 })
-export class AuthComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit {
     private recaptchaVerifier?: firebase.auth.RecaptchaVerifier;
 
     public showCodeInput = false;

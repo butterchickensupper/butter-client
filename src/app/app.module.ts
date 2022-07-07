@@ -14,7 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-import { AuthComponent } from './core/auth/auth.component';
+import { LoginComponent } from './core/login/login.component';
 import { MaterialModule } from './core/material/material.module';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
@@ -52,7 +52,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         OrderInfoComponent,
         PaymentInfoComponent,
         PhoneAccountComponent,
-        AuthComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
