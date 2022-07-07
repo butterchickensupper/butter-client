@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,7 +13,6 @@ import { BillingInfoComponent } from './billing-info/billing-info.component';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-    @ViewChild('orderInfo')
     public orderInfo!: BillingInfoComponent;
     public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];

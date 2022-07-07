@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -30,14 +31,18 @@ export class BillingInfoComponent implements OnInit {
         });
     }
 
-    constructor(public fb: UntypedFormBuilder) {}
+    constructor(public fb: UntypedFormBuilder, private router: Router) {}
 
     public showDelivery() {
         this.selectedOption = 'delivery';
     }
 
-    public showPickup() {
-        this.selectedOption = 'pickup';
+    public back(): void {
+        this.selectedOption = undefined;
+    }
+
+    public next(): void {
+        this.router.navigate(['order-info']);
     }
 
     ngOnInit(): void {
