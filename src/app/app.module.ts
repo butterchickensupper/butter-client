@@ -13,7 +13,10 @@ import { environment } from '../environments/environment';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderInfoComponent } from './cart/order-info/order-info.component';
+import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { LoginComponent } from './core/login/login.component';
 import { MaterialModule } from './core/material/material.module';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
@@ -24,9 +27,6 @@ import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewe
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
-import { OrderInfoComponent } from './order-info/order-info.component';
-import { PaymentInfoComponent } from './payment-info/payment-info.component';
-import { PhoneAccountComponent } from './phone-account/phone-account.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -51,7 +51,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         OrderDashboardComponent,
         OrderInfoComponent,
         PaymentInfoComponent,
-        PhoneAccountComponent,
+        AccountSelectorComponent,
         LoginComponent,
     ],
     imports: [

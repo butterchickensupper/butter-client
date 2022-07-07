@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { MenuOrder, Order } from '../models/order';
-import { OrderInfoComponent } from '../order-info/order-info.component';
 import { OrderService } from '../services/order/order.service';
+import { OrderInfoComponent } from './order-info/order-info.component';
 
 @Component({
     selector: 'app-cart',
@@ -28,8 +28,8 @@ export class CartComponent implements OnInit {
         });
     }
 
-    public phoneVerify(): void {
-        this.router.navigate(['/phone']);
+    public goToAccount(): void {
+        this.router.navigate(['/account']);
     }
 
     public getTotal(): number | undefined {

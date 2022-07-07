@@ -3,11 +3,11 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-phone-account',
-    templateUrl: './phone-account.component.html',
-    styleUrls: ['./phone-account.component.scss'],
+    selector: 'app-account-selector',
+    templateUrl: './account-selector.component.html',
+    styleUrls: ['./account-selector.component.scss'],
 })
-export class PhoneAccountComponent implements OnInit {
+export class AccountSelectorComponent implements OnInit {
     public form = this.fb.group({
         phoneNumber: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
     });

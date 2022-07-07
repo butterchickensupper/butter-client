@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialModule } from '../core/material/material.module';
-import { OrderInfoComponent } from './order-info.component';
+import { MaterialModule } from '../../core/material/material.module';
+import { PaymentInfoComponent } from './payment-info.component';
 
-describe('OrderInfoComponent', () => {
-    let component: OrderInfoComponent;
-    let fixture: ComponentFixture<OrderInfoComponent>;
+describe('PaymentInfoComponent', () => {
+    let component: PaymentInfoComponent;
+    let fixture: ComponentFixture<PaymentInfoComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [MaterialModule],
-            declarations: [OrderInfoComponent],
+            declarations: [PaymentInfoComponent],
         }).compileComponents();
 
-        fixture = TestBed.createComponent(OrderInfoComponent);
+        fixture = TestBed.createComponent(PaymentInfoComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
