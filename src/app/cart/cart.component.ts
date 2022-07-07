@@ -3,8 +3,8 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { OrderInfoComponent } from '../core/order-info/order-info.component';
 import { MenuOrder, Order } from '../models/order';
+import { OrderInfoComponent } from '../order-info/order-info.component';
 import { OrderService } from '../services/order/order.service';
 
 @Component({

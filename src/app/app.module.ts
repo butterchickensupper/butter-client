@@ -10,24 +10,23 @@ import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../environments/environment';
+import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
-import { AboutComponent } from './core/about/about.component';
 import { AuthComponent } from './core/auth/auth.component';
 import { MaterialModule } from './core/material/material.module';
-import { OrderInfoComponent } from './core/order-info/order-info.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { PaymentInfoComponent } from './core/payment-info/payment-info.component';
-import { PhoneAccountComponent } from './core/phone-account/phone-account.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
-import { UserInfoComponent } from './core/user-info/user-info.component';
 import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewer.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderInfoComponent } from './order-info/order-info.component';
+import { PaymentInfoComponent } from './payment-info/payment-info.component';
+import { PhoneAccountComponent } from './phone-account/phone-account.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -50,7 +49,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         MenuItemViewerComponent,
         OrderHistoryComponent,
         OrderDashboardComponent,
-        UserInfoComponent,
         OrderInfoComponent,
         PaymentInfoComponent,
         PhoneAccountComponent,

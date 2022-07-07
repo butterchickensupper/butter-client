@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '../core/material/material.module';
 import { OrderInfoComponent } from './order-info.component';
 
 describe('OrderInfoComponent', () => {
