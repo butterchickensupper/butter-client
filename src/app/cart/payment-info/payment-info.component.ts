@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user';
     templateUrl: './payment-info.component.html',
     styleUrls: ['./payment-info.component.scss'],
 })
-export class PaymentInfoComponent implements OnInit {
+export class PaymentInfoComponent {
     public form = this.fb.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
@@ -31,10 +31,6 @@ export class PaymentInfoComponent implements OnInit {
     }
 
     constructor(public fb: UntypedFormBuilder, private router: Router) {}
-
-    ngOnInit(): void {
-        console.log('init');
-    }
 
     public back(): void {
         this.router.navigate(['billing']);
