@@ -1,0 +1,18 @@
+<mat-accordion class="result">
+    <mat-expansion-panel expanded hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-description>
+                Order Type
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="container">
+            <mat-card class="button-card" (click)="selectDelivery()">
+                <mat-card-title>Delivery</mat-card-title>
+            </mat-card>
+            <mat-card class="button-card" (click)="selectPickup()">
+                <mat-card-title>Pickup</mat-card-title>
+            </mat-card>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

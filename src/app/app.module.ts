@@ -27,6 +27,7 @@ import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewe
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderTypeComponent } from './cart/order-type/order-type.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -53,6 +54,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         PaymentInfoComponent,
         AccountSelectorComponent,
         LoginComponent,
+        OrderTypeComponent,
     ],
     imports: [
         BrowserModule,

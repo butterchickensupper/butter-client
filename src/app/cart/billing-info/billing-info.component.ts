@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user';
     templateUrl: './billing-info.component.html',
     styleUrls: ['./billing-info.component.scss'],
 })
-export class BillingInfoComponent implements OnInit {
+export class BillingInfoComponent {
     public selectedOption: string | undefined = undefined;
     public form = this.fb.group({
         firstName: ['', [Validators.required]],
@@ -33,19 +33,11 @@ export class BillingInfoComponent implements OnInit {
 
     constructor(public fb: UntypedFormBuilder, private router: Router) {}
 
-    public showDelivery() {
-        this.selectedOption = 'delivery';
-    }
-
     public back(): void {
-        this.selectedOption = undefined;
+        this.router.navigate(['account']);
     }
 
-    public next(): void {
-        this.router.navigate(['order-info']);
-    }
-
-    ngOnInit(): void {
-        console.log('init');
+    public payment(): void {
+        this.router.navigate(['payment']);
     }
 }
