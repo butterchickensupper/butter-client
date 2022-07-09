@@ -33,8 +33,7 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
 
     public showPhoneNumber = false;
     public readonly user: Observable<User | null> = EMPTY;
-    public showLoginButton = false;
-    public showLogoutButton = false;
+    public loggedIn = false;
     public template = LoginTemplate;
     public activeTemplate = LoginTemplate.Login;
     @ViewChild('recaptcha')
@@ -53,8 +52,8 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
                     map((u) => !!u)
                 )
                 .subscribe((isLoggedIn) => {
-                    this.showLoginButton = !isLoggedIn;
-                    this.showLogoutButton = isLoggedIn;
+                    this.loggedIn = isLoggedIn;
+                    if (this.loggedIn) this.activeTemplate = LoginTemplate.Landing;
                 });
         }
     }
