@@ -1,5 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,15 +31,6 @@ import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AuthService } from './services/auth/auth.service';
-
-// const firebaseUiAuthConfig: firebaseui.auth.Config = {
-//     signInFlow: 'popup',
-//     signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID, firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID],
-//     tosUrl: 'http://www.bcs.com',
-//     privacyPolicyUrl: 'http://www.google.com',
-//     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-// };
-// firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
     declarations: [
@@ -72,6 +65,8 @@ import { AuthService } from './services/auth/auth.service';
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
     ],
     bootstrap: [AppComponent],
     providers: [
