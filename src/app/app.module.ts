@@ -10,7 +10,6 @@ import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../environments/environment';
-import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
@@ -18,6 +17,7 @@ import { BillingInfoComponent } from './cart/billing-info/billing-info.component
 import { CartComponent } from './cart/cart.component';
 import { OrderTypeComponent } from './cart/order-type/order-type.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
+import { AboutComponent } from './core/about/about.component';
 import { LoginComponent } from './core/login/login.component';
 import { MaterialModule } from './core/material/material.module';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent } from './about/about.component';
 import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
 import { BillingInfoComponent } from './cart/billing-info/billing-info.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderTypeComponent } from './cart/order-type/order-type.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
+import { AboutComponent } from './core/about/about.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
