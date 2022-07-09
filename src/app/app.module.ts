@@ -1,12 +1,10 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule, SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../environments/environment';
@@ -32,13 +30,14 @@ import { OrderDashboardComponent } from './order-dashboard/order-dashboard.compo
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AuthService } from './services/auth/auth.service';
 
-const firebaseUiAuthConfig: firebaseui.auth.Config = {
-    signInFlow: 'popup',
-    signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID, firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID],
-    tosUrl: 'http://www.bcs.com',
-    privacyPolicyUrl: 'http://www.google.com',
-    credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-};
+// const firebaseUiAuthConfig: firebaseui.auth.Config = {
+//     signInFlow: 'popup',
+//     signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID, firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID],
+//     tosUrl: 'http://www.bcs.com',
+//     privacyPolicyUrl: 'http://www.google.com',
+//     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+// };
+// firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
     declarations: [
@@ -73,9 +72,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig, { automaticDataCollectionEnabled: true }),
-        AngularFireAuthModule,
-        FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     ],
     bootstrap: [AppComponent],
     providers: [

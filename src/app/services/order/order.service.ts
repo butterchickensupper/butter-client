@@ -14,11 +14,7 @@ export class OrderService {
     constructor(private httpClient: HttpClient, private cartService: CartService) {}
 
     public submitOrder(order: Order): Observable<any> {
-        return this.httpClient.post(environment.apiGatewayUrl + 'menu', order).pipe(
-            map(() => {
-                this.cartService.clear();
-            })
-        );
+        return this.httpClient.post(environment.apiGatewayUrl + 'order', order);
     }
 
     public getHistory(request: OrderHistoryRequest): Observable<Order[]> {
