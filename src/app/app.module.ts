@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule, SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
@@ -24,10 +24,13 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { ProfileComponent } from './core/profile/profile.component';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { ErrorInterceptor } from './http/interceptors/error-interceptor';
+import { JwtInterceptor } from './http/interceptors/jwt-interceptor';
 import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewer.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { AuthService } from './services/auth/auth.service';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -82,6 +85,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
             provide: SETTINGS,
             useValue: { appVerificationDisabledForTesting: !environment.production },
         },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true, deps: [AuthService] },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
 })
 export class AppModule {}
