@@ -31,7 +31,6 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
     private readonly userDisposable: Subscription | undefined;
     public confirmationResult?: ConfirmationResult;
 
-    public showCodeInput = false;
     public showPhoneNumber = false;
     public readonly user: Observable<User | null> = EMPTY;
     public showLoginButton = false;
@@ -107,7 +106,6 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         //TODO: update with phone number
         this.confirmationResult = await signInWithPhoneNumber(this.auth, '+16665555555', this.recaptchaVerifier);
 
-        this.showCodeInput = true;
         // TODO: add to component
         const verificationCode = window.prompt('Please enter the verification ' + 'code that was sent to your mobile device.');
         if (!verificationCode) return;
@@ -115,18 +113,21 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         return this.confirmationResult.confirm('123456').then((res) => {
             if (res) {
                 if (res) {
-                    this.reset();
+                    this.confirmationResult = undefined;
+                    this.activeTemplate = LoginTemplate.Landing;
                 } else console.log('info', res);
             }
         });
     }
 
     async logout() {
-        return await signOut(this.auth);
+        signOut(this.auth).then(() => {
+            this.reset();
+        });
     }
 
     public reset(): void {
-        this.showCodeInput = false;
+        this.confirmationResult = undefined;
         this.activeTemplate = LoginTemplate.Login;
     }
 }
