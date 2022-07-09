@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { SETTINGS as AUTH_SETTINGS, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +32,7 @@ import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AuthService } from './services/auth/auth.service';
+import { AutofocusDirective } from './utils/auto-focus.directive';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { AuthService } from './services/auth/auth.service';
         LoginComponent,
         OrderTypeComponent,
         TelInputComponent,
+        AutofocusDirective,
     ],
     imports: [
         BrowserModule,
@@ -67,7 +69,7 @@ import { AuthService } from './services/auth/auth.service';
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirebaseApp(() => initializeApp(environment.firebase, { automaticDataCollectionEnabled: false })),
         provideAuth(() => getAuth()),
     ],
     bootstrap: [AppComponent],
@@ -75,8 +77,8 @@ import { AuthService } from './services/auth/auth.service';
         CookieService,
         { provide: USE_AUTH_EMULATOR, useValue: !environment.production ? ['http://localhost:9099'] : undefined },
         {
-            provide: SETTINGS,
-            useValue: { appVerificationDisabledForTesting: !environment.production },
+            provide: AUTH_SETTINGS,
+            useValue: { appVerificationDisabledForTesting: true },
         },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true, deps: [AuthService] },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

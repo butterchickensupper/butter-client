@@ -25,20 +25,23 @@
 </ng-template>
 
 <ng-template #showPhone>
-    <div id="phone-container">
+    <div id="phone-container" *ngIf="!confirmationResult">
         <form [formGroup]="form">
             <p>
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Phone number</mat-label>
                     <app-tel-input formControlName="tel" required></app-tel-input>
                     <mat-icon matSuffix>phone</mat-icon>
-                    <mat-hint align="end">Include area code (555) 555-5555</mat-hint>
+                    <mat-hint align="end">Include area code 555-555-5555</mat-hint>
                 </mat-form-field>
             </p>
-            <p><button mat-raised-button color="primary" (click)="phoneLogin()">Verify</button></p>
+            <p class="button-container">
+                <button mat-raised-button color="primary" (click)="reset()">Back</button>
+                <button mat-raised-button color="primary" (click)="phoneLogin()">Verify</button>
+            </p>
         </form>
     </div>
-    <div id="code-container" *ngIf="showCodeInput">
+    <div id="code-container" *ngIf="confirmationResult">
         <form>
             <p>
                 <mat-form-field class="example-full-width" appearance="fill">

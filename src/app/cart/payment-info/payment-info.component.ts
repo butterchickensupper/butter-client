@@ -45,7 +45,6 @@ export class PaymentInfoComponent {
         var o = new Order({
             billingInfo: state.billingInfo,
             items: state.items,
-            date: new Date(),
         });
         this.orderService.submitOrder(o).subscribe({
             next: () => {

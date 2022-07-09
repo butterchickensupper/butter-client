@@ -13,8 +13,8 @@ import { CartService } from '../cart/cart.service';
 export class OrderService {
     constructor(private httpClient: HttpClient, private cartService: CartService) {}
 
-    public submitOrder(order: Order): Observable<any> {
-        return this.httpClient.post(environment.apiGatewayUrl + 'order', order);
+    public submitOrder(order: Order): Observable<Order> {
+        return this.httpClient.post<Order>(environment.apiGatewayUrl + 'order', order);
     }
 
     public getHistory(request: OrderHistoryRequest): Observable<Order[]> {
@@ -22,7 +22,8 @@ export class OrderService {
         return this.httpClient.get<Order[]>('/assets/orders.json').pipe(
             map((a) => {
                 a.forEach((b) => {
-                    b.date = new Date(b.date);
+                    if (b.createdAt) b.createdAt = new Date(b.createdAt);
+                    if (b.updatedAt) b.updatedAt = new Date(b.updatedAt);
                 });
                 return a;
             })

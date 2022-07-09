@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, Optional, ViewChild } 
 import {
     Auth,
     authState,
+    ConfirmationResult,
     RecaptchaVerifier,
     signInAnonymously,
     signInWithPhoneNumber,
@@ -28,6 +29,7 @@ export enum LoginTemplate {
 export class LoginComponent implements OnDestroy, AfterViewInit {
     private recaptchaVerifier?: RecaptchaVerifier;
     private readonly userDisposable: Subscription | undefined;
+    public confirmationResult?: ConfirmationResult;
 
     public showCodeInput = false;
     public showPhoneNumber = false;
@@ -101,40 +103,30 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
             return;
         }
         const number = this.form.get('tel')?.value;
-        console.log('number', number);
-        const response = await signInWithPhoneNumber(this.auth, '6665555555', this.recaptchaVerifier);
+        const phone = `+1${number.area}${number.exchange}${number.subscriber}`;
+        //TODO: update with phone number
+        this.confirmationResult = await signInWithPhoneNumber(this.auth, '+16665555555', this.recaptchaVerifier);
 
         this.showCodeInput = true;
-        console.log(response);
+        // TODO: add to component
         const verificationCode = window.prompt('Please enter the verification ' + 'code that was sent to your mobile device.');
         if (!verificationCode) return;
-        return response.confirm(verificationCode).then((res) => {
+        //TODO: update with verification code
+        return this.confirmationResult.confirm('123456').then((res) => {
             if (res) {
-                if (res) this.activeTemplate = LoginTemplate.Landing;
-                if (res && this.recaptchaWrapperRef && this.recaptchaVerifier) {
-                    this.recaptchaVerifier.clear();
-                    this.recaptchaWrapperRef.nativeElement.innerHTML = `<div id="recaptcha-container"></div>`;
-                    // Initialize new reCaptcha verifier
-                    this.recaptchaVerifier = new RecaptchaVerifier(
-                        this.recaptchaWrapperRef.nativeElement,
-                        {
-                            size: 'invisible',
-                            callback: this.phoneLogin,
-                            expiredCallback: () => {
-                                // reset recaptcha
-                                console.log('reset');
-                            },
-                        },
-                        this.auth
-                    );
-                    this.recaptchaVerifier.render();
-                    this.showCodeInput = false;
-                }
+                if (res) {
+                    this.reset();
+                } else console.log('info', res);
             }
         });
     }
 
     async logout() {
         return await signOut(this.auth);
+    }
+
+    public reset(): void {
+        this.showCodeInput = false;
+        this.activeTemplate = LoginTemplate.Login;
     }
 }

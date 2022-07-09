@@ -18,14 +18,13 @@ export class Order {
     public id?: string;
     public items: MenuOrder[] = [];
     public billingInfo!: BillingInfo;
-    public date: Date;
-    public total?: number; // this is used for the UI
+    public createdAt?: Date;
+    public updatedAt?: Date;
+    public total?: number;
 
-    constructor(args: { billingInfo: BillingInfo; items: MenuOrder[]; date: Date; id?: string }) {
+    constructor(args: { billingInfo: BillingInfo; items: MenuOrder[] }) {
         this.billingInfo = args.billingInfo;
         this.items = args.items;
-        this.date = args.date;
-        this.id = args.id;
     }
 }
 
