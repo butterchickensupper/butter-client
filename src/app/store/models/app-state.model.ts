@@ -8,7 +8,7 @@ export interface AppState {
     items: MenuOrder[];
     billingInfo?: BillingInfo;
     paymentInfo?: PaymentInfo;
-    date: Date;
+    date?: Date;
     total?: number;
     orderType?: OrderType;
 }

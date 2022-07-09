@@ -1,32 +1,22 @@
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
-import { MenuOrder, Order } from 'src/app/models/order';
-
-import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { Order } from 'src/app/models/order';
 import { OrderHistoryRequest } from 'src/app/models/order-history-request';
 import { environment } from 'src/environments/environment';
+
+import { CartService } from '../cart/cart.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OrderService {
-    private cart: MenuOrder[] = [];
-    public totalItems$ = new BehaviorSubject<number>(0);
-    public total$ = new BehaviorSubject<number>(0);
-
-    constructor(private httpClient: HttpClient, private cookieService: CookieService) {
-        var cart = this.cookieService.get('cart');
-        if (cart) {
-            this.cart = JSON.parse(cart) as MenuOrder[];
-        }
-    }
+    constructor(private httpClient: HttpClient, private cartService: CartService) {}
 
     public submitOrder(order: Order): Observable<any> {
-        // submit data to server
         return this.httpClient.post(environment.apiGatewayUrl + 'menu', order).pipe(
             map(() => {
-                this.cart = [];
+                this.cartService.clear();
             })
         );
     }
@@ -41,43 +31,5 @@ export class OrderService {
                 return a;
             })
         );
-    }
-
-    public addMenuOrder(order: MenuOrder, fromMenu = false): Observable<string> {
-        const i = this.cart.findIndex((x) => x.id === order.id);
-        if (i !== -1) {
-            if (fromMenu) this.cart[i].quantity += order.quantity;
-            else this.cart[i].quantity = order.quantity;
-        } else {
-            this.cart.push(order);
-        }
-        this.updateTotals();
-        return of('added');
-    }
-
-    public removeMenuOrder(id: string): Observable<boolean> {
-        const i = this.cart.findIndex((x) => x.id === id);
-        if (i === -1) return of(false);
-        this.cart.splice(i, 1);
-        this.updateTotals();
-        return of(true);
-    }
-
-    public getMenuOrders(): Observable<MenuOrder[]> {
-        return of(this.cart);
-    }
-
-    public clearMenuOrders(): Observable<void> {
-        this.cart = [];
-        this.updateTotals();
-        return of();
-    }
-
-    private updateTotals(): void {
-        let t = 0;
-        this.cart.forEach((i) => {
-            t += i.quantity;
-        });
-        this.totalItems$.next(t);
     }
 }

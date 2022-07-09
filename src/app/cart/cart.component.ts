@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { MenuOrder } from '../models/order';
-import { OrderService } from '../services/order/order.service';
+import { CartService } from '../services/cart/cart.service';
 import { BillingInfoComponent } from './billing-info/billing-info.component';
 
 @Component({
@@ -14,17 +13,12 @@ import { BillingInfoComponent } from './billing-info/billing-info.component';
 })
 export class CartComponent implements OnInit {
     public orderInfo!: BillingInfoComponent;
-    public orders$: Observable<MenuOrder[]>;
     public orders: MenuOrder[] = [];
 
-    constructor(public fb: UntypedFormBuilder, private orderService: OrderService, private router: Router) {
-        this.orders$ = this.orderService.getMenuOrders();
-    }
+    constructor(public fb: UntypedFormBuilder, private cartService: CartService, private router: Router) {}
 
     ngOnInit(): void {
-        this.orders$.subscribe((a) => {
-            this.orders = a;
-        });
+        this.orders = this.cartService.menuOrders;
     }
 
     public goToAccount(): void {
@@ -41,10 +35,10 @@ export class CartComponent implements OnInit {
     }
 
     public onEdit(order: MenuOrder): void {
-        this.orderService.addMenuOrder(order);
+        this.cartService.addOrder(order);
     }
 
     public onDelete(itemId: any): void {
-        this.orderService.removeMenuOrder(itemId);
+        this.cartService.removeOrder(itemId);
     }
 }

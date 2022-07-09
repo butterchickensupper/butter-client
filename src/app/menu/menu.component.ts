@@ -3,9 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Menu } from '../models/menu';
 import { MenuOrder } from '../models/order';
+import { CartService } from '../services/cart/cart.service';
 import { LoadingService } from '../services/loading/loading.service';
 import { MenuService } from '../services/menu/menu.service';
-import { OrderService } from '../services/order/order.service';
 import { MenuItemViewerComponent } from './menu-item-viewer/menu-item-viewer.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
     public menu?: Menu;
 
     constructor(
-        private orderService: OrderService,
+        private cartService: CartService,
         private menuService: MenuService,
         private snackBar: MatSnackBar,
         private loadingService: LoadingService
@@ -34,14 +34,13 @@ export class MenuComponent implements OnInit {
     }
 
     public onAdd(order: MenuOrder): void {
-        this.orderService.addMenuOrder(order, true).subscribe(() => {
-            this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
-        });
+        this.cartService.addOrder(order, true);
+        this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
     }
 
     public onDelete(id: string): void {
-        this.orderService.removeMenuOrder(id).subscribe(() => {
+        if (this.cartService.removeOrder(id)) {
             this.snackBar.open('Item Added!', 'Dismiss', { duration: 3 * 1000 });
-        });
+        }
     }
 }
