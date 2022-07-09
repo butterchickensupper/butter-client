@@ -1,5 +1,5 @@
-export class User {
-    public id?: string;
+export class BillingInfo {
+    public addressId?: string;
     public firstName!: string;
     public lastName!: string;
     public address!: string;

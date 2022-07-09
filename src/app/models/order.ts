@@ -1,5 +1,5 @@
+import { BillingInfo } from './billing-info';
 import { MenuItem } from './menu';
-import { User } from './user';
 
 export class MenuOrder {
     public id?: string;
@@ -16,12 +16,12 @@ export class MenuOrder {
 export class Order {
     public id?: string;
     public items: MenuOrder[] = [];
-    public user!: User;
+    public billingInfo!: BillingInfo;
     public date: Date;
     public total?: number; // TODO: needs to be set on orderSubmit
 
-    constructor(args: { user: User; items: MenuOrder[]; date: Date; total?: number; id?: string }) {
-        this.user = args.user;
+    constructor(args: { billingInfo: BillingInfo; items: MenuOrder[]; date: Date; total?: number; id?: string }) {
+        this.billingInfo = args.billingInfo;
         this.items = args.items;
         this.date = args.date;
         this.total = args.total;

@@ -1,15 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from 'src/app/models/user';
 
 import * as OrderActions from '../actions/order.action';
-import { State } from '../models/state.model';
+import { AppState } from '../models/app-state.model';
 
-export const initialState: State = {
-    id: 'string',
+export const initialState: AppState = {
     items: [],
-    user: new User({ firstName: 'John', lastName: 'Smith', address: '123 Main', city: '', state: '', zip: '' }),
     date: new Date(),
-    total: 0,
 };
 
 export const orderReducer = createReducer(
@@ -18,9 +14,13 @@ export const orderReducer = createReducer(
     on(OrderActions.setOrder, (state, { order }) => ({
         id: order.id,
         items: order.items,
-        user: order.user,
+        billingInfo: order.billingInfo,
         date: order.date,
         total: order.total,
+        orderType: order.orderType,
     })),
-    on(OrderActions.clearOrder, (state) => initialState)
+    on(OrderActions.clearOrder, () => initialState),
+    on(OrderActions.setBillingInfo, (state, { billingInfo }) => ({ ...state, billingInfo: billingInfo })),
+    on(OrderActions.setPaymentInfo, (state, { paymentInfo }) => ({ ...state, paymentInfo: paymentInfo })),
+    on(OrderActions.setOrderType, (state, { orderType }) => ({ ...state, orderType: orderType }))
 );

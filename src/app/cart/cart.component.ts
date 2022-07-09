@@ -3,7 +3,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { MenuOrder, Order } from '../models/order';
+import { MenuOrder } from '../models/order';
 import { OrderService } from '../services/order/order.service';
 import { BillingInfoComponent } from './billing-info/billing-info.component';
 
@@ -38,39 +38,6 @@ export class CartComponent implements OnInit {
             total += i.item.price * i.quantity;
         });
         return total;
-    }
-
-    public submitOrder(): void {
-        if (!this.orders) {
-            console.log('orders are null');
-            return;
-        }
-        const user = this.orderInfo.user;
-        if (!user) {
-            console.log('user is null');
-            return;
-        }
-
-        var o = new Order({
-            user: user,
-            items: this.orders,
-            date: new Date(),
-        });
-        this.orderService.submitOrder(o).subscribe((res) => {
-            console.log(res);
-        });
-
-        // clear order from store
-        console.log(o);
-        this.orderService.clearMenuOrders();
-    }
-
-    public cancel(): void {
-        // clear order from the store/server
-    }
-
-    public onOrder(): void {
-        // submit order to the service
     }
 
     public onEdit(order: MenuOrder): void {

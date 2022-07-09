@@ -30,6 +30,7 @@ import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { orderReducer } from './store/reducers/order.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -78,6 +79,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         StoreModule.forRoot({
             order: orderReducer,
         }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ],
     bootstrap: [AppComponent],
     providers: [

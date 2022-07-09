@@ -10,28 +10,28 @@
             <p>
                 <mat-form-field appearance="outline" class="same-line-spacer">
                     <mat-label>Card Number</mat-label>
-                    <input matInput placeholder="Card Number" formControlName="firstName" />
-                    <mat-error *ngIf="form.get('firstName')?.invalid">Card Number is required.</mat-error>
+                    <input matInput placeholder="Card Number" formControlName="cardNumber" />
+                    <mat-error *ngIf="form.get('cardNumber')?.invalid">Card Number is required.</mat-error>
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Expiration Date</mat-label>
-                    <input matInput placeholder="Expiration Date (MM/YY)" formControlName="lastName" />
-                    <mat-error *ngIf="form.get('lastName')?.invalid">Expiration Date is required.</mat-error>
+                    <input matInput placeholder="Expiration Date (MM/YY)" formControlName="expDate" />
+                    <mat-error *ngIf="form.get('expDate')?.invalid">Expiration Date is required.</mat-error>
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Security Code</mat-label>
-                    <input matInput placeholder="Security Code" formControlName="address" />
-                    <mat-error *ngIf="form.get('address')?.invalid">Security Code is required.</mat-error>
+                    <input matInput placeholder="Security Code" formControlName="code" />
+                    <mat-error *ngIf="form.get('code')?.invalid">Security Code is required.</mat-error>
                 </mat-form-field>
             </p>
         </form>
         <mat-action-row>
             <button mat-button color="primary" (click)="back()">Back</button>
-            <button mat-button color="primary">Order</button>
+            <button mat-button color="primary" (click)="submit()">Order</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

@@ -12,7 +12,9 @@ export class AccountSelectorComponent {
         phoneNumber: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
     });
 
-    constructor(public fb: UntypedFormBuilder, private router: Router) {}
+    constructor(public fb: UntypedFormBuilder, private router: Router) {
+        // TODO: ensure user is already loading if user logs in before
+    }
 
     public nextStep(): void {
         this.router.navigate(['billing']);

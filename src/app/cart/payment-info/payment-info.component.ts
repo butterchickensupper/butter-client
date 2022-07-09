@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
+import { Store } from '@ngrx/store';
+import { mergeMap, Observable } from 'rxjs';
+import { Order } from 'src/app/models/order';
+import { PaymentInfo } from 'src/app/models/payment-info';
+import { OrderService } from 'src/app/services/order/order.service';
+import { clearOrder } from 'src/app/store/actions/order.action';
+import { AppState } from 'src/app/store/models/app-state.model';
+import { orderSelector } from 'src/app/store/selectors/order.selectors';
 
 @Component({
     selector: 'app-payment-info',
@@ -9,30 +16,54 @@ import { User } from 'src/app/models/user';
     styleUrls: ['./payment-info.component.scss'],
 })
 export class PaymentInfoComponent {
-    public form = this.fb.group({
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        address: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        state: ['', [Validators.required]],
-        zip: ['', [Validators.required]],
-    });
-
-    public get user(): User | undefined {
+    private order$: Observable<AppState>;
+    private get paymentInfo(): PaymentInfo | undefined {
         if (this.form.invalid) return undefined;
-        return new User({
-            firstName: this.form.get('firstName')?.value,
-            lastName: this.form.get('lastName')?.value,
-            address: this.form.get('address')?.value,
-            city: this.form.get('city')?.value,
-            state: this.form.get('state')?.value,
-            zip: this.form.get('zip')?.value,
+        return new PaymentInfo({
+            cardNumber: this.form.get('cardNumber')?.value,
+            expirationDate: this.form.get('expDate')?.value,
+            securityCode: this.form.get('code')?.value,
         });
     }
 
-    constructor(public fb: UntypedFormBuilder, private router: Router) {}
+    public form = this.fb.group({
+        cardNumber: ['', [Validators.required]],
+        expDate: ['', [Validators.required]],
+        code: ['', [Validators.required]],
+    });
+
+    constructor(public fb: UntypedFormBuilder, private router: Router, private store: Store<AppState>, private orderService: OrderService) {
+        this.order$ = this.store.select(orderSelector);
+    }
 
     public back(): void {
         this.router.navigate(['billing']);
+    }
+
+    public submit(): void {
+        if (!this.paymentInfo) return;
+        this.order$
+            .pipe(
+                mergeMap((res) => {
+                    if (!res.billingInfo) {
+                        throw new Error('');
+                    }
+                    var o = new Order({
+                        billingInfo: res.billingInfo,
+                        items: res.items,
+                        date: res.date,
+                    });
+                    return this.orderService.submitOrder(o);
+                })
+            )
+            .subscribe({
+                next: () => {
+                    this.store.dispatch(clearOrder());
+                },
+                error: (error) => {
+                    // TODO: inform user
+                    console.log(error);
+                },
+            });
     }
 }
