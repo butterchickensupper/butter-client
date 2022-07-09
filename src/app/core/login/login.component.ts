@@ -1,67 +1,128 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Optional, ViewChild } from '@angular/core';
+import {
+    Auth,
+    authState,
+    RecaptchaVerifier,
+    signInAnonymously,
+    signInWithPhoneNumber,
+    signOut,
+    User,
+} from '@angular/fire/auth';
+import { traceUntilFirst } from '@angular/fire/performance';
+import { EMPTY, map, Observable, Subscription } from 'rxjs';
+
+export enum LoginTemplate {
+    Landing = 'landing',
+    Phone = 'phone',
+    Login = 'login',
+}
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy, AfterViewInit {
+    private recaptchaVerifier?: RecaptchaVerifier;
+    private readonly userDisposable: Subscription | undefined;
+
     public showCodeInput = false;
+    public showPhoneNumber = false;
+    public readonly user: Observable<User | null> = EMPTY;
+    public showLoginButton = false;
+    public showLogoutButton = false;
+    public template = LoginTemplate;
+    public activeTemplate = LoginTemplate.Login;
     @ViewChild('recaptcha-container')
     public recaptchaWrapperRef?: ElementRef;
 
-    constructor() {
-        // this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
+    constructor(@Optional() private auth: Auth) {
+        if (auth) {
+            this.user = authState(this.auth);
+            this.userDisposable = authState(this.auth)
+                .pipe(
+                    traceUntilFirst('auth'),
+                    map((u) => !!u)
+                )
+                .subscribe((isLoggedIn) => {
+                    this.showLoginButton = !isLoggedIn;
+                    this.showLogoutButton = isLoggedIn;
+                });
+        }
     }
 
-    public phoneLogin(phoneNumber: any): void {
-        // this.afAuth
-        //     .signInWithPhoneNumber(phoneNumber, this.recaptchaVerifier)
-        //     .then((confirmationResult) => {
-        //         this.showCodeInput = true;
-        //         console.log(confirmationResult);
-        //         const verificationCode = window.prompt('Please enter the verification ' + 'code that was sent to your mobile device.');
-        //         if (!verificationCode) return;
-        //         return confirmationResult.confirm(verificationCode).then((res) => {
-        //             if (res) {
-        //                 if (res && this.recaptchaWrapperRef && this.recaptchaVerifier) {
-        //                     this.recaptchaVerifier.clear();
-        //                     this.recaptchaWrapperRef.nativeElement.innerHTML = `<div id="recaptcha-container"></div>`;
-        //                     // Initialize new reCaptcha verifier
-        //                     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        //                         size: 'invisible',
-        //                         callback: this.phoneLogin,
-        //                     });
-        //                     this.showCodeInput = false;
-        //                 }
-        //             }
-        //         });
-        //     })
-        //     .catch((error) => {
-        //         this.recaptchaVerifier?.clear();
-        //         console.log('SMS not sent', error);
-        //     });
+    ngAfterViewInit() {
+        if (this.recaptchaWrapperRef) {
+            this.recaptchaVerifier = new RecaptchaVerifier(
+                this.recaptchaWrapperRef.nativeElement,
+                {
+                    size: 'invisible',
+                    callback: this.phoneLogin,
+                },
+                this.auth
+            );
+            this.recaptchaVerifier.render();
+        }
     }
 
-    // private firebaseAuthChangeListener(response: firebase.User | null) {
-    //     // if needed, do a redirect in here
-    //     if (response) {
-    //         console.log('Logged in :)');
-    //     } else {
-    //         console.log('Logged out :(');
-    //     }
-    // }
-
-    public successCallback(signInSuccessData: any) {
-        console.log('signInSuccessData', signInSuccessData);
-        console.log(signInSuccessData.authResult.user?.uid);
+    ngOnDestroy() {
+        if (this.userDisposable) {
+            this.userDisposable.unsubscribe();
+        }
     }
 
-    public errorCallback(errorData: any) {
-        console.log('errorData', errorData);
+    login() {
+        this.activeTemplate = LoginTemplate.Phone;
     }
 
-    public uiShownCallback() {
-        console.log('uiShownCallback');
+    async loginAnonymously() {
+        const response = await signInAnonymously(this.auth);
+        if (response.user) {
+            this.activeTemplate = LoginTemplate.Landing;
+        } else {
+            console.log('error with signInAnonymously');
+        }
+    }
+
+    async phoneLogin(phoneNumber: any) {
+        if (!this.recaptchaVerifier) {
+            // failed to init recaptcha
+            return;
+        }
+
+        const response = await signInWithPhoneNumber(this.auth, phoneNumber, this.recaptchaVerifier);
+
+        this.showCodeInput = true;
+        console.log(response);
+        const verificationCode = window.prompt('Please enter the verification ' + 'code that was sent to your mobile device.');
+        if (!verificationCode) return;
+        return response.confirm(verificationCode).then((res) => {
+            if (res) {
+                if (res) this.activeTemplate = LoginTemplate.Landing;
+                if (res && this.recaptchaWrapperRef && this.recaptchaVerifier) {
+                    this.recaptchaVerifier.clear();
+                    this.recaptchaWrapperRef.nativeElement.innerHTML = `<div id="recaptcha-container"></div>`;
+                    // Initialize new reCaptcha verifier
+                    this.recaptchaVerifier = new RecaptchaVerifier(
+                        this.recaptchaWrapperRef.nativeElement,
+                        {
+                            size: 'invisible',
+                            callback: this.phoneLogin,
+                            expiredCallback: () => {
+                                // reset recaptcha
+                                console.log('reset');
+                            },
+                        },
+                        this.auth
+                    );
+                    this.recaptchaVerifier.render();
+                    this.showCodeInput = false;
+                }
+            }
+        });
+    }
+
+    async logout() {
+        return await signOut(this.auth);
     }
 }

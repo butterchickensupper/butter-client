@@ -1,12 +1,49 @@
-<!-- add loging ui support phone number and guest login -->
-<div id="code-container" *ngIf="showCodeInput">
-    <form>
-        <p>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Verification Code</mat-label>
-                <input matInput #postalCode maxlength="6" placeholder="Ex. 123456" value="123456">
-                <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
-            </mat-form-field>
-        </p>
-    </form>
-</div>
+<ng-container [ngSwitch]="activeTemplate">
+    <ng-container *ngSwitchCase="template.Phone" [ngTemplateOutlet]="showPhone"></ng-container>
+    <ng-container *ngSwitchCase="template.Landing" [ngTemplateOutlet]="showLanding"></ng-container>
+    <ng-container *ngSwitchCase="template.Login" [ngTemplateOutlet]="showLogin"></ng-container>
+</ng-container>
+
+<ng-template #showLogin>
+    <div class="container">
+        <button mat-raised-button color="accent" (click)="login()">Sign in with Phone</button>
+        <button mat-raised-button color="accent" (click)="loginAnonymously()">Continue as
+            guest</button>
+    </div>
+</ng-template>
+
+<ng-template #showLanding>
+    <div *ngIf="user | async as user;">
+        <h1>Hello {{ user.displayName }}!</h1>
+        <code>uid: {{ user.uid }}</code>
+        <button (click)="logout()">Logout</button>
+    </div>
+</ng-template>
+
+<ng-template #showPhone>
+    <div id="phone-container" *ngIf="">
+        <form>
+            <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput #postalCode maxlength="6" placeholder="Ex. (555) 555-5555">
+                    <mat-hint align="end">(555) 555-5555</mat-hint>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <div id="code-container" *ngIf="showCodeInput">
+        <form>
+            <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Verification Code</mat-label>
+                    <input matInput #postalCode maxlength="6" placeholder="Ex. 123456" value="123456">
+                    <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+</ng-template>
