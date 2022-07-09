@@ -102,7 +102,7 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         }
         const number = this.form.get('tel')?.value;
         console.log('number', number);
-        const response = await signInWithPhoneNumber(this.auth, '666-555-5555', this.recaptchaVerifier);
+        const response = await signInWithPhoneNumber(this.auth, '6665555555', this.recaptchaVerifier);
 
         this.showCodeInput = true;
         console.log(response);
