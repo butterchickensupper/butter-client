@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { OrderType } from 'src/app/models/order-type.enum';
-import { setOrderType } from 'src/app/store/actions/order.action';
-import { AppState } from 'src/app/store/models/app-state.model';
-import { orderTypeSelector } from 'src/app/store/selectors/order.selectors';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
     selector: 'app-order-type',
@@ -13,10 +9,10 @@ import { orderTypeSelector } from 'src/app/store/selectors/order.selectors';
     styleUrls: ['./order-type.component.scss'],
 })
 export class OrderTypeComponent {
-    public existing$: Observable<OrderType | undefined>;
+    public existing: OrderType | undefined;
 
-    constructor(private router: Router, private store: Store<AppState>) {
-        this.existing$ = this.store.select(orderTypeSelector);
+    constructor(private router: Router, private cartService: CartService) {
+        this.existing = this.cartService.orderType;
     }
 
     public selectDelivery() {
@@ -28,7 +24,7 @@ export class OrderTypeComponent {
     }
 
     private set(type: OrderType): void {
-        this.store.dispatch(setOrderType({ orderType: type }));
+        this.cartService.setOrderType(type);
         this.router.navigate(['billing']);
     }
 }

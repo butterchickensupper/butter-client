@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { StoreModule } from '@ngrx/store';
 import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -29,8 +28,6 @@ import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewe
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
-import { orderReducer } from './store/reducers/order.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
     signInFlow: 'popup',
@@ -76,10 +73,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         AngularFireModule.initializeApp(environment.firebaseConfig, { automaticDataCollectionEnabled: true }),
         AngularFireAuthModule,
         FirebaseUIModule.forRoot(firebaseUiAuthConfig),
-        StoreModule.forRoot({
-            order: orderReducer,
-        }),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ],
     bootstrap: [AppComponent],
     providers: [

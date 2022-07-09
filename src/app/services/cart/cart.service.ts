@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
-import { MenuOrder } from 'src/app/models/order';
-import { AppState } from 'src/app/store/models/app-state.model';
+import { BillingInfo } from 'src/app/models/billing-info';
+import { AppState, MenuOrder } from 'src/app/models/order';
+import { OrderType } from 'src/app/models/order-type.enum';
 
 @Injectable({
     providedIn: 'root',
@@ -15,6 +16,18 @@ export class CartService {
 
     public get menuOrders(): MenuOrder[] {
         return this.state?.items ?? [];
+    }
+
+    public get order(): AppState {
+        return this.state;
+    }
+
+    public get orderType(): OrderType | undefined {
+        return this.state.orderType;
+    }
+
+    public get billingInfo(): BillingInfo | undefined {
+        return this.state.billingInfo;
     }
 
     constructor(private cookieService: CookieService) {
@@ -36,6 +49,16 @@ export class CartService {
             this.state.items.push(order);
         }
         this.updateTotals();
+        this.persistState();
+    }
+
+    public setOrderType(type: OrderType): void {
+        this.state.orderType = type;
+        this.persistState();
+    }
+
+    public setBillingInfo(info: BillingInfo): void {
+        this.state.billingInfo = info;
         this.persistState();
     }
 

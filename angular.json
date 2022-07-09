@@ -119,7 +119,7 @@
         }
     },
     "cli": {
-        "schematicCollections": ["@ngrx/schematics"],
+        "schematicCollections": [],
         "analytics": false
     }
 }

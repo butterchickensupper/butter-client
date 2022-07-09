@@ -1,7 +1,6 @@
 import { Component, Output } from '@angular/core';
-
-import { OrderService } from 'src/app/services/order/order.service';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
     selector: 'app-toolbar',
@@ -11,8 +10,8 @@ import { Router } from '@angular/router';
 export class ToolbarComponent {
     public total: number = 0;
 
-    constructor(public router: Router, private orderService: OrderService) {
-        this.orderService.totalItems$.asObservable().subscribe((res) => {
+    constructor(public router: Router, private cartService: CartService) {
+        this.cartService.totalItems$.asObservable().subscribe((res) => {
             this.total = res;
         });
     }

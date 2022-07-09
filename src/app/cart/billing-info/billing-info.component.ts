@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { BillingInfo } from 'src/app/models/billing-info';
-import { setBillingInfo } from 'src/app/store/actions/order.action';
-import { AppState } from 'src/app/store/models/app-state.model';
-import { billingSelector } from 'src/app/store/selectors/order.selectors';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
     selector: 'app-billing-info',
@@ -14,7 +10,7 @@ import { billingSelector } from 'src/app/store/selectors/order.selectors';
     styleUrls: ['./billing-info.component.scss'],
 })
 export class BillingInfoComponent {
-    public existing$: Observable<BillingInfo | undefined>;
+    public existing: BillingInfo | undefined;
     public form = this.fb.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
@@ -36,8 +32,8 @@ export class BillingInfoComponent {
         });
     }
 
-    constructor(public fb: UntypedFormBuilder, private router: Router, private store: Store<AppState>) {
-        this.existing$ = this.store.select(billingSelector);
+    constructor(public fb: UntypedFormBuilder, private router: Router, private cartService: CartService) {
+        this.existing = this.cartService.billingInfo;
     }
 
     public back(): void {
@@ -46,7 +42,7 @@ export class BillingInfoComponent {
 
     public payment(): void {
         if (!this.billingInfo) return;
-        this.store.dispatch(setBillingInfo({ billingInfo: this.billingInfo }));
+        this.cartService.setBillingInfo(this.billingInfo);
         this.router.navigate(['payment']);
     }
 }
