@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Optional, Output, ViewChild } from '@angular/core';
 import {
     Auth,
     authState,
@@ -39,9 +39,12 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
     @ViewChild('recaptcha')
     public recaptchaWrapperRef?: ElementRef;
 
-    form: FormGroup = new FormGroup({
+    public form: FormGroup = new FormGroup({
         tel: new FormControl(new MyTel('', '', '')),
     });
+
+    @Output() //TODO: rename this
+    public LoggedIn = new EventEmitter<boolean>();
 
     constructor(@Optional() private auth: Auth) {
         if (auth) {
@@ -53,6 +56,7 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
                 )
                 .subscribe((isLoggedIn) => {
                     this.loggedIn = isLoggedIn;
+                    this.LoggedIn.emit(this.loggedIn);
                     if (this.loggedIn) this.activeTemplate = LoginTemplate.Landing;
                 });
         }

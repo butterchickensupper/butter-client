@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +7,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./account-selector.component.scss'],
 })
 export class AccountSelectorComponent {
-    public form = this.fb.group({
-        phoneNumber: ['', [Validators.required, Validators.pattern('[- +()0-9]+')]],
-    });
+    public loggedIn = false;
 
-    constructor(public fb: UntypedFormBuilder, private router: Router) {
-        // TODO: ensure user is already loading if user logs in before
-    }
+    constructor(private router: Router) {}
 
     public nextStep(): void {
         this.router.navigate(['billing']);
@@ -22,5 +17,9 @@ export class AccountSelectorComponent {
 
     public prevStep(): void {
         this.router.navigate(['cart']);
+    }
+
+    public handle(event: boolean) {
+        this.loggedIn = event;
     }
 }
