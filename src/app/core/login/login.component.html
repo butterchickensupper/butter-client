@@ -1,40 +1,43 @@
 <ng-container [ngSwitch]="activeTemplate">
+    <div style="margin-top: 10px;"></div>
     <ng-container *ngSwitchCase="template.Phone" [ngTemplateOutlet]="showPhone"></ng-container>
     <ng-container *ngSwitchCase="template.Landing" [ngTemplateOutlet]="showLanding"></ng-container>
     <ng-container *ngSwitchCase="template.Login" [ngTemplateOutlet]="showLogin"></ng-container>
+    <div #recaptcha></div>
 </ng-container>
 
 <ng-template #showLogin>
     <div class="container">
-        <button mat-raised-button color="accent" (click)="login()">Sign in with Phone</button>
-        <button mat-raised-button color="accent" (click)="loginAnonymously()">Continue as
-            guest</button>
+        <p><button mat-raised-button color="primary" (click)="login()">Sign in with Phone</button></p>
+
+        <p><button mat-raised-button color="primary" (click)="loginAnonymously()">Continue as
+                guest</button>
+        </p>
     </div>
 </ng-template>
 
 <ng-template #showLanding>
-    <div *ngIf="user | async as user;">
-        <h1>Hello {{ user.displayName }}!</h1>
+    <div class="container" *ngIf="user | async as user;">
+        <h1>Hello!</h1>
         <code>uid: {{ user.uid }}</code>
-        <button (click)="logout()">Logout</button>
+        <p><button mat-raised-button color="primary" (click)="logout()">Logout</button></p>
     </div>
 </ng-template>
 
 <ng-template #showPhone>
-    <div id="phone-container" *ngIf="">
-        <form>
+    <div id="phone-container">
+        <form [formGroup]="form">
             <p>
                 <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Phone Number</mat-label>
-                    <input matInput #postalCode maxlength="6" placeholder="Ex. (555) 555-5555">
-                    <mat-hint align="end">(555) 555-5555</mat-hint>
+                    <mat-label>Phone number</mat-label>
+                    <app-tel-input formControlName="tel" required></app-tel-input>
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-hint align="end">Include area code (555) 555-5555</mat-hint>
                 </mat-form-field>
             </p>
+            <p><button mat-raised-button color="primary" (click)="phoneLogin()">Verify</button></p>
         </form>
     </div>
-
-    <div id="recaptcha-container"></div>
-
     <div id="code-container" *ngIf="showCodeInput">
         <form>
             <p>

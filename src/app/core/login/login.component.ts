@@ -9,7 +9,10 @@ import {
     User,
 } from '@angular/fire/auth';
 import { traceUntilFirst } from '@angular/fire/performance';
+import { FormControl, FormGroup } from '@angular/forms';
 import { EMPTY, map, Observable, Subscription } from 'rxjs';
+
+import { MyTel } from './tel-input/tel-input.component';
 
 export enum LoginTemplate {
     Landing = 'landing',
@@ -33,8 +36,12 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
     public showLogoutButton = false;
     public template = LoginTemplate;
     public activeTemplate = LoginTemplate.Login;
-    @ViewChild('recaptcha-container')
+    @ViewChild('recaptcha')
     public recaptchaWrapperRef?: ElementRef;
+
+    form: FormGroup = new FormGroup({
+        tel: new FormControl(new MyTel('', '', '')),
+    });
 
     constructor(@Optional() private auth: Auth) {
         if (auth) {
@@ -84,13 +91,18 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         }
     }
 
-    async phoneLogin(phoneNumber: any) {
+    async phoneLogin() {
         if (!this.recaptchaVerifier) {
             // failed to init recaptcha
             return;
         }
-
-        const response = await signInWithPhoneNumber(this.auth, phoneNumber, this.recaptchaVerifier);
+        if (this.form.invalid) {
+            // phone number is invalid
+            return;
+        }
+        const number = this.form.get('tel')?.value;
+        console.log('number', number);
+        const response = await signInWithPhoneNumber(this.auth, '666-555-5555', this.recaptchaVerifier);
 
         this.showCodeInput = true;
         console.log(response);

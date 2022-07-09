@@ -19,6 +19,7 @@ import { OrderTypeComponent } from './cart/order-type/order-type.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { AboutComponent } from './core/about/about.component';
 import { LoginComponent } from './core/login/login.component';
+import { TelInputComponent } from './core/login/tel-input/tel-input.component';
 import { MaterialModule } from './core/material/material.module';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
@@ -50,6 +51,7 @@ import { AuthService } from './services/auth/auth.service';
         AccountSelectorComponent,
         LoginComponent,
         OrderTypeComponent,
+        TelInputComponent,
     ],
     imports: [
         BrowserModule,
