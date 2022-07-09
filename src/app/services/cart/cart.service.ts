@@ -72,12 +72,12 @@ export class CartService {
 
     public clear(): void {
         this.state = { items: [] };
-        this.persistState();
+        this.cookieService.delete('state');
         this.updateTotals();
     }
 
     private persistState(): void {
-        this.cookieService.set('state', JSON.stringify(this.state));
+        this.cookieService.set('state', JSON.stringify(this.state), { sameSite: 'Strict', expires: 1 });
     }
 
     private updateTotals(): void {
