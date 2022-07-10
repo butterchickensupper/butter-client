@@ -34,6 +34,15 @@ export class BillingInfoComponent {
 
     constructor(public fb: UntypedFormBuilder, private router: Router, private cartService: CartService) {
         this.existing = this.cartService.billingInfo;
+        this.existing = new BillingInfo({
+            firstName: 'John',
+            lastName: 'Smith',
+            address: '123 Main',
+            city: 'Livonia',
+            state: 'MI',
+            zip: '',
+        });
+        this.form.setValue(this.existing);
     }
 
     public back(): void {

@@ -5,13 +5,11 @@ import { Order } from 'src/app/models/order';
 import { OrderHistoryRequest } from 'src/app/models/order-history-request';
 import { environment } from 'src/environments/environment';
 
-import { CartService } from '../cart/cart.service';
-
 @Injectable({
     providedIn: 'root',
 })
 export class OrderService {
-    constructor(private httpClient: HttpClient, private cartService: CartService) {}
+    constructor(private httpClient: HttpClient) {}
 
     public submitOrder(order: Order): Observable<Order> {
         return this.httpClient.post<Order>(environment.apiGatewayUrl + 'order', order);

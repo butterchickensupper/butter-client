@@ -1,17 +1,15 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Optional, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Optional, Output, ViewChild } from '@angular/core';
 import {
     Auth,
-    authState,
     ConfirmationResult,
     RecaptchaVerifier,
     signInAnonymously,
     signInWithPhoneNumber,
     signOut,
-    User,
 } from '@angular/fire/auth';
-import { traceUntilFirst } from '@angular/fire/performance';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EMPTY, map, Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 import { MyTel } from './tel-input/tel-input.component';
 
@@ -26,14 +24,12 @@ export enum LoginTemplate {
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnDestroy, AfterViewInit {
+export class LoginComponent implements AfterViewInit {
     private recaptchaVerifier?: RecaptchaVerifier;
-    private readonly userDisposable: Subscription | undefined;
     public confirmationResult?: ConfirmationResult;
 
     public showPhoneNumber = false;
-    public readonly user: Observable<User | null> = EMPTY;
-    public loggedIn = false;
+    public userId$;
     public template = LoginTemplate;
     public activeTemplate = LoginTemplate.Login;
     @ViewChild('recaptcha')
@@ -43,23 +39,20 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
         tel: new FormControl(new MyTel('', '', '')),
     });
 
-    @Output() //TODO: rename this
+    @Output()
     public LoggedIn = new EventEmitter<boolean>();
 
-    constructor(@Optional() private auth: Auth) {
-        if (auth) {
-            this.user = authState(this.auth);
-            this.userDisposable = authState(this.auth)
-                .pipe(
-                    traceUntilFirst('auth'),
-                    map((u) => !!u)
-                )
-                .subscribe((isLoggedIn) => {
-                    this.loggedIn = isLoggedIn;
-                    this.LoggedIn.emit(this.loggedIn);
-                    if (this.loggedIn) this.activeTemplate = LoginTemplate.Landing;
-                });
-        }
+    constructor(@Optional() private auth: Auth, private authService: AuthService) {
+        this.userId$ = authService.userId$.pipe(
+            tap((res) => {
+                if (res) {
+                    this.activeTemplate = LoginTemplate.Landing;
+                    this.LoggedIn.emit(true);
+                } else {
+                    this.LoggedIn.emit(false);
+                }
+            })
+        );
     }
 
     ngAfterViewInit() {
@@ -73,12 +66,6 @@ export class LoginComponent implements OnDestroy, AfterViewInit {
                 this.auth
             );
             this.recaptchaVerifier.render();
-        }
-    }
-
-    ngOnDestroy() {
-        if (this.userDisposable) {
-            this.userDisposable.unsubscribe();
         }
     }
 
