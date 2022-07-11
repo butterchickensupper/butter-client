@@ -22,6 +22,10 @@ export class AuthService implements OnDestroy {
         }
     }
 
+    public get currentUser(): User | null {
+        return this.auth.currentUser;
+    }
+
     public get userId$(): Observable<string | undefined> {
         return this.user.pipe(
             map((res) => {

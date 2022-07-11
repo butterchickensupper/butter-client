@@ -1,11 +1,5 @@
 {
-    "/order": {
-        "target": "http://localhost:3000",
-        "logLevel": "debug",
-        "secure": false,
-        "changeOrigin": true
-    },
-    "/menu": {
+    "/api": {
         "target": "http://localhost:3000",
         "logLevel": "debug",
         "secure": false,
