@@ -1,12 +1,12 @@
 <div class="cart-container">
-  <mat-accordion class="result">
-    <mat-expansion-panel [expanded]="!checkout" hideToggle>
+  <mat-accordion class="result" [multi]="false">
+    <mat-expansion-panel [expanded]="(step$ | async) === stepId" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
           Cart
         </mat-panel-title>
         <mat-panel-description>
-          <div [hidden]="!checkout">{{ getTotal() | currency }}</div>
+          <div [hidden]="(step$ | async) === stepId">{{ getTotal() | currency }}</div>
           <mat-icon>shopping_bag</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -27,15 +27,15 @@
       <p></p>
 
       <mat-action-row [hidden]="checkout">
-        <button mat-button color="primary" (click)="goToAccount()">Checkout</button>
+        <button mat-button color="primary" (click)="goToAccount()" [disabled]="getTotal() === 0">Checkout</button>
       </mat-action-row>
     </mat-expansion-panel>
-  </mat-accordion>
 
-  <ng-container *ngIf="checkout">
-    <app-account-selector></app-account-selector>
-    <app-order-type></app-order-type>
-    <app-billing-info></app-billing-info>
-    <app-payment-info></app-payment-info>
-  </ng-container>
+    <ng-container *ngIf="checkout">
+      <app-account-selector></app-account-selector>
+      <app-order-type></app-order-type>
+      <app-billing-info></app-billing-info>
+      <app-payment-info (order)="submit($event)"></app-payment-info>
+    </ng-container>
+  </mat-accordion>
 </div>

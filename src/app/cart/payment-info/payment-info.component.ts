@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { Order } from 'src/app/models/order';
 import { PaymentInfo } from 'src/app/models/payment-info';
 import { CartExpansionService } from 'src/app/services/cart/cart-expansion.service';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { OrderService } from 'src/app/services/order/order.service';
 
 @Component({
     selector: 'app-payment-info',
@@ -29,12 +27,10 @@ export class PaymentInfoComponent {
         code: ['', [Validators.required]],
     });
 
-    constructor(
-        public fb: UntypedFormBuilder,
-        private orderService: OrderService,
-        private cartService: CartService,
-        private cartExpansionService: CartExpansionService
-    ) {
+    @Output()
+    public order = new EventEmitter<PaymentInfo>();
+
+    constructor(public fb: UntypedFormBuilder, private cartService: CartService, private cartExpansionService: CartExpansionService) {
         this.step$ = this.cartExpansionService.step$;
     }
 
@@ -50,19 +46,6 @@ export class PaymentInfoComponent {
         const state = this.cartService.order;
         if (!this.paymentInfo || !state.billingInfo) return;
 
-        var o = new Order({
-            billingInfo: state.billingInfo,
-            items: state.items,
-        });
-        this.orderService.submitOrder(o).subscribe({
-            next: () => {
-                this.cartService.clear();
-                this.cartExpansionService.setStep(0);
-            },
-            error: (error) => {
-                // TODO: inform user
-                console.log(error);
-            },
-        });
+        this.order.emit(this.paymentInfo);
     }
 }

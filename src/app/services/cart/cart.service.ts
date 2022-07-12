@@ -11,8 +11,10 @@ import { OrderType } from 'src/app/models/order-type.enum';
 export class CartService {
     private state!: AppState;
 
-    public totalItems$ = new BehaviorSubject<number>(0);
-    public total$ = new BehaviorSubject<number>(0);
+    private totalItems = new BehaviorSubject<number>(0);
+    public totalItems$ = this.totalItems.asObservable();
+    private total = new BehaviorSubject<number>(0);
+    public total$ = this.total.asObservable();
 
     public get menuOrders(): MenuOrder[] {
         return this.state?.items ?? [];
@@ -85,6 +87,6 @@ export class CartService {
         this.state.items.forEach((i) => {
             t += i.quantity;
         });
-        this.totalItems$.next(t);
+        this.totalItems.next(t);
     }
 }

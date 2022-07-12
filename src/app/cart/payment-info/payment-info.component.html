@@ -1,37 +1,35 @@
-<mat-accordion class="result">
-    <mat-expansion-panel [expanded]="(step$ | async) === 4" (opened)="opened" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-description>
-                Payment Info
-                <mat-icon>attach_money</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <form [formGroup]="form">
-            <p>
-                <mat-form-field appearance="outline" class="same-line-spacer">
-                    <mat-label>Card Number</mat-label>
-                    <input matInput placeholder="Card Number" formControlName="cardNumber" />
-                    <mat-error *ngIf="form.get('cardNumber')?.invalid">Card Number is required.</mat-error>
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Expiration Date</mat-label>
-                    <input matInput placeholder="Expiration Date (MM/YY)" formControlName="expDate" />
-                    <mat-error *ngIf="form.get('expDate')?.invalid">Expiration Date is required.</mat-error>
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Security Code</mat-label>
-                    <input matInput placeholder="Security Code" formControlName="code" />
-                    <mat-error *ngIf="form.get('code')?.invalid">Security Code is required.</mat-error>
-                </mat-form-field>
-            </p>
-        </form>
-        <mat-action-row>
-            <button mat-button color="primary" (click)="back">Back</button>
-            <button mat-button color="primary" (click)="submit()">Order</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-</mat-accordion>
+<mat-expansion-panel [expanded]="(step$ | async) === stepId" (opened)="opened" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-description>
+            Payment Info
+            <mat-icon>attach_money</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]="form">
+        <p>
+            <mat-form-field appearance="outline" class="same-line-spacer">
+                <mat-label>Card Number</mat-label>
+                <input matInput placeholder="Card Number" formControlName="cardNumber" />
+                <mat-error *ngIf="form.get('cardNumber')?.invalid">Card Number is required.</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput placeholder="Expiration Date (MM/YY)" formControlName="expDate" />
+                <mat-error *ngIf="form.get('expDate')?.invalid">Expiration Date is required.</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Security Code</mat-label>
+                <input matInput placeholder="Security Code" formControlName="code" />
+                <mat-error *ngIf="form.get('code')?.invalid">Security Code is required.</mat-error>
+            </mat-form-field>
+        </p>
+    </form>
+    <mat-action-row>
+        <button mat-button color="primary" (click)="back">Back</button>
+        <button mat-button color="primary" (click)="submit()">Order</button>
+    </mat-action-row>
+</mat-expansion-panel>

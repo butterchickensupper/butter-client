@@ -1,23 +1,21 @@
-<mat-accordion class="result">
-    <mat-expansion-panel [expanded]="(step$ | async) === stepId" (opened)="opened" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-description>
-                Order Type
-                <mat-icon *ngIf="existing === 0">takeout_dining</mat-icon>
-                <mat-icon *ngIf="existing === 1">local_shipping</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+<mat-expansion-panel [expanded]="(step$ | async) === stepId" (opened)="opened" hideToggle>
+    <mat-expansion-panel-header>
+        <mat-panel-description>
+            Order Type
+            <mat-icon *ngIf="existing === 0">takeout_dining</mat-icon>
+            <mat-icon *ngIf="existing === 1">local_shipping</mat-icon>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
 
-        <div class="container">
-            <mat-card class="button-card" (click)="selectDelivery()">
-                <mat-card-title>Delivery</mat-card-title>
-            </mat-card>
-            <mat-card class="button-card" (click)="selectPickup()">
-                <mat-card-title>Pickup</mat-card-title>
-            </mat-card>
-        </div>
-        <div>
-            <!-- show when user selects delivery, checkbox for same as billing or have them enter a location-->
-        </div>
-    </mat-expansion-panel>
-</mat-accordion>
+    <div class="container">
+        <mat-card class="button-card" (click)="selectDelivery()">
+            <mat-card-title>Delivery</mat-card-title>
+        </mat-card>
+        <mat-card class="button-card" (click)="selectPickup()">
+            <mat-card-title>Pickup</mat-card-title>
+        </mat-card>
+    </div>
+    <div>
+        <!-- show when user selects delivery, checkbox for same as billing or have them enter a location-->
+    </div>
+</mat-expansion-panel>
