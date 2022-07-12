@@ -1,5 +1,5 @@
 <mat-accordion class="result">
-    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel [expanded]="(step$ | async) === 4" (opened)="opened" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-description>
                 Payment Info
@@ -30,7 +30,7 @@
             </p>
         </form>
         <mat-action-row>
-            <button mat-button color="primary" (click)="back()">Back</button>
+            <button mat-button color="primary" (click)="back">Back</button>
             <button mat-button color="primary" (click)="submit()">Order</button>
         </mat-action-row>
     </mat-expansion-panel>

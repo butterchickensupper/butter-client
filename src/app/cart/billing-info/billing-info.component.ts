@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { BillingInfo } from 'src/app/models/billing-info';
+import { CartExpansionService } from 'src/app/services/cart/cart-expansion.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
@@ -18,6 +19,8 @@ export class BillingInfoComponent {
         state: ['', [Validators.required]],
         zip: ['', [Validators.required]],
     });
+    public step$;
+    public stepId = 3;
 
     private get billingInfo(): BillingInfo | undefined {
         if (this.form.invalid) return undefined;
@@ -31,7 +34,7 @@ export class BillingInfoComponent {
         });
     }
 
-    constructor(public fb: UntypedFormBuilder, private cartService: CartService) {
+    constructor(public fb: UntypedFormBuilder, private cartService: CartService, private cartExpansionService: CartExpansionService) {
         this.existing = this.cartService.billingInfo;
         this.existing = new BillingInfo({
             firstName: 'John',
@@ -42,15 +45,20 @@ export class BillingInfoComponent {
             zip: '48154',
         });
         this.form.setValue(this.existing);
+        this.step$ = this.cartExpansionService.step$;
     }
 
-    public back(): void {
-        //this.router.navigate(['account']);
+    public opened() {
+        this.cartExpansionService.setStep(this.stepId);
+    }
+
+    public back() {
+        this.cartExpansionService.prevStep();
     }
 
     public payment(): void {
         if (!this.billingInfo) return;
         this.cartService.setBillingInfo(this.billingInfo);
-        //this.router.navigate(['payment']);
+        this.cartExpansionService.nextStep();
     }
 }

@@ -1,5 +1,5 @@
 <mat-accordion class="result">
-    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel [expanded]="(step$ | async) === stepId" (opened)="opened" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-description>
                 Billing Info
