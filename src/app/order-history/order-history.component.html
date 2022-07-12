@@ -8,10 +8,11 @@
         (opened)="setStep(i)" (opened)="panelOpenState === true" (closed)="panelOpenState === false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Order Time: {{ order.createdAt | date:'medium' }}
+            {{ order.createdAt | date:'short' }}
           </mat-panel-title>
           <mat-panel-description>
-            Delivery Address: {{ order.billingInfo.address }}
+            <mat-icon>pin_drop</mat-icon>
+            {{ order.billingInfo.address }}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <table mat-table [dataSource]="order?.items ?? []" class="mat-elevation-z8" style="width: 100%;">
