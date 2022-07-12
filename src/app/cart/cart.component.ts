@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { DialogService } from '../core/dialog/dialog.service';
 import { MenuOrder, Order } from '../models/order';
 import { PaymentInfo } from '../models/payment-info';
 import { CartExpansionService } from '../services/cart/cart-expansion.service';
@@ -23,7 +24,8 @@ export class CartComponent {
         private cartService: CartService,
         public cartExpansionService: CartExpansionService,
         private orderService: OrderService,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private dialogService: DialogService
     ) {
         this.step$ = this.cartExpansionService.step$;
         this.orders = this.cartService.menuOrders;
@@ -61,9 +63,9 @@ export class CartComponent {
                 setTimeout(() => this.loadingService.hide(), 0);
             },
             error: (error) => {
-                // TODO: inform user
-                console.log(error);
                 setTimeout(() => this.loadingService.hide(), 0);
+                console.log(error);
+                this.dialogService.showErrorDialog(error);
             },
         });
     }

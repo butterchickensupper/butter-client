@@ -18,6 +18,7 @@ import { CartComponent } from './cart/cart.component';
 import { OrderTypeComponent } from './cart/order-type/order-type.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { AboutComponent } from './core/about/about.component';
+import { ErrorDialogComponent } from './core/dialog/error-dialog';
 import { LoginComponent } from './core/login/login.component';
 import { TelInputComponent } from './core/login/tel-input/tel-input.component';
 import { MaterialModule } from './core/material/material.module';
@@ -54,6 +55,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         OrderTypeComponent,
         TelInputComponent,
         AutofocusDirective,
+        ErrorDialogComponent,
     ],
     imports: [
         BrowserModule,
