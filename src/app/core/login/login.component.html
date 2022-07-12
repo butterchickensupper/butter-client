@@ -31,7 +31,7 @@
                     <mat-label>Phone number</mat-label>
                     <app-tel-input formControlName="tel" required></app-tel-input>
                     <mat-icon matSuffix>phone</mat-icon>
-                    <mat-hint align="end">Include area code 555-555-5555</mat-hint>
+                    <mat-hint [align]="'end'">Include area code 555-555-5555</mat-hint>
                 </mat-form-field>
             </p>
             <p class="button-container">
@@ -46,7 +46,7 @@
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Verification Code</mat-label>
                     <input matInput #postalCode maxlength="6" placeholder="Ex. 123456" value="123456">
-                    <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
+                    <mat-hint [align]="'end'">{{postalCode.value.length}} / 6</mat-hint>
                 </mat-form-field>
             </p>
         </form>
