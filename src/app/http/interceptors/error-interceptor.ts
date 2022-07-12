@@ -1,18 +1,12 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        console.log('Passed through the interceptor in request');
-
         return next.handle(request).pipe(
-            map((res) => {
-                console.log('Passed through the interceptor in response');
-                return res;
-            }),
             catchError((error: HttpErrorResponse) => {
                 let errorMsg = '';
                 if (error.error instanceof ErrorEvent) {
