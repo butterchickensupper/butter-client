@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { OrderType } from 'src/app/models/order-type.enum';
 import { CartService } from 'src/app/services/cart/cart.service';
 
@@ -11,7 +10,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 export class OrderTypeComponent {
     public existing: OrderType | undefined;
 
-    constructor(private router: Router, private cartService: CartService) {
+    constructor(private cartService: CartService) {
         this.existing = this.cartService.orderType;
     }
 
@@ -25,6 +24,6 @@ export class OrderTypeComponent {
 
     private set(type: OrderType): void {
         this.cartService.setOrderType(type);
-        this.router.navigate(['billing']);
+        //this.router.navigate(['billing']);
     }
 }

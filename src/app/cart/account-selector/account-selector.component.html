@@ -7,7 +7,7 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <app-login (LoggedIn)="handle($event)"></app-login>
+        <app-login (LoggedIn)="handle($event)" [showLogout]=false></app-login>
 
         <mat-action-row>
             <button mat-button color="primary" (click)="prevStep()">Back</button>

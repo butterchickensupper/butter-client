@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-account-selector',
@@ -9,17 +8,18 @@ import { Router } from '@angular/router';
 export class AccountSelectorComponent {
     public loggedIn = false;
 
-    constructor(private router: Router) {}
+    constructor() {}
 
     public nextStep(): void {
-        this.router.navigate(['billing']);
+        //this.router.navigate(['billing']);
     }
 
     public prevStep(): void {
-        this.router.navigate(['cart']);
+        //this.router.navigate(['cart']);
     }
 
     public handle(event: boolean) {
         this.loggedIn = event;
+        this.nextStep();
     }
 }

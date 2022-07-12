@@ -10,17 +10,16 @@
     <div class="container">
         <p><button mat-raised-button color="primary" (click)="login()">Sign in with Phone</button></p>
 
-        <p><button mat-raised-button color="primary" (click)="loginAnonymously()">Continue as
-                guest</button>
+        <p><button mat-raised-button color="primary" (click)="loginAnonymously()">Sign in as
+                Guest</button>
         </p>
     </div>
 </ng-template>
 
 <ng-template #showLanding>
     <div class="container" *ngIf="userId$ | async as userId;">
-        <h1>Hello!</h1>
         <code>uid: {{ userId }}</code>
-        <p><button mat-raised-button color="primary" (click)="logout()">Logout</button></p>
+        <p *ngIf="showLogout"><button mat-raised-button color="primary" (click)="logout()">Logout</button></p>
     </div>
 </ng-template>
 

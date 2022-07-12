@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Optional, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Optional, Output, ViewChild } from '@angular/core';
 import {
     Auth,
     ConfirmationResult,
@@ -38,6 +38,9 @@ export class LoginComponent implements AfterViewInit {
     public form: FormGroup = new FormGroup({
         tel: new FormControl(new MyTel('', '', '')),
     });
+
+    @Input()
+    public showLogout = true;
 
     @Output()
     public LoggedIn = new EventEmitter<boolean>();

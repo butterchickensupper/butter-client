@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { PaymentInfo } from 'src/app/models/payment-info';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -27,15 +26,10 @@ export class PaymentInfoComponent {
         code: ['', [Validators.required]],
     });
 
-    constructor(
-        public fb: UntypedFormBuilder,
-        private router: Router,
-        private orderService: OrderService,
-        private cartService: CartService
-    ) {}
+    constructor(public fb: UntypedFormBuilder, private orderService: OrderService, private cartService: CartService) {}
 
     public back(): void {
-        this.router.navigate(['billing']);
+        //this.router.navigate(['billing']);
     }
 
     public submit(): void {

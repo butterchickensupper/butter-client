@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { MenuOrder } from '../models/order';
 import { CartService } from '../services/cart/cart.service';
-import { BillingInfoComponent } from './billing-info/billing-info.component';
 
 @Component({
     selector: 'app-cart',
@@ -12,17 +9,17 @@ import { BillingInfoComponent } from './billing-info/billing-info.component';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-    public orderInfo!: BillingInfoComponent;
+    public checkout = false;
     public orders: MenuOrder[] = [];
 
-    constructor(public fb: UntypedFormBuilder, private cartService: CartService, private router: Router) {}
+    constructor(private cartService: CartService) {}
 
     ngOnInit(): void {
         this.orders = this.cartService.menuOrders;
     }
 
     public goToAccount(): void {
-        this.router.navigate(['/account']);
+        this.checkout = true;
     }
 
     public getTotal(): number | undefined {

@@ -1,11 +1,11 @@
 <mat-accordion class="result">
-  <mat-expansion-panel expanded hideToggle>
+  <mat-expansion-panel [expanded]="!checkout" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Cart
       </mat-panel-title>
       <mat-panel-description>
-        <div> </div>
+        <div [hidden]="!checkout">$10.99</div>
         <mat-icon>shopping_bag</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -30,3 +30,10 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
+
+<ng-container *ngIf="checkout">
+  <app-account-selector></app-account-selector>
+  <app-order-type></app-order-type>
+  <app-billing-info></app-billing-info>
+  <app-payment-info></app-payment-info>
+</ng-container>

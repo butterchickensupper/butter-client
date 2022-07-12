@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BillingInfo } from 'src/app/models/billing-info';
 import { CartService } from 'src/app/services/cart/cart.service';
 
@@ -32,7 +31,7 @@ export class BillingInfoComponent {
         });
     }
 
-    constructor(public fb: UntypedFormBuilder, private router: Router, private cartService: CartService) {
+    constructor(public fb: UntypedFormBuilder, private cartService: CartService) {
         this.existing = this.cartService.billingInfo;
         this.existing = new BillingInfo({
             firstName: 'John',
@@ -46,12 +45,12 @@ export class BillingInfoComponent {
     }
 
     public back(): void {
-        this.router.navigate(['account']);
+        //this.router.navigate(['account']);
     }
 
     public payment(): void {
         if (!this.billingInfo) return;
         this.cartService.setBillingInfo(this.billingInfo);
-        this.router.navigate(['payment']);
+        //this.router.navigate(['payment']);
     }
 }
