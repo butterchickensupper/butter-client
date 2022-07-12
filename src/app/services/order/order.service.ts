@@ -15,9 +15,8 @@ export class OrderService {
         return this.httpClient.post<Order>(environment.apiGatewayUrl + 'order', order);
     }
 
-    public getHistory(request: OrderHistoryRequest): Observable<Order[]> {
-        console.log(request);
-        return this.httpClient.get<Order[]>('/assets/orders.json').pipe(
+    public getHistory(request?: OrderHistoryRequest): Observable<Order[]> {
+        return this.httpClient.get<Order[]>(environment.apiGatewayUrl + 'orders').pipe(
             map((a) => {
                 a.forEach((b) => {
                     if (b.createdAt) b.createdAt = new Date(b.createdAt);

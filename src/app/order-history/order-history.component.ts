@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { Order } from '../models/order';
 import { OrderHistoryRequest } from '../models/order-history-request';
+import { LoadingService } from '../services/loading/loading.service';
 import { OrderService } from '../services/order/order.service';
 
 @Component({
@@ -16,9 +17,11 @@ export class OrderHistoryComponent {
     public panelOpenState = false;
     public displayedColumns: string[] = ['quantity', 'name', 'price'];
 
-    constructor(private orderServce: OrderService) {
-        // TODO: get userId from context? claims?
-        this.orders$ = this.orderServce.getHistory(new OrderHistoryRequest({ userId: 'test123' }));
+    constructor(private orderServce: OrderService, private loadingService: LoadingService) {
+        setTimeout(() => this.loadingService.show(), 0);
+        this.orders$ = this.orderServce
+            .getHistory(new OrderHistoryRequest({ userId: 'test123' }))
+            .pipe(tap(() => setTimeout(() => this.loadingService.hide(), 0)));
     }
 
     public setStep(index: number) {

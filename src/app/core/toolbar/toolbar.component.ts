@@ -11,9 +11,10 @@ export class ToolbarComponent {
     public total: number = 0;
 
     constructor(public router: Router, private cartService: CartService) {
-        this.cartService.totalItems$.asObservable().subscribe((res) => {
+        this.cartService.totalItems$.subscribe((res) => {
             this.total = res;
         });
+        this.cartService.updateTotals();
     }
 
     @Output()

@@ -80,7 +80,7 @@ export class CartService {
         this.cookieService.set('state', JSON.stringify(this.state), { sameSite: 'Strict', expires: 1 });
     }
 
-    private updateTotals(): void {
+    public updateTotals(): void {
         let t = 0;
         this.state.items.forEach((i) => {
             t += i.quantity;

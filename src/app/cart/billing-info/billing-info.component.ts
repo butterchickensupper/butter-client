@@ -40,7 +40,7 @@ export class BillingInfoComponent {
             address: '123 Main',
             city: 'Livonia',
             state: 'MI',
-            zip: '',
+            zip: '48154',
         });
         this.form.setValue(this.existing);
     }
