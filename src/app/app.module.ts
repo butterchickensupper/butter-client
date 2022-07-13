@@ -12,12 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
-import { BillingInfoComponent } from './cart/billing-info/billing-info.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './cart/checkout/checkout.component';
-import { OrderTypeComponent } from './cart/order-type/order-type.component';
-import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { AboutComponent } from './core/about/about.component';
 import { ErrorDialogComponent } from './core/dialog/error-dialog';
 import { LoginComponent } from './core/login/login.component';
@@ -49,11 +45,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         MenuItemViewerComponent,
         OrderHistoryComponent,
         OrderDashboardComponent,
-        BillingInfoComponent,
-        PaymentInfoComponent,
-        AccountSelectorComponent,
         LoginComponent,
-        OrderTypeComponent,
         TelInputComponent,
         AutofocusDirective,
         ErrorDialogComponent,

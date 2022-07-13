@@ -5,7 +5,7 @@
 
 <mat-stepper #stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
     <mat-step #loginStep label="Account">
-        <app-login (LoggedIn)="loggedIn()" [showLogout]=false></app-login>
+        <app-login (LoggedIn)="completeLogin()" [showLogout]=false></app-login>
     </mat-step>
     <mat-step #orderTypeStep label="Order Type">
         <div class="container">
@@ -66,7 +66,7 @@
             </p>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="payment()">Next</button>
+                <button mat-button (click)="completeBilling()">Next</button>
             </div>
         </form>
     </mat-step>
@@ -95,7 +95,7 @@
             </p>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="order()">Order</button>
+                <button mat-button (click)="completeOrder()">Order</button>
             </div>
         </form>
     </mat-step>
