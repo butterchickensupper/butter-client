@@ -20,9 +20,6 @@ import { OrderService } from 'src/app/services/order/order.service';
     styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent {
-    public existingOrderType: OrderType | undefined;
-    public existingBilling: BillingInfo | undefined;
-
     @ViewChild('stepper')
     private matStepper?: MatStepper;
     @ViewChild('loginStep')
@@ -33,10 +30,8 @@ export class CheckoutComponent {
     private billInfoStep?: MatStep;
     @ViewChild('payInfoStep')
     private payInfoStep?: MatStep;
-    @ViewChild('completeStep')
-    private completeStep?: MatStep;
 
-    public billingInfoForm = this._formBuilder.group({
+    public billingInfoForm = this.formBuilder.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         address: ['', [Validators.required]],
@@ -44,7 +39,7 @@ export class CheckoutComponent {
         state: ['', [Validators.required]],
         zip: ['', [Validators.required]],
     });
-    public payInfoForm = this._formBuilder.group({
+    public payInfoForm = this.formBuilder.group({
         cardNumber: ['', [Validators.required]],
         expDate: ['', [Validators.required]],
         code: ['', [Validators.required]],
@@ -74,8 +69,8 @@ export class CheckoutComponent {
     }
 
     constructor(
-        private _formBuilder: UntypedFormBuilder,
-        breakpointObserver: BreakpointObserver,
+        private formBuilder: UntypedFormBuilder,
+        private breakpointObserver: BreakpointObserver,
         private router: Router,
         private cartService: CartService,
         private orderService: OrderService,
@@ -85,17 +80,6 @@ export class CheckoutComponent {
         this.stepperOrientation = breakpointObserver
             .observe('(min-width: 800px)')
             .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-
-        this.existingBilling = this.cartService.billingInfo;
-        this.existingBilling = new BillingInfo({
-            firstName: 'John',
-            lastName: 'Smith',
-            address: '123 Main',
-            city: 'Livonia',
-            state: 'MI',
-            zip: '48154',
-        });
-        this.billingInfoForm.setValue(this.existingBilling);
     }
 
     public goToCart(): void {
@@ -103,10 +87,7 @@ export class CheckoutComponent {
     }
 
     public completeLogin(): void {
-        if (this.loginStep) {
-            this.loginStep.completed = true;
-            this.loginStep.editable = false;
-        }
+        this.completeStep(this.loginStep);
         this.next();
     }
 
@@ -116,22 +97,14 @@ export class CheckoutComponent {
 
     public completeBilling(): void {
         if (!this.billingInfo) return;
-        if (this.billInfoStep) {
-            this.billInfoStep.completed = true;
-            this.billInfoStep.editable = false;
-        }
-        // TODO: set billing info
+        this.completeStep(this.billInfoStep);
         this.cartService.setBillingInfo(this.billingInfo);
         this.next();
     }
 
     public completeOrder(): void {
         if (!this.paymentInfo) return;
-        if (this.payInfoStep) {
-            this.payInfoStep.completed = true;
-            this.payInfoStep.editable = false;
-        }
-
+        this.completeStep(this.payInfoStep);
         this.submit().subscribe({
             next: () => {
                 this.cartService.clear();
@@ -156,12 +129,8 @@ export class CheckoutComponent {
     }
 
     private set(type: OrderType): void {
-        this.existingOrderType = type;
         this.cartService.setOrderType(type);
-        if (this.orderTypeStep) {
-            this.orderTypeStep.completed = true;
-            this.orderTypeStep.editable = false;
-        }
+        this.completeStep(this.orderTypeStep);
         this.next();
     }
 
@@ -177,5 +146,12 @@ export class CheckoutComponent {
             items: this.cartService.order.items,
         });
         return this.orderService.submitOrder(o);
+    }
+
+    private completeStep(step?: MatStep): void {
+        if (step) {
+            step.completed = true;
+            step.editable = false;
+        }
     }
 }
