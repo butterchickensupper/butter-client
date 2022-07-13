@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { AccountSelectorComponent } from './cart/account-selector/account-selector.component';
 import { BillingInfoComponent } from './cart/billing-info/billing-info.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './cart/checkout/checkout.component';
 import { OrderTypeComponent } from './cart/order-type/order-type.component';
 import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { AboutComponent } from './core/about/about.component';
@@ -56,6 +57,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         TelInputComponent,
         AutofocusDirective,
         ErrorDialogComponent,
+        CheckoutComponent,
     ],
     imports: [
         BrowserModule,

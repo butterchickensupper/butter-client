@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { DialogService } from '../core/dialog/dialog.service';
@@ -25,15 +26,15 @@ export class CartComponent {
         public cartExpansionService: CartExpansionService,
         private orderService: OrderService,
         private loadingService: LoadingService,
-        private dialogService: DialogService
+        private dialogService: DialogService,
+        private router: Router
     ) {
         this.step$ = this.cartExpansionService.step$;
         this.orders = this.cartService.menuOrders;
     }
 
     public goToAccount(): void {
-        this.checkout = true;
-        this.cartExpansionService.nextStep();
+        this.router.navigate(['checkout']);
     }
 
     public getTotal(): number | undefined {

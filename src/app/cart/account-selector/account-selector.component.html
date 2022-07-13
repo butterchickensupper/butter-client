@@ -9,7 +9,7 @@
     <app-login (LoggedIn)="handle($event)" [showLogout]=false></app-login>
 
     <mat-action-row>
-        <button mat-button color="primary" (click)="back">Back</button>
-        <button mat-button color="primary" (click)="next" [disabled]="!loggedIn">Next</button>
+        <button mat-button color="primary" (click)="back()">Back</button>
+        <button mat-button color="primary" (click)="next()" [disabled]="!loggedIn">Next</button>
     </mat-action-row>
 </mat-expansion-panel>

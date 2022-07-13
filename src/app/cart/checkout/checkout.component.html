@@ -1,0 +1,108 @@
+<ng-container [ngSwitch]="stepperOrientation | async">
+    <div *ngSwitchCase="'horizontal'"></div>
+    <div *ngSwitchCase="'vertical'"></div>
+</ng-container>
+
+<mat-stepper #stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
+    <mat-step #loginStep label="Account">
+        <app-login (LoggedIn)="loggedIn()" [showLogout]=false></app-login>
+    </mat-step>
+    <mat-step #orderTypeStep label="Order Type">
+        <div class="container">
+            <mat-card class="button-card" (click)="selectDelivery()">
+                <mat-card-title>Delivery</mat-card-title>
+            </mat-card>
+            <mat-card class="button-card" (click)="selectPickup()">
+                <mat-card-title>Pickup</mat-card-title>
+            </mat-card>
+        </div>
+        <div>
+            <!-- show when user selects delivery, checkbox for same as billing or have them enter a location-->
+        </div>
+    </mat-step>
+    <mat-step #billInfoStep [stepControl]="billingInfoForm" label="Billing Information">
+        <form [formGroup]="billingInfoForm">
+            <p>
+                <mat-form-field appearance="outline" class="same-line-spacer">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="First Name" formControlName="firstName" />
+                    <mat-error *ngIf="billingInfoForm.get('firstName')?.invalid">First Name is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Last Name" formControlName="lastName" />
+                    <mat-error *ngIf="billingInfoForm.get('lastName')?.invalid">Last Name is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput placeholder="Address" formControlName="address" />
+                    <mat-error *ngIf="billingInfoForm.get('address')?.invalid">Address is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline" class="same-line-spacer">
+                    <mat-label>City</mat-label>
+                    <input matInput placeholder="City" formControlName="city" />
+                    <mat-error *ngIf="billingInfoForm.get('city')?.invalid">City is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input matInput placeholder="State" formControlName="state" />
+                    <mat-error *ngIf="billingInfoForm.get('state')?.invalid">State is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput placeholder="Zip" formControlName="zip" />
+                    <mat-error *ngIf="billingInfoForm.get('zip')?.invalid">Zip Code is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="payment()">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step #payInfoStep [stepControl]="payInfoForm" label="Payment Information">
+        <form [formGroup]="payInfoForm">
+            <p>
+                <mat-form-field appearance="outline" class="same-line-spacer">
+                    <mat-label>Card Number</mat-label>
+                    <input matInput placeholder="Card Number" formControlName="cardNumber" />
+                    <mat-error *ngIf="payInfoForm.get('cardNumber')?.invalid">Card Number is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Expiration Date</mat-label>
+                    <input matInput placeholder="Expiration Date (MM/YY)" formControlName="expDate" />
+                    <mat-error *ngIf="payInfoForm.get('expDate')?.invalid">Expiration Date is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Security Code</mat-label>
+                    <input matInput placeholder="Security Code" formControlName="code" />
+                    <mat-error *ngIf="payInfoForm.get('code')?.invalid">Security Code is required.</mat-error>
+                </mat-form-field>
+            </p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="order()">Order</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step #completeStep>
+        <ng-template matStepLabel>{{checkoutStatus}}</ng-template>
+        <div>
+            <button mat-button (click)="goToCart()">Return</button>
+        </div>
+    </mat-step>
+</mat-stepper>

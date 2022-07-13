@@ -20,6 +20,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
     declarations: [],
@@ -45,6 +46,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatExpansionModule,
         MatTableModule,
         MatDialogModule,
+        MatStepperModule,
     ],
     exports: [
         CommonModule,
@@ -68,6 +70,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatExpansionModule,
         MatTableModule,
         MatDialogModule,
+        MatStepperModule,
     ],
 })
 export class MaterialModule {}
