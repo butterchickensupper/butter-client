@@ -70,7 +70,7 @@ export class CheckoutComponent {
 
     constructor(
         private formBuilder: UntypedFormBuilder,
-        private breakpointObserver: BreakpointObserver,
+        public breakpointObserver: BreakpointObserver,
         private router: Router,
         private cartService: CartService,
         private orderService: OrderService,

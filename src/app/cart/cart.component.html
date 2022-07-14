@@ -4,7 +4,7 @@
     <mat-icon>shopping_bag</mat-icon>
   </mat-card-title>
   <mat-card-content>
-    <div class="bottom-space">
+    <div>
       <div class="menu-item" *ngFor="let item of orders">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" (addItem)="onEdit($event)"
           (deleteItem)="onDelete($event)" [readOnly]="true" [imageSize]="64">
