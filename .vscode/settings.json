@@ -1,4 +1,7 @@
 {
     "typescriptHero.imports.organizeOnSave": true,
-    "prettier.configPath": "src/.prettierrc.js"
+    "prettier.configPath": "src/.prettierrc.js",
+    "files.exclude": {
+        "node_modules": true
+    }
 }
