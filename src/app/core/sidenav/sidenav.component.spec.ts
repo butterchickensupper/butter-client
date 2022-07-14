@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { SidenavComponent } from './sidenav.component';
-import { of } from 'rxjs';
 
 describe('SidenavComponent', () => {
     let component: SidenavComponent;
@@ -13,16 +12,9 @@ describe('SidenavComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [MatSidenavModule, BrowserAnimationsModule, MatListModule],
+            imports: [MatSidenavModule, BrowserAnimationsModule, MatListModule, RouterTestingModule.withRoutes([])],
             declarations: [SidenavComponent],
-            providers: [
-                {
-                    provide: Router,
-                    useValue: {
-                        events: of({}),
-                    },
-                },
-            ],
+            providers: [],
         }).compileComponents();
     });
 

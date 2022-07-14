@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatListModule } from '@angular/material/list';
-import { OrderHistoryComponent } from './order-history.component';
+import { MaterialModule } from '../core/material/material.module';
+import { AuthService } from '../services/auth/auth.service';
+import { LoadingService } from '../services/loading/loading.service';
 import { OrderService } from '../services/order/order.service';
+import { OrderHistoryComponent } from './order-history.component';
 
 describe('OrderHistoryComponent', () => {
     let component: OrderHistoryComponent;
@@ -13,13 +14,24 @@ describe('OrderHistoryComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [OrderHistoryComponent],
-            imports: [MatCardModule, MatListModule, MatFormFieldModule],
+            imports: [MaterialModule],
             providers: [
                 {
                     provide: OrderService,
                     useValue: {
-                        getHistory: jasmine.createSpy('getHistory'),
+                        getHistory: jasmine.createSpy('getHistory').and.returnValue(of()),
                     },
+                },
+                {
+                    provide: LoadingService,
+                    useValue: {
+                        show: jasmine.createSpy('show'),
+                        hide: jasmine.createSpy('hide'),
+                    },
+                },
+                {
+                    provide: AuthService,
+                    useValue: {},
                 },
             ],
         }).compileComponents();

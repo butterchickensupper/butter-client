@@ -1,7 +1,14 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 
 import { ProfileComponent } from './profile.component';
+
+@Component({
+    selector: 'app-login',
+    template: '<p>login</p>',
+})
+class MockLoginComponent {}
 
 describe('ProfileComponent', () => {
     let component: ProfileComponent;
@@ -9,7 +16,7 @@ describe('ProfileComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ProfileComponent],
+            declarations: [ProfileComponent, MockLoginComponent],
             imports: [MatCardModule],
         }).compileComponents();
     });

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { CartComponent } from './cart.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { OrderService } from '../services/order/order.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+
+import { MaterialModule } from '../core/material/material.module';
+import { OrderService } from '../services/order/order.service';
+import { CartComponent } from './cart.component';
 
 describe('CartComponent', () => {
     let component: CartComponent;
@@ -14,7 +14,7 @@ describe('CartComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [CartComponent],
-            imports: [FormsModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule],
+            imports: [FormsModule, ReactiveFormsModule, MaterialModule, RouterTestingModule.withRoutes([])],
             providers: [
                 {
                     provide: OrderService,
