@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DialogService } from 'src/app/core/dialog/dialog.service';
 import { BillingInfo } from 'src/app/models/billing-info';
+import { DeliveryInfo } from 'src/app/models/delivery-info';
 import { Order } from 'src/app/models/order';
 import { OrderType } from 'src/app/models/order-type.enum';
 import { PaymentInfo } from 'src/app/models/payment-info';
@@ -31,22 +32,6 @@ export class CheckoutComponent {
     @ViewChild('payInfoStep')
     private payInfoStep?: MatStep;
 
-    public billingInfoForm = this.formBuilder.group({
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        address: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        state: ['', [Validators.required]],
-        zip: ['', [Validators.required]],
-    });
-    public payInfoForm = this.formBuilder.group({
-        cardNumber: ['', [Validators.required]],
-        expDate: ['', [Validators.required]],
-        code: ['', [Validators.required]],
-    });
-    public stepperOrientation: Observable<StepperOrientation>;
-    public checkoutStatus = 'Order...';
-
     private get billingInfo(): BillingInfo | undefined {
         if (this.billingInfoForm.invalid) return undefined;
         return new BillingInfo({
@@ -59,6 +44,17 @@ export class CheckoutComponent {
         });
     }
 
+    private get deliveryInfo(): DeliveryInfo | undefined {
+        if (this.deliveryInfoForm.invalid) return undefined;
+        return new DeliveryInfo({
+            sameAsBilling: this.deliveryInfoForm.get('sameAsBilling')?.value,
+            address: this.deliveryInfoForm.get('address')?.value,
+            city: this.deliveryInfoForm.get('city')?.value,
+            state: this.deliveryInfoForm.get('state')?.value,
+            zip: this.deliveryInfoForm.get('zip')?.value,
+        });
+    }
+
     private get paymentInfo(): PaymentInfo | undefined {
         if (this.payInfoForm.invalid) return undefined;
         return new PaymentInfo({
@@ -67,6 +63,30 @@ export class CheckoutComponent {
             securityCode: this.payInfoForm.get('code')?.value,
         });
     }
+
+    public billingInfoForm = this.formBuilder.group({
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
+        address: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        zip: ['', [Validators.required]],
+    });
+    public deliveryInfoForm = this.formBuilder.group({
+        sameAsBilling: [false, [Validators.required]],
+        address: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        zip: ['', [Validators.required]],
+    });
+    public payInfoForm = this.formBuilder.group({
+        cardNumber: ['', [Validators.required]],
+        expDate: ['', [Validators.required]],
+        code: ['', [Validators.required]],
+    });
+    public stepperOrientation: Observable<StepperOrientation>;
+    public checkoutStatus = 'Order...';
+    public orderType?: OrderType;
 
     constructor(
         private formBuilder: UntypedFormBuilder,
@@ -111,6 +131,7 @@ export class CheckoutComponent {
                 setTimeout(() => this.loadingService.hide(), 0);
                 this.checkoutStatus = 'Order Complete';
                 this.next();
+                this.orderType = undefined;
             },
             error: (error) => {
                 setTimeout(() => this.loadingService.hide(), 0);
@@ -126,12 +147,13 @@ export class CheckoutComponent {
 
     public selectPickup() {
         this.set(OrderType.Pickup);
+        this.completeStep(this.orderTypeStep);
+        this.next();
     }
 
     private set(type: OrderType): void {
         this.cartService.setOrderType(type);
-        this.completeStep(this.orderTypeStep);
-        this.next();
+        this.orderType = type;
     }
 
     public submit(): Observable<Order> {

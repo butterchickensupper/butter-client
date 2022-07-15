@@ -7,7 +7,7 @@
     <mat-step #loginStep label="Account">
         <app-login (LoggedIn)="completeLogin()" [showLogout]=false></app-login>
     </mat-step>
-    <mat-step #orderTypeStep label="Order Type">
+    <mat-step #orderTypeStep label="Order Type" [stepControl]="deliveryInfoForm">
         <div class="container">
             <mat-card class="button-card" (click)="selectDelivery()">
                 <mat-card-title>Delivery</mat-card-title>
@@ -16,9 +16,47 @@
                 <mat-card-title>Pickup</mat-card-title>
             </mat-card>
         </div>
-        <div>
-            <!-- show when user selects delivery, checkbox for same as billing or have them enter a location-->
-        </div>
+        <ng-container *ngIf="orderType === 1">
+            <div class="container">
+                <form [formGroup]="deliveryInfoForm">
+                    <p>
+                        <mat-checkbox #sameAsBilling formControlName="sameAsBilling">Same As Billing</mat-checkbox>
+                    </p>
+                    <div [hidden]="sameAsBilling.checked">
+                        <p>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Address</mat-label>
+                                <input matInput placeholder="Address" formControlName="address" />
+                                <mat-error *ngIf="deliveryInfoForm.get('address')?.invalid">Address is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline" class="same-line-spacer">
+                                <mat-label>City</mat-label>
+                                <input matInput placeholder="City" formControlName="city" />
+                                <mat-error *ngIf="deliveryInfoForm.get('city')?.invalid">City is required.</mat-error>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline">
+                                <mat-label>State</mat-label>
+                                <input matInput placeholder="State" formControlName="state" />
+                                <mat-error *ngIf="deliveryInfoForm.get('state')?.invalid">State is required.</mat-error>
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Zip Code</mat-label>
+                                <input matInput placeholder="Zip" formControlName="zip" />
+                                <mat-error *ngIf="deliveryInfoForm.get('zip')?.invalid">Zip Code is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
     </mat-step>
     <mat-step #billInfoStep [stepControl]="billingInfoForm" label="Billing Information">
         <form [formGroup]="billingInfoForm">
