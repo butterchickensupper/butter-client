@@ -31,8 +31,6 @@ export class CheckoutComponent {
     private billInfoStep?: MatStep;
     @ViewChild('payInfoStep')
     private payInfoStep?: MatStep;
-    @ViewChild('completeStep')
-    private completeMatStep?: MatStep;
 
     private get billingInfo(): BillingInfo | undefined {
         if (this.billingInfoForm.invalid) return undefined;
@@ -87,7 +85,6 @@ export class CheckoutComponent {
         code: ['', [Validators.required]],
     });
     public stepperOrientation: Observable<StepperOrientation>;
-    public checkoutStatus = 'Status';
     public orderType?: OrderType;
 
     constructor(
@@ -131,9 +128,7 @@ export class CheckoutComponent {
             next: () => {
                 this.cartService.clear();
                 setTimeout(() => this.loadingService.hide(), 0);
-                this.checkoutStatus = 'Order Complete';
-                this.next();
-                this.completeStep(this.completeMatStep);
+                this.router.navigate(['status']);
             },
             error: (error) => {
                 setTimeout(() => this.loadingService.hide(), 0);

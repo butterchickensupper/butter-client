@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CartComponent } from './cart/cart.component';
+import { CheckoutCompleteComponent } from './cart/checkout/checkout-complete.component';
 import { CheckoutComponent } from './cart/checkout/checkout.component';
 import { AboutComponent } from './core/about/about.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'cart', component: CartComponent },
     { path: 'checkout', component: CheckoutComponent },
+    { path: 'status', component: CheckoutCompleteComponent },
     { path: 'menu', component: MenuComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'order-history', component: OrderHistoryComponent },

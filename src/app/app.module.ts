@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutCompleteComponent } from './cart/checkout/checkout-complete.component';
 import { CheckoutComponent } from './cart/checkout/checkout.component';
 import { AboutComponent } from './core/about/about.component';
 import { ErrorDialogComponent } from './core/dialog/error-dialog';
@@ -50,6 +51,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         AutofocusDirective,
         ErrorDialogComponent,
         CheckoutComponent,
+        CheckoutCompleteComponent,
     ],
     imports: [
         BrowserModule,

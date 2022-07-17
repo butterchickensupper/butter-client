@@ -41,7 +41,7 @@
 
     <div>
       <mat-label>Price: </mat-label>
-      <span class="text-bold">{{ item?.price }}</span>
+      <span class="text-bold">{{ item?.price | currency }}</span>
     </div>
 
     <ng-container *ngIf="!editMode && !onMenu">
@@ -52,7 +52,7 @@
         </div>
         <div>
           <mat-label>Item Total: </mat-label>
-          <span class="text-bold">{{ quantity * item.price }}</span>
+          <span class="text-bold">{{ quantity * item.price | currency }}</span>
         </div>
       </div>
     </ng-container>

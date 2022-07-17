@@ -1,7 +1,5 @@
 <mat-card class="result">
-  <mat-card-header>
-    <mat-card-title>Order History</mat-card-title>
-  </mat-card-header>
+  <mat-card-title>Order History</mat-card-title>
   <mat-card-content>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let order of orders$ | async;let i=index;" [expanded]="step === i"
@@ -31,9 +29,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <div style="margin-top: 15px;text-align: right;">
+        <div class="total">
           <mat-label>Total: </mat-label>
-          <span style="font-weight: 500;">{{ order.total | currency }}</span>
+          <span class="text-bold">{{ order.total | currency }}</span>
         </div>
 
         <mat-action-row>
@@ -43,3 +41,4 @@
     </mat-accordion>
   </mat-card-content>
 </mat-card>
+<p class="card-spacer"></p>
