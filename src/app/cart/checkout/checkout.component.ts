@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatStep, MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DialogService } from 'src/app/core/dialog/dialog.service';
 import { BillingInfo } from 'src/app/models/billing-info';
@@ -31,6 +31,8 @@ export class CheckoutComponent {
     private billInfoStep?: MatStep;
     @ViewChild('payInfoStep')
     private payInfoStep?: MatStep;
+    @ViewChild('completeStep')
+    private completeMatStep?: MatStep;
 
     private get billingInfo(): BillingInfo | undefined {
         if (this.billingInfoForm.invalid) return undefined;
@@ -85,7 +87,7 @@ export class CheckoutComponent {
         code: ['', [Validators.required]],
     });
     public stepperOrientation: Observable<StepperOrientation>;
-    public checkoutStatus = 'Order...';
+    public checkoutStatus = 'Status';
     public orderType?: OrderType;
 
     constructor(
@@ -131,7 +133,7 @@ export class CheckoutComponent {
                 setTimeout(() => this.loadingService.hide(), 0);
                 this.checkoutStatus = 'Order Complete';
                 this.next();
-                this.orderType = undefined;
+                this.completeStep(this.completeMatStep);
             },
             error: (error) => {
                 setTimeout(() => this.loadingService.hide(), 0);
@@ -157,15 +159,21 @@ export class CheckoutComponent {
     }
 
     public submit(): Observable<Order> {
-        if (!this.billingInfo || !this.paymentInfo) {
-            //form errors
-            return of();
+        if (!this.billingInfo) {
+            throw new Error('billing information is missing');
+        }
+        if (!this.paymentInfo) {
+            throw new Error('payment information is missing');
+        }
+        if (this.orderType === OrderType.Delivery && !this.deliveryInfo) {
+            throw new Error('delivery information is missing');
         }
 
         setTimeout(() => this.loadingService.show(), 0);
         var o = new Order({
             billingInfo: this.billingInfo,
             items: this.cartService.order.items,
+            deliveryInfo: this.orderType === OrderType.Delivery ? this.deliveryInfo : undefined,
         });
         return this.orderService.submitOrder(o);
     }

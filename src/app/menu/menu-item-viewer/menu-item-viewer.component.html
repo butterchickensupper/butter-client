@@ -1,52 +1,72 @@
 <mat-card class="result">
-  <mat-card-header>
+  <div class="container">
     <mat-card-title>{{ item?.name }}</mat-card-title>
-    <span class="fill-remaining-space"></span>
-    <div *ngIf="!readOnly">
+
+    <ng-container *ngIf="onMenu">
       <button mat-mini-fab color="primary" aria-label="add cart item" (click)="onAdd()">
         <mat-icon>add_shopping_cart</mat-icon>
       </button>
-    </div>
-    <div *ngIf="readOnly">
-      <button class="button-scale edit-margin" mat-mini-fab color="primary" aria-label="edit cart item"
-        (click)="onEdit()">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-    <div *ngIf="readOnly">
-      <button class="button-scale" mat-mini-fab color="primary" aria-label="remove from cart" (click)="onDelete()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-  </mat-card-header>
+    </ng-container>
+
+    <ng-container *ngIf="!onMenu">
+      <div *ngIf="editMode">
+        <button class="button-scale edit-margin" mat-mini-fab color="primary" aria-label="update item"
+          (click)="onAdd()">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button class="button-scale" mat-mini-fab color="primary" aria-label="cancel" (click)="cancelEdit()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="!editMode">
+        <button class="button-scale edit-margin" mat-mini-fab color="primary" aria-label="edit cart item"
+          (click)="onEdit()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button class="button-scale" mat-mini-fab color="primary" aria-label="remove from cart" (click)="onDelete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
   <mat-card-content>
     <img class="image" [src]="item?.imageUrl" width="{{imageSize}}" height="{{imageSize}}" />
 
-    <div *ngIf="!readOnly">
+    <div *ngIf="onMenu">
       <mat-label>Description: </mat-label>
       <span>{{ item?.description }}</span>
     </div>
+
     <div>
       <mat-label>Price: </mat-label>
-      <span class="item-price">{{ item?.price }}</span>
+      <span class="text-bold">{{ item?.price }}</span>
     </div>
+
+    <ng-container *ngIf="!editMode && !onMenu">
+      <div class="container">
+        <div>
+          <mat-label>Quantity: </mat-label>
+          <span class="text-bold">{{ quantity }}</span>
+        </div>
+        <div>
+          <mat-label>Item Total: </mat-label>
+          <span class="text-bold">{{ quantity * item.price }}</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="onMenu || editMode">
+      <mat-form-field appearance="outline">
+        <mat-label>Quantity</mat-label>
+        <mat-select [(value)]="quantity">
+          <mat-option *ngFor="let count of numbers" [value]="count">
+            {{ count }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+
   </mat-card-content>
-
-  <div *ngIf="readOnly">
-    <mat-card-footer>
-      <mat-label>Quantity: </mat-label>
-      <span class="item-price">{{ quantity }}</span>
-    </mat-card-footer>
-  </div>
-  <div *ngIf="!readOnly">
-    <mat-form-field appearance="outline">
-      <mat-label>Quantity</mat-label>
-      <mat-select [(value)]="quantity">
-        <mat-option *ngFor="let count of numbers" [value]="count">
-          {{ count }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
 </mat-card>

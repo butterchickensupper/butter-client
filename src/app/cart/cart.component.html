@@ -1,25 +1,25 @@
-<mat-card>
-  <mat-card-title>
-    Cart
-    <mat-icon>shopping_bag</mat-icon>
-  </mat-card-title>
+<mat-card class="result">
+  <mat-card-header>
+    <mat-card-title>
+      Order
+    </mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <div>
       <div class="menu-item" *ngFor="let item of orders">
         <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" (addItem)="onEdit($event)"
-          (deleteItem)="onDelete($event)" [readOnly]="true" [imageSize]="64">
+          (deleteItem)="onDelete($event)" [imageSize]="64">
         </app-menu-item-viewer>
         <p></p>
       </div>
     </div>
-    <p></p>
     <div [align]="'end'">
       <mat-label>Total: </mat-label>
-      <span>{{ getTotal() | currency }}</span>
+      <span class="text-bold">{{ getTotal() | currency }}</span>
     </div>
-    <p></p>
   </mat-card-content>
   <mat-card-actions [hidden]="checkout" [align]="'end'">
     <button mat-button color="primary" (click)="goToCheckout()">Checkout</button>
   </mat-card-actions>
 </mat-card>
+<p class="card-spacer"></p>

@@ -1,4 +1,5 @@
 import { BillingInfo } from './billing-info';
+import { DeliveryInfo } from './delivery-info';
 import { MenuItem } from './menu';
 import { OrderType } from './order-type.enum';
 
@@ -18,13 +19,15 @@ export class Order {
     public id?: string;
     public items: MenuOrder[] = [];
     public billingInfo!: BillingInfo;
+    public deliveryInfo?: DeliveryInfo;
     public createdAt?: Date;
     public updatedAt?: Date;
     public total?: number;
 
-    constructor(args: { billingInfo: BillingInfo; items: MenuOrder[] }) {
+    constructor(args: { billingInfo: BillingInfo; items: MenuOrder[]; deliveryInfo?: DeliveryInfo }) {
         this.billingInfo = args.billingInfo;
         this.items = args.items;
+        this.deliveryInfo = args.deliveryInfo;
     }
 }
 
