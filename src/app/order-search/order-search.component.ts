@@ -33,6 +33,8 @@ export class OrderSearchComponent implements OnDestroy {
     }
 
     public search() {
+        this.searchForm.get('date')?.markAsTouched();
+        this.searchForm.updateValueAndValidity();
         const d = this.date;
         if (!d) return;
         setTimeout(() => this.loadingService.show(), 0);
@@ -41,6 +43,13 @@ export class OrderSearchComponent implements OnDestroy {
                 .search(new OrderSearchRequest({ startDate: d }))
                 .pipe(
                     map((res) => {
+                        res.map((x) => {
+                            var total = 0;
+                            x.items.map((i) => {
+                                total += i.item.price * i.quantity;
+                            });
+                            x.total = total;
+                        });
                         this.dataSource = res;
                     }),
                     tap(() => setTimeout(() => this.loadingService.hide(), 0))
@@ -49,5 +58,8 @@ export class OrderSearchComponent implements OnDestroy {
         );
     }
 
-    public clear(): void {}
+    public clear(): void {
+        this.dataSource = [];
+        this.searchForm.reset();
+    }
 }
