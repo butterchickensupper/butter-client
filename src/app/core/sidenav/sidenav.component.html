@@ -2,10 +2,14 @@
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
     <mat-nav-list>
       <a mat-list-item [routerLink]="'/menu'" (click)="sidenav.toggle()"> Menu </a>
-      <a mat-list-item [routerLink]="'/search'" (click)="sidenav.toggle()"> Order Search </a>
-      <a mat-list-item [routerLink]="'/orders'" (click)="sidenav.toggle()"> Orders </a>
-      <a mat-list-item [routerLink]="'/dashboard'" (click)="sidenav.toggle()"> Order Dashboard
+
+      <!-- admim only -->
+      <a mat-list-item [routerLink]="'/search'" (click)="sidenav.toggle()"> Search </a>
+      <a mat-list-item [routerLink]="'/dashboard'" (click)="sidenav.toggle()"> Dashboard
       </a>
+      <!-- admim only -->
+
+      <a mat-list-item [routerLink]="'/orders'" (click)="sidenav.toggle()"> Orders </a>
       <a mat-list-item [routerLink]="'/about'" (click)="sidenav.toggle()"> About </a>
     </mat-nav-list>
   </mat-sidenav>
