@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { map, Subscription, tap } from 'rxjs';
 
 import { Order } from '../models/order';
-import { AuthService } from '../services/auth/auth.service';
+import { OrderSearchRequest } from '../models/order-search-request';
 import { LoadingService } from '../services/loading/loading.service';
 import { OrderService } from '../services/order/order.service';
 
@@ -11,39 +12,42 @@ import { OrderService } from '../services/order/order.service';
     templateUrl: './order-search.component.html',
     styleUrls: ['./order-search.component.scss'],
 })
-export class OrderSearchComponent {
-    public orders$: Observable<Order[]> = of([]);
-    public step = 0;
-    public panelOpenState = false;
-    public displayedColumns: string[] = ['quantity', 'name', 'price'];
+export class OrderSearchComponent implements OnDestroy {
+    private subscriptions: Subscription[] = [];
+    public displayedColumns = ['created', 'name', 'items', 'total'];
+    public dataSource: Order[] = [];
+    public searchForm = this.formBuilder.group({
+        date: ['', Validators.required],
+    });
 
-    constructor(private orderServce: OrderService, private loadingService: LoadingService, private authService: AuthService) {
-        // TODO: uncomment
-        // if (!this.authService.currentUser) return;
+    private get date(): Date | undefined {
+        const v = this.searchForm.get('date')?.value;
+        if (!v) return undefined;
+        return new Date(v);
+    }
+
+    constructor(private formBuilder: UntypedFormBuilder, private loadingService: LoadingService, private orderService: OrderService) {}
+
+    ngOnDestroy(): void {
+        this.subscriptions.map((res) => res.unsubscribe());
+    }
+
+    public search() {
+        const d = this.date;
+        if (!d) return;
         setTimeout(() => this.loadingService.show(), 0);
-        this.orders$ = this.orderServce.getHistory().pipe(
-            map((orders) => {
-                orders.map((order) => {
-                    order.total = 0;
-                    for (const item of order.items) {
-                        order.total += item.quantity * item.item.price;
-                    }
-                });
-                return orders;
-            }),
-            tap(() => setTimeout(() => this.loadingService.hide(), 0))
+        this.subscriptions.push(
+            this.orderService
+                .search(new OrderSearchRequest({ startDate: d }))
+                .pipe(
+                    map((res) => {
+                        this.dataSource = res;
+                    }),
+                    tap(() => setTimeout(() => this.loadingService.hide(), 0))
+                )
+                .subscribe()
         );
     }
 
-    public setStep(index: number) {
-        this.step = index;
-    }
-
-    public nextStep() {
-        this.step++;
-    }
-
-    public prevStep() {
-        this.step--;
-    }
+    public clear(): void {}
 }

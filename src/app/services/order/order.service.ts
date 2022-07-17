@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Order } from 'src/app/models/order';
-import { OrderHistoryRequest } from 'src/app/models/order-history-request';
+import { OrderSearchRequest } from 'src/app/models/order-search-request';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,8 +15,28 @@ export class OrderService {
         return this.httpClient.post<Order>(environment.apiGatewayUrl + 'order', order);
     }
 
-    public getHistory(request?: OrderHistoryRequest): Observable<Order[]> {
+    /**
+     * Get all orders for a user
+     *
+     */
+    public getHistory(): Observable<Order[]> {
         return this.httpClient.get<Order[]>(environment.apiGatewayUrl + 'orders').pipe(
+            map((a) => {
+                a.forEach((b) => {
+                    if (b.createdAt) b.createdAt = new Date(b.createdAt);
+                    if (b.updatedAt) b.updatedAt = new Date(b.updatedAt);
+                });
+                return a;
+            })
+        );
+    }
+
+    /**
+     * Search for orders by date range
+     *
+     */
+    public search(request: OrderSearchRequest): Observable<Order[]> {
+        return this.httpClient.post<Order[]>(environment.apiGatewayUrl + 'search', request).pipe(
             map((a) => {
                 a.forEach((b) => {
                     if (b.createdAt) b.createdAt = new Date(b.createdAt);
