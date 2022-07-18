@@ -7,6 +7,7 @@
     <mat-step #loginStep label="Account">
         <app-login (LoggedIn)="completeLogin()" [showLogout]=false></app-login>
     </mat-step>
+
     <mat-step #orderTypeStep label="Order Type" [stepControl]="deliveryInfoForm">
         <div class="container">
             <mat-card class="button-card" (click)="selectDelivery()">
@@ -58,6 +59,7 @@
             </div>
         </ng-container>
     </mat-step>
+
     <mat-step #billInfoStep [stepControl]="billingInfoForm" label="Billing Information">
         <form [formGroup]="billingInfoForm">
             <p>
@@ -108,6 +110,7 @@
             </div>
         </form>
     </mat-step>
+
     <mat-step #payInfoStep [stepControl]="payInfoForm" label="Payment Information">
         <form [formGroup]="payInfoForm">
             <p>
@@ -137,5 +140,6 @@
             </div>
         </form>
     </mat-step>
+
 </mat-stepper>
 <p class="card-spacer"></p>
