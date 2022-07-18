@@ -30,6 +30,7 @@ import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewe
 import { MenuComponent } from './menu/menu.component';
 import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderDetailComponent } from './order-search/order-detail/order-detail.component';
 import { OrderSearchComponent } from './order-search/order-search.component';
 import { AuthService } from './services/auth/auth.service';
 import { AutofocusDirective } from './utils/auto-focus.directive';
@@ -54,6 +55,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         CheckoutComponent,
         CheckoutCompleteComponent,
         OrderSearchComponent,
+        OrderDetailComponent,
     ],
     imports: [
         BrowserModule,

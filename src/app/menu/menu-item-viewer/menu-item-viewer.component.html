@@ -8,7 +8,7 @@
       </button>
     </ng-container>
 
-    <ng-container *ngIf="!onMenu">
+    <ng-container *ngIf="!onMenu && !preventEdit">
       <div *ngIf="editMode">
         <button class="button-scale edit-margin" mat-mini-fab color="primary" aria-label="update item"
           (click)="onAdd()">

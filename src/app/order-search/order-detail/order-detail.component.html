@@ -1,0 +1,19 @@
+<p></p>
+<mat-divider></mat-divider>
+<p></p>
+<div>
+    <div class="menu-item" *ngFor="let item of orders">
+        <app-menu-item-viewer #viewer [item]="item.item" [quantity]="item.quantity" [imageSize]="32"
+            [preventEdit]="true">
+        </app-menu-item-viewer>
+        <p></p>
+    </div>
+</div>
+<div [align]="'end'">
+    <mat-label>Total: </mat-label>
+    <span class="text-bold">{{ getTotal() | currency }}</span>
+</div>
+<mat-divider></mat-divider>
+<div [align]="'end'">
+    <button mat-button color="primary" (click)="goBack()">Back</button>
+</div>

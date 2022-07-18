@@ -24,7 +24,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="dataSource.length > 0">
+    <ng-container *ngIf="dataSource.length > 0 && !showDetail">
       <div class="results-table">
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="created">
@@ -32,8 +32,9 @@
             <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'shortTime'}} </td>
           </ng-container>
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Last Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.billingInfo.lastName}} </td>
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element">{{element.billingInfo.firstName}} {{element.billingInfo.lastName}}
+            </td>
           </ng-container>
           <ng-container matColumnDef="items">
             <th mat-header-cell *matHeaderCellDef> Items </th>
@@ -45,10 +46,17 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showOrder(row)" class="search-result">
+          </tr>
         </table>
       </div>
     </ng-container>
+
+    <ng-container *ngIf="showDetail">
+      <app-order-detail (back)="showResults()" [orders]="orders"></app-order-detail>
+    </ng-container>
+
+
   </mat-card-content>
 </mat-card>
 <p class="card-spacer"></p>

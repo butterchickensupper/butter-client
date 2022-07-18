@@ -16,6 +16,8 @@ export class MenuItemViewerComponent implements OnInit {
     @Input()
     public onMenu!: boolean;
     @Input()
+    public preventEdit?: boolean = false;
+    @Input()
     public item!: MenuItem;
     @Input()
     public quantity: number = 1;

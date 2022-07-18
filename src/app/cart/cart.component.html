@@ -18,6 +18,7 @@
       <span class="text-bold">{{ getTotal() | currency }}</span>
     </div>
   </mat-card-content>
+  <mat-divider></mat-divider>
   <mat-card-actions [hidden]="checkout" [align]="'end'">
     <button mat-button color="primary" (click)="goToCheckout()">Checkout</button>
   </mat-card-actions>
