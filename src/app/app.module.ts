@@ -24,11 +24,11 @@ import { PageNotFoundComponent } from './core/page-not-found/page-not-found.comp
 import { ProfileComponent } from './core/profile/profile.component';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
 import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorInterceptor } from './http/interceptors/error-interceptor';
 import { JwtInterceptor } from './http/interceptors/jwt-interceptor';
 import { MenuItemViewerComponent } from './menu/menu-item-viewer/menu-item-viewer.component';
 import { MenuComponent } from './menu/menu.component';
-import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailComponent } from './order-search/order-detail/order-detail.component';
 import { OrderSearchComponent } from './order-search/order-search.component';
@@ -47,7 +47,7 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         MenuComponent,
         MenuItemViewerComponent,
         OrderHistoryComponent,
-        OrderDashboardComponent,
+        DashboardComponent,
         LoginComponent,
         TelInputComponent,
         AutofocusDirective,

@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MatCardModule } from '@angular/material/card';
-import { OrderDashboardComponent } from './order-dashboard.component';
+
+import { DashboardComponent } from './dashboard.component';
 
 describe('OrderDashboardComponent', () => {
-    let component: OrderDashboardComponent;
-    let fixture: ComponentFixture<OrderDashboardComponent>;
+    let component: DashboardComponent;
+    let fixture: ComponentFixture<DashboardComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [OrderDashboardComponent],
+            declarations: [DashboardComponent],
             imports: [MatCardModule],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(OrderDashboardComponent);
+        fixture = TestBed.createComponent(DashboardComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

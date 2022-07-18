@@ -1,0 +1,37 @@
+<mat-card class="dashboard">
+    <mat-card-title>Today's Orders</mat-card-title>
+    <mat-card-content>
+        <ng-container *ngIf="dataSource.length > 0">
+            <div class="results-table">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="created">
+                        <th mat-header-cell *matHeaderCellDef> Order Time </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'shortTime'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element">{{element.billingInfo.firstName}}
+                            {{element.billingInfo.lastName}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="items">
+                        <th mat-header-cell *matHeaderCellDef> Items </th>
+                        <td mat-cell *matCellDef="let element"> {{element.items.length}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="total">
+                        <th mat-header-cell *matHeaderCellDef> Total </th>
+                        <td mat-cell *matCellDef="let element"> {{element.total | currency}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showOrder(row)"
+                        class="search-result">
+                    </tr>
+                </table>
+            </div>
+            <p></p>
+            <p>Show map here</p>
+        </ng-container>
+    </mat-card-content>
+</mat-card>
+<p class="card-spacer"></p>

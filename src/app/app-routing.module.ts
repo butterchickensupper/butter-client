@@ -7,8 +7,8 @@ import { CheckoutComponent } from './cart/checkout/checkout.component';
 import { AboutComponent } from './core/about/about.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
-import { OrderDashboardComponent } from './order-dashboard/order-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderSearchComponent } from './order-search/order-search.component';
 
@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'orders', component: OrderHistoryComponent },
     { path: 'search', component: OrderSearchComponent },
-    { path: 'dashboard', component: OrderDashboardComponent },
+    { path: 'dashboard', component: DashboardComponent },
     { path: '', redirectTo: '/menu', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent },
 ];
