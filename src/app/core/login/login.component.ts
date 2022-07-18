@@ -105,11 +105,9 @@ export class LoginComponent implements AfterViewInit {
         //TODO: update with verification code
         return this.confirmationResult.confirm('123456').then((res) => {
             if (res) {
-                if (res) {
-                    this.confirmationResult = undefined;
-                    this.activeTemplate = LoginTemplate.Landing;
-                } else console.log('info', res);
-            }
+                this.confirmationResult = undefined;
+                this.activeTemplate = LoginTemplate.Landing;
+            } else console.log('info', res);
         });
     }
 
