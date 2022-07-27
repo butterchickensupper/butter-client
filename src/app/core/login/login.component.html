@@ -17,7 +17,7 @@
 </ng-template>
 
 <ng-template #showLanding>
-    <div class="container" *ngIf="userId$ | async as userId;">
+    <div class="container">
         <code>uid: {{ userId }}</code>
         <p *ngIf="showLogout"><button mat-raised-button color="primary" (click)="logout()">Logout</button></p>
     </div>

@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Optional, Output, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    Optional,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import {
     Auth,
     ConfirmationResult,
@@ -8,7 +18,7 @@ import {
     signOut,
 } from '@angular/fire/auth';
 import { FormControl, FormGroup } from '@angular/forms';
-import { tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 import { MyTel } from './tel-input/tel-input.component';
@@ -24,12 +34,13 @@ export enum LoginTemplate {
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit, OnDestroy {
+    private subscriptions: Subscription[] = [];
     private recaptchaVerifier?: RecaptchaVerifier;
     public confirmationResult?: ConfirmationResult;
 
     public showPhoneNumber = false;
-    public userId$;
+    public userId?: string;
     public template = LoginTemplate;
     public activeTemplate = LoginTemplate.Login;
     @ViewChild('recaptcha')
@@ -46,16 +57,24 @@ export class LoginComponent implements AfterViewInit {
     public LoggedIn = new EventEmitter<boolean>();
 
     constructor(@Optional() private auth: Auth, private authService: AuthService) {
-        this.userId$ = authService.userId$.pipe(
-            tap((res) => {
-                if (res) {
-                    this.activeTemplate = LoginTemplate.Landing;
-                    this.LoggedIn.emit(true);
-                } else {
-                    this.LoggedIn.emit(false);
-                }
-            })
+        this.subscriptions.push(
+            authService.userId$
+                .pipe(
+                    tap((res) => {
+                        this.userId = res;
+                        if (res) {
+                            this.activeTemplate = LoginTemplate.Landing;
+                            this.LoggedIn.emit(true);
+                        } else {
+                            this.LoggedIn.emit(false);
+                        }
+                    })
+                )
+                .subscribe()
         );
+    }
+    ngOnDestroy(): void {
+        this.subscriptions.map((x) => x.unsubscribe());
     }
 
     ngAfterViewInit() {
