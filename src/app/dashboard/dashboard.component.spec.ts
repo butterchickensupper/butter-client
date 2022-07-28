@@ -17,7 +17,9 @@ describe('DashboardComponent', () => {
             providers: [
                 {
                     provide: LoadingService,
-                    useValue: {},
+                    useValue: {
+                        show: jasmine.createSpy('show'),
+                    },
                 },
                 {
                     provide: OrderService,
