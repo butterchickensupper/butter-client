@@ -20,7 +20,7 @@ export class OrderHistoryComponent {
     constructor(private orderServce: OrderService, private loadingService: LoadingService, private authService: AuthService) {
         // TODO: uncomment
         // if (!this.authService.currentUser) return;
-        setTimeout(() => this.loadingService.show(), 0);
+        this.loadingService.show();
         this.orders$ = this.orderServce.getHistory().pipe(
             map((orders) => {
                 orders.map((order) => {
@@ -31,7 +31,7 @@ export class OrderHistoryComponent {
                 });
                 return orders;
             }),
-            tap(() => setTimeout(() => this.loadingService.hide(), 0))
+            tap(() => this.loadingService.hide())
         );
     }
 

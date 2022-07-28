@@ -20,6 +20,7 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
 import { MyTel } from './tel-input/tel-input.component';
 
@@ -56,12 +57,14 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
     @Output()
     public LoggedIn = new EventEmitter<boolean>();
 
-    constructor(@Optional() private auth: Auth, private authService: AuthService) {
+    constructor(@Optional() private auth: Auth, private authService: AuthService, private loadingService: LoadingService) {
+        this.loadingService.show();
         this.subscriptions.push(
             authService.userId$
                 .pipe(
                     tap((res) => {
                         this.userId = res;
+                        this.loadingService.hide();
                         if (res) {
                             this.activeTemplate = LoginTemplate.Landing;
                             this.LoggedIn.emit(true);

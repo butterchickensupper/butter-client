@@ -12,9 +12,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BillingInfoComponent } from './cart/billing-info/billing-info.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutCompleteComponent } from './cart/checkout/checkout-complete.component';
 import { CheckoutComponent } from './cart/checkout/checkout.component';
+import { PaymentInfoComponent } from './cart/payment-info/payment-info.component';
 import { AboutComponent } from './core/about/about.component';
 import { ErrorDialogComponent } from './core/dialog/error-dialog';
 import { LoginComponent } from './core/login/login.component';
@@ -56,6 +58,8 @@ import { AutofocusDirective } from './utils/auto-focus.directive';
         CheckoutCompleteComponent,
         OrderSearchComponent,
         OrderDetailComponent,
+        BillingInfoComponent,
+        PaymentInfoComponent,
     ],
     imports: [
         BrowserModule,

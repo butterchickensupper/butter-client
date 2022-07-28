@@ -26,10 +26,10 @@ export class MenuComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        setTimeout(() => this.loadingService.show(), 0);
+        this.loadingService.show();
         this.menuService.getMenu('default').subscribe((res) => {
             this.menu = res;
-            setTimeout(() => this.loadingService.hide(), 0);
+            this.loadingService.hide();
         });
     }
 

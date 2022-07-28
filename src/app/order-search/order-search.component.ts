@@ -40,7 +40,7 @@ export class OrderSearchComponent implements OnDestroy {
         const d = this.date;
         if (!d) return;
         this.showDetail = false;
-        setTimeout(() => this.loadingService.show(), 0);
+        this.loadingService.show();
         this.subscriptions.push(
             this.orderService
                 .search(new OrderSearchRequest({ startDate: d }))
@@ -55,7 +55,7 @@ export class OrderSearchComponent implements OnDestroy {
                         });
                         this.dataSource = res;
                     }),
-                    tap(() => setTimeout(() => this.loadingService.hide(), 0))
+                    tap(() => this.loadingService.hide())
                 )
                 .subscribe()
         );

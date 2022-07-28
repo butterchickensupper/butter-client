@@ -11,10 +11,10 @@ export class LoadingService {
     constructor() {}
 
     public show() {
-        this._loading.next(true);
+        setTimeout(() => this._loading.next(true), 0);
     }
 
     public hide() {
-        this._loading.next(false);
+        setTimeout(() => this._loading.next(false), 0);
     }
 }

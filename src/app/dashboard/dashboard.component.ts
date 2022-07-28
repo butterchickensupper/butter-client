@@ -27,7 +27,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
     }
 
     public search() {
-        setTimeout(() => this.loadingService.show(), 0);
+        this.loadingService.show();
         this.subscriptions.push(
             this.orderService
                 .search(new OrderSearchRequest({ startDate: new Date() }))
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
                         });
                         this.dataSource = res;
                     }),
-                    tap(() => setTimeout(() => this.loadingService.hide(), 0))
+                    tap(() => this.loadingService.hide())
                 )
                 .subscribe()
         );

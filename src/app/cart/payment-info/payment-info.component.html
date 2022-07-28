@@ -1,0 +1,27 @@
+<form [formGroup]="payInfoForm">
+    <p>
+        <mat-form-field appearance="outline" class="same-line-spacer">
+            <mat-label>Card Number</mat-label>
+            <input matInput placeholder="Card Number" formControlName="cardNumber" />
+            <mat-error *ngIf="payInfoForm.get('cardNumber')?.invalid">Card Number is required.</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Expiration Date</mat-label>
+            <input matInput placeholder="Expiration Date (MM/YY)" formControlName="expDate" />
+            <mat-error *ngIf="payInfoForm.get('expDate')?.invalid">Expiration Date is required.</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Security Code</mat-label>
+            <input matInput placeholder="Security Code" formControlName="code" />
+            <mat-error *ngIf="payInfoForm.get('code')?.invalid">Security Code is required.</mat-error>
+        </mat-form-field>
+    </p>
+    <div>
+        <button mat-button matStepperPrevious (click)="goBack()">Back</button>
+        <button mat-button (click)="goNext()">Order</button>
+    </div>
+</form>

@@ -64,6 +64,11 @@ export class CartService {
         this.persistState();
     }
 
+    public setDeliveryInfo(info: BillingInfo): void {
+        this.state.deliveryInfo = info;
+        this.persistState();
+    }
+
     public removeOrder(orderId: any): boolean {
         const i = this.state.items.findIndex((x) => x.id === orderId);
         if (i === -1) return false;

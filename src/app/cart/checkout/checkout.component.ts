@@ -1,19 +1,19 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CdkStep } from '@angular/cdk/stepper';
 import { Component, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatStep, MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DialogService } from 'src/app/core/dialog/dialog.service';
-import { BillingInfo } from 'src/app/models/billing-info';
-import { DeliveryInfo } from 'src/app/models/delivery-info';
 import { Order } from 'src/app/models/order';
 import { OrderType } from 'src/app/models/order-type.enum';
-import { PaymentInfo } from 'src/app/models/payment-info';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { OrderService } from 'src/app/services/order/order.service';
+
+import { BillingInfoComponent } from '../billing-info/billing-info.component';
+import { PaymentInfoComponent } from '../payment-info/payment-info.component';
 
 @Component({
     selector: 'app-checkout',
@@ -23,72 +23,26 @@ import { OrderService } from 'src/app/services/order/order.service';
 export class CheckoutComponent {
     @ViewChild('stepper')
     private matStepper?: MatStepper;
-    @ViewChild('loginStep')
-    private loginStep?: MatStep;
-    @ViewChild('orderTypeStep')
-    private orderTypeStep?: MatStep;
-    @ViewChild('billInfoStep')
-    private billInfoStep?: MatStep;
     @ViewChild('payInfoStep')
     private payInfoStep?: MatStep;
 
-    private get billingInfo(): BillingInfo | undefined {
-        if (this.billingInfoForm.invalid) return undefined;
-        return new BillingInfo({
-            firstName: this.billingInfoForm.get('firstName')?.value,
-            lastName: this.billingInfoForm.get('lastName')?.value,
-            address: this.billingInfoForm.get('address')?.value,
-            city: this.billingInfoForm.get('city')?.value,
-            state: this.billingInfoForm.get('state')?.value,
-            zip: this.billingInfoForm.get('zip')?.value,
-        });
+    @ViewChild('billing')
+    private billingInfoComponent!: BillingInfoComponent;
+    @ViewChild('payment')
+    private paymentInfoComponent!: PaymentInfoComponent;
+
+    private deliveryInfoComponent?: BillingInfoComponent;
+    @ViewChild('delivery', { static: false })
+    public set content(deliveryInfo: BillingInfoComponent) {
+        if (deliveryInfo) {
+            this.deliveryInfoComponent = deliveryInfo;
+        }
     }
 
-    private get deliveryInfo(): DeliveryInfo | undefined {
-        if (this.deliveryInfoForm.invalid) return undefined;
-        return new DeliveryInfo({
-            sameAsBilling: this.deliveryInfoForm.get('sameAsBilling')?.value,
-            address: this.deliveryInfoForm.get('address')?.value,
-            city: this.deliveryInfoForm.get('city')?.value,
-            state: this.deliveryInfoForm.get('state')?.value,
-            zip: this.deliveryInfoForm.get('zip')?.value,
-        });
-    }
-
-    private get paymentInfo(): PaymentInfo | undefined {
-        if (this.payInfoForm.invalid) return undefined;
-        return new PaymentInfo({
-            cardNumber: this.payInfoForm.get('cardNumber')?.value,
-            expirationDate: this.payInfoForm.get('expDate')?.value,
-            securityCode: this.payInfoForm.get('code')?.value,
-        });
-    }
-
-    public billingInfoForm = this.formBuilder.group({
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        address: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        state: ['', [Validators.required]],
-        zip: ['', [Validators.required]],
-    });
-    public deliveryInfoForm = this.formBuilder.group({
-        sameAsBilling: [false, [Validators.required]],
-        address: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        state: ['', [Validators.required]],
-        zip: ['', [Validators.required]],
-    });
-    public payInfoForm = this.formBuilder.group({
-        cardNumber: ['', [Validators.required]],
-        expDate: ['', [Validators.required]],
-        code: ['', [Validators.required]],
-    });
     public stepperOrientation: Observable<StepperOrientation>;
     public orderType?: OrderType;
 
     constructor(
-        private formBuilder: UntypedFormBuilder,
         public breakpointObserver: BreakpointObserver,
         private router: Router,
         private cartService: CartService,
@@ -106,32 +60,34 @@ export class CheckoutComponent {
     }
 
     public completeLogin(): void {
-        this.completeStep(this.loginStep);
         this.next();
     }
 
     public next(): void {
-        if (this.matStepper) this.matStepper.next();
+        if (this.matStepper) {
+            if (this.matStepper.selected) {
+                this.completeStep(this.matStepper.selected);
+            }
+
+            this.matStepper.next();
+        }
     }
 
-    public completeBilling(): void {
-        if (!this.billingInfo) return;
-        this.completeStep(this.billInfoStep);
-        this.cartService.setBillingInfo(this.billingInfo);
-        this.next();
+    public back(): void {
+        if (this.matStepper) this.matStepper.previous();
     }
 
     public completeOrder(): void {
-        if (!this.paymentInfo) return;
+        if (!this.paymentInfoComponent?.paymentInfo) return;
         this.completeStep(this.payInfoStep);
         this.submit().subscribe({
             next: () => {
                 this.cartService.clear();
-                setTimeout(() => this.loadingService.hide(), 0);
+                this.loadingService.hide();
                 this.router.navigate(['status']);
             },
             error: (error) => {
-                setTimeout(() => this.loadingService.hide(), 0);
+                this.loadingService.hide();
                 console.log(error);
                 this.dialogService.showErrorDialog(error);
             },
@@ -140,12 +96,16 @@ export class CheckoutComponent {
 
     public selectDelivery() {
         this.set(OrderType.Delivery);
+        this.deliveryInfoComponent?.reset();
     }
 
     public selectPickup() {
         this.set(OrderType.Pickup);
-        this.completeStep(this.orderTypeStep);
         this.next();
+    }
+
+    public resetOrderType(): void {
+        this.orderType = undefined;
     }
 
     private set(type: OrderType): void {
@@ -154,26 +114,26 @@ export class CheckoutComponent {
     }
 
     public submit(): Observable<Order> {
-        if (!this.billingInfo) {
+        if (!this.billingInfoComponent?.billingInfo) {
             throw new Error('billing information is missing');
         }
-        if (!this.paymentInfo) {
+        if (!this.paymentInfoComponent?.paymentInfo) {
             throw new Error('payment information is missing');
         }
-        if (this.orderType === OrderType.Delivery && !this.deliveryInfo) {
+        if (this.orderType === OrderType.Delivery && !this.deliveryInfoComponent?.billingInfo) {
             throw new Error('delivery information is missing');
         }
 
-        setTimeout(() => this.loadingService.show(), 0);
+        this.loadingService.show();
         var o = new Order({
-            billingInfo: this.billingInfo,
+            billingInfo: this.billingInfoComponent.billingInfo,
             items: this.cartService.order.items,
-            deliveryInfo: this.orderType === OrderType.Delivery ? this.deliveryInfo : undefined,
+            deliveryInfo: this.orderType === OrderType.Delivery ? this.deliveryInfoComponent?.billingInfo : undefined,
         });
         return this.orderService.submitOrder(o);
     }
 
-    private completeStep(step?: MatStep): void {
+    private completeStep(step?: CdkStep): void {
         if (step) {
             step.completed = true;
             step.editable = false;
