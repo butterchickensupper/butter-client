@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { map, Subscription, tap } from 'rxjs';
@@ -11,6 +12,19 @@ import { OrderService } from '../services/order/order.service';
     selector: 'app-order-search',
     templateUrl: './order-search.component.html',
     styleUrls: ['./order-search.component.scss'],
+    animations: [
+        trigger('showOrderAnimation', [
+            transition(':enter', [
+                style({ opacity: 0 }),
+                animate(
+                    '800ms',
+                    style({
+                        opacity: 1,
+                    })
+                ),
+            ]),
+        ]),
+    ],
 })
 export class OrderSearchComponent implements OnDestroy {
     private subscriptions: Subscription[] = [];

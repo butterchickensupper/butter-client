@@ -53,7 +53,7 @@
     </ng-container>
 
     <ng-container *ngIf="showDetail">
-      <app-order-detail (back)="showResults()" [orders]="orders"></app-order-detail>
+      <app-order-detail (back)="showResults()" [orders]="orders" [@showOrderAnimation]></app-order-detail>
     </ng-container>
 
 
